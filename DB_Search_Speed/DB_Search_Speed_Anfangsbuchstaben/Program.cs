@@ -32,8 +32,6 @@ class Program
                     {
                         while (reader.Read())
                         {
-                            // Zugriff auf das Wort möglich, falls man es braucht:
-                            // string word = reader.GetString(0);
                             treffer++;
                         }
                     }

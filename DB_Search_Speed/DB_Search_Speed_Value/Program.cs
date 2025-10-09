@@ -32,8 +32,6 @@ class Program
                     {
                         while (reader.Read())
                         {
-                            // Zugriff auf den gefundenen Wert möglich:
-                            // string val = reader.GetString(0);
                             treffer++;
                         }
                     }

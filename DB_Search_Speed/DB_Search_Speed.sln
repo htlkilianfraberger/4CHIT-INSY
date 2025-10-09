@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DB_Search_Speed_Anfangsbuch
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DB_Search_Speed_Number", "DB_Search_Speed_Number\DB_Search_Speed_Number.csproj", "{09ADB8AD-A626-403F-A0C7-02BDA8EB018B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Union_vs_Or", "Union_vs_Or\Union_vs_Or.csproj", "{9DB61318-DA15-4ED2-9086-4926BD23C16D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{09ADB8AD-A626-403F-A0C7-02BDA8EB018B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09ADB8AD-A626-403F-A0C7-02BDA8EB018B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09ADB8AD-A626-403F-A0C7-02BDA8EB018B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DB61318-DA15-4ED2-9086-4926BD23C16D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DB61318-DA15-4ED2-9086-4926BD23C16D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DB61318-DA15-4ED2-9086-4926BD23C16D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DB61318-DA15-4ED2-9086-4926BD23C16D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

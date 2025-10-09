@@ -36,7 +36,7 @@ class Program
                     for (int i = 0; i < currentBatch; i++)
                     {
                         string word = GenerateRandomWord(10, rnd);
-                        int number = rnd.Next(1, 21);
+                        int number = rnd.Next(1, 101);
                         values.Add($"('{word}', {number})");
                     }
 
