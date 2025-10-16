@@ -11,6 +11,7 @@ class Program
         int wordCount = 1_000_000;
         int batchSize = 10_000;
         Random rnd = new Random();
+        string[] categories = { "A", "B", "C", "D", "E" };
 
         using (MySqlConnection conn = new MySqlConnection(connectionString))
         {
@@ -18,9 +19,7 @@ class Program
 
             Console.WriteLine("Leere Tabelle...");
             using (var cmd = new MySqlCommand("TRUNCATE TABLE Words;", conn))
-            {
                 cmd.ExecuteNonQuery();
-            }
 
             Console.WriteLine("Starte Einfügen...");
 
@@ -37,14 +36,20 @@ class Program
                     {
                         string word = GenerateRandomWord(10, rnd);
                         int number = rnd.Next(1, 101);
-                        values.Add($"('{word}', {number})");
+                        string category = categories[rnd.Next(categories.Length)];
+                        bool isActive = rnd.Next(0, 2) == 1; // true oder false
+                        string createdAt = DateTime.Now.AddSeconds(-rnd.Next(0, 1_000_000)).ToString("yyyy-MM-dd HH:mm:ss");
+                        string description = GenerateRandomWord(20, rnd);
+
+                        // Escape single quotes in description (falls nötig)
+                        description = description.Replace("'", "''");
+
+                        values.Add($"('{word}', {number}, '{category}', '{createdAt}', {isActive}, '{description}')");
                     }
 
-                    string sql = $"INSERT INTO Words (value, number) VALUES {string.Join(",", values)};";
+                    string sql = $"INSERT INTO Words (value, number, category, createdAt, isActive, description) VALUES {string.Join(",", values)};";
                     using (var cmd = new MySqlCommand(sql, conn, tran))
-                    {
                         cmd.ExecuteNonQuery();
-                    }
 
                     inserted += currentBatch;
                     Console.WriteLine($"{inserted:N0} Wörter eingefügt...");
@@ -62,9 +67,7 @@ class Program
         const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         StringBuilder sb = new StringBuilder(length);
         for (int i = 0; i < length; i++)
-        {
             sb.Append(chars[rnd.Next(chars.Length)]);
-        }
         return sb.ToString();
     }
 }

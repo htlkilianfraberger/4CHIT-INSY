@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DB_Search_Speed_Number", "D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Union_vs_Or", "Union_vs_Or\Union_vs_Or.csproj", "{9DB61318-DA15-4ED2-9086-4926BD23C16D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Or_vs_Union", "Or_vs_Union\Or_vs_Union.csproj", "{5286ED7E-395B-48E6-BB4C-1E44EDE72446}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{9DB61318-DA15-4ED2-9086-4926BD23C16D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DB61318-DA15-4ED2-9086-4926BD23C16D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DB61318-DA15-4ED2-9086-4926BD23C16D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5286ED7E-395B-48E6-BB4C-1E44EDE72446}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5286ED7E-395B-48E6-BB4C-1E44EDE72446}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5286ED7E-395B-48E6-BB4C-1E44EDE72446}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5286ED7E-395B-48E6-BB4C-1E44EDE72446}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
