@@ -15,7 +15,7 @@ class Program
             
         RunTest(conn, "value", 2000, () => GenerateRandomWord(10, rnd), rnd);
         RunTest(conn, "number", 30, () => rnd.Next(1, 101), rnd);
-        RunTest(conn, "category", 2, () => new string[] { "A","B","C","D","E" }[rnd.Next(5)], rnd);
+        RunTest(conn, "category", 2, () => new [] { "A","B","C","D","E" }[rnd.Next(5)], rnd);
         RunTest(conn, "createdAt", 5000, () => RandomDate(rnd), rnd);
         RunTest(conn, "isActive", 1, () => rnd.Next(0,2)==0, rnd);
         RunTest(conn, "description", 5, () => GenerateRandomWord(20, rnd), rnd);
@@ -84,26 +84,32 @@ class Program
 /*
 Ergebnisse OR vs UNION Performance-Test
 ----------------------------------
-Ergebnisse (Durchschnittswerte):
+Ergebnisse:
+RunTest(conn, "value", 2000, () => GenerateRandomWord(10, rnd), rnd);
 - value: OR = 3,88s | UNION = 2,33s
   → UNION schneller, weil "value" viele unterschiedliche Werte hat 
      und ein Index genutzt werden kann.
 
+RunTest(conn, "number", 30, () => rnd.Next(1, 101), rnd);
 - number: OR = 10,14s | UNION = 6,70s
   → UNION schneller, da "number" ebenfalls viele verschiedene Werte hat 
      und der Index Abfragen stark beschleunigt.
 
+RunTest(conn, "category", 2, () => new [] { "A","B","C","D","E" }[rnd.Next(5)], rnd);
 - category: OR = 4,30s | UNION = 26,36s
   → OR schneller, obwohl es einen Index gibt, weil nur wenige verschiedene Werte existieren,
      sodass UNION mehrere Abfragen ausführt, die sich stark überschneiden.
 
+RunTest(conn, "createdAt", 5000, () => RandomDate(rnd), rnd);
 - createdAt: OR = 6,96s | UNION = 6,42s
-  → Bei Datum beide ähnlich schnell
+  → Bei Datetime beide ähnlich schnell
 
+RunTest(conn, "isActive", 1, () => rnd.Next(0,2)==0, rnd);
 - isActive: OR = 2,55s | UNION = 14,16s
   → OR deutlich schneller, da "isActive" boolesch ist (nur wenige verschiedene Werte),
      der Index bringt kaum Vorteil und UNION führt unnötig mehrere Scans aus.
 
+RunTest(conn, "description", 5, () => GenerateRandomWord(20, rnd), rnd);
 - description: OR = 4,81s | UNION = 6,25s
   → OR schneller, weil auf "description" kein Index existiert, 
      UNION aber zwei volle Table-Scans erzeugt, die langsamer sind.

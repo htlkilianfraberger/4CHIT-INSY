@@ -37,11 +37,10 @@ class Program
                         string word = GenerateRandomWord(10, rnd);
                         int number = rnd.Next(1, 101);
                         string category = categories[rnd.Next(categories.Length)];
-                        bool isActive = rnd.Next(0, 2) == 1; // true oder false
+                        bool isActive = rnd.Next(0, 2) == 1;
                         string createdAt = DateTime.Now.AddSeconds(-rnd.Next(0, 1_000_000)).ToString("yyyy-MM-dd HH:mm:ss");
                         string description = GenerateRandomWord(20, rnd);
-
-                        // Escape single quotes in description (falls nötig)
+                        
                         description = description.Replace("'", "''");
 
                         values.Add($"('{word}', {number}, '{category}', '{createdAt}', {isActive}, '{description}')");
