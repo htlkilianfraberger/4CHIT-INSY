@@ -10,12 +10,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("DB_Search_Speed_Number")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("Or_vs_Union")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1e59bf020a5e602f334804c2fa8febed059f7f13")]
-[assembly: System.Reflection.AssemblyProductAttribute("DB_Search_Speed_Number")]
-[assembly: System.Reflection.AssemblyTitleAttribute("DB_Search_Speed_Number")]
+[assembly: System.Reflection.AssemblyProductAttribute("Or_vs_Union")]
+[assembly: System.Reflection.AssemblyTitleAttribute("Or_vs_Union")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Von der MSBuild WriteCodeFragment-Klasse generiert.

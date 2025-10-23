@@ -83,3 +83,40 @@ class Program
         return new DateTime(year, month, day, hour, minute, second);
     }
 }
+/*
+FAZIT OR vs UNION Performance-Test
+----------------------------------
+Ergebnisse (Durchschnittswerte):
+- value: OR = 3,88s   | UNION = 2,33s
+  -> UNION schneller, weil "value" viele unterschiedliche Werte hat 
+     und ein Index genutzt werden kann.
+
+- number: OR = 10,14s  | UNION = 6,70s
+  -> UNION schneller, da "number" ebenfalls viele verschiedene Werte hat 
+     und der Index Abfragen stark beschleunigt.
+
+- category: OR = 4,30s   | UNION = 26,36s
+  -> OR schneller, obwohl es einen Index gibt, weil nur wenige verschiedene Werte existieren,
+     sodass UNION mehrere Abfragen ausführt, die sich stark überschneiden.
+
+- createdAt: OR = 6,96s   | UNION = 6,42s
+  -> Bei Datum beide ähnlich schnell
+
+- isActive: OR = 2,55s   | UNION = 14,16s
+  -> OR deutlich schneller, da "isActive" boolesch ist (nur wenige verschiedene Werte),
+     der Index bringt kaum Vorteil und UNION führt unnötig mehrere Scans aus.
+
+- description: OR = 4,81s   | UNION = 6,25s
+  -> OR schneller, weil auf "description" kein Index existiert, 
+     UNION aber zwei volle Table-Scans erzeugt, die langsamer sind.
+
+----------------------------------
+
+UNION ist schneller, wenn viele verschiedene Werte vorkommen 
+(z. B. "value", "number") und ein Index effektiv genutzt werden kann.
+
+OR ist schneller, wenn oft die gleichen Werte auftreten 
+(z. B. boolesche Felder wie "isActive" oder wenige Kategorien),
+weil die Abfrage nur einmal über die Tabelle läuft, während UNION 
+mehrere vollständige Abfragen ausführt und dadurch langsamer wird.
+*/
