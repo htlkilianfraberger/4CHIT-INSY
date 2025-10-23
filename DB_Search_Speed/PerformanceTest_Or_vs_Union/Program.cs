@@ -10,17 +10,15 @@ class Program
 
         Random rnd = new Random();
 
-        using (MySqlConnection conn = new MySqlConnection(connectionString))
-        {
-            conn.Open();
+        using MySqlConnection conn = new MySqlConnection(connectionString);
+        conn.Open();
             
-            RunTest(conn, "value", 2000, () => GenerateRandomWord(10, rnd), rnd);
-            RunTest(conn, "number", 30, () => rnd.Next(1, 101), rnd);
-            RunTest(conn, "category", 2, () => new string[] { "A","B","C","D","E" }[rnd.Next(5)], rnd);
-            RunTest(conn, "createdAt", 5000, () => RandomDate(rnd), rnd);
-            RunTest(conn, "isActive", 1, () => rnd.Next(0,2)==0, rnd);
-            RunTest(conn, "description", 5, () => GenerateRandomWord(20, rnd), rnd);
-        }
+        RunTest(conn, "value", 2000, () => GenerateRandomWord(10, rnd), rnd);
+        RunTest(conn, "number", 30, () => rnd.Next(1, 101), rnd);
+        RunTest(conn, "category", 2, () => new string[] { "A","B","C","D","E" }[rnd.Next(5)], rnd);
+        RunTest(conn, "createdAt", 5000, () => RandomDate(rnd), rnd);
+        RunTest(conn, "isActive", 1, () => rnd.Next(0,2)==0, rnd);
+        RunTest(conn, "description", 5, () => GenerateRandomWord(20, rnd), rnd);
     }
 
     static void RunTest<T>(MySqlConnection conn, string columnName, int count, Func<T> generateValue, Random rnd)
@@ -88,26 +86,26 @@ Ergebnisse OR vs UNION Performance-Test
 ----------------------------------
 Ergebnisse (Durchschnittswerte):
 - value: OR = 3,88s | UNION = 2,33s
-  -> UNION schneller, weil "value" viele unterschiedliche Werte hat 
+  → UNION schneller, weil "value" viele unterschiedliche Werte hat 
      und ein Index genutzt werden kann.
 
 - number: OR = 10,14s | UNION = 6,70s
-  -> UNION schneller, da "number" ebenfalls viele verschiedene Werte hat 
+  → UNION schneller, da "number" ebenfalls viele verschiedene Werte hat 
      und der Index Abfragen stark beschleunigt.
 
 - category: OR = 4,30s | UNION = 26,36s
-  -> OR schneller, obwohl es einen Index gibt, weil nur wenige verschiedene Werte existieren,
+  → OR schneller, obwohl es einen Index gibt, weil nur wenige verschiedene Werte existieren,
      sodass UNION mehrere Abfragen ausführt, die sich stark überschneiden.
 
 - createdAt: OR = 6,96s | UNION = 6,42s
-  -> Bei Datum beide ähnlich schnell
+  → Bei Datum beide ähnlich schnell
 
 - isActive: OR = 2,55s | UNION = 14,16s
-  -> OR deutlich schneller, da "isActive" boolesch ist (nur wenige verschiedene Werte),
+  → OR deutlich schneller, da "isActive" boolesch ist (nur wenige verschiedene Werte),
      der Index bringt kaum Vorteil und UNION führt unnötig mehrere Scans aus.
 
 - description: OR = 4,81s | UNION = 6,25s
-  -> OR schneller, weil auf "description" kein Index existiert, 
+  → OR schneller, weil auf "description" kein Index existiert, 
      UNION aber zwei volle Table-Scans erzeugt, die langsamer sind.
 
 Fazit
