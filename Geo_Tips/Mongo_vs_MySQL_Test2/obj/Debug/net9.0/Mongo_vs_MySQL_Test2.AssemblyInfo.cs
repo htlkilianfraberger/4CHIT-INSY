@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Mongo_vs_MySQL_Test2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2c863d5d5ce34942ec89cd4ea66226ef0801e3d0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+32640eed9ac14e7ebac8ad859adda7f12097a1d0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Mongo_vs_MySQL_Test2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Mongo_vs_MySQL_Test2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

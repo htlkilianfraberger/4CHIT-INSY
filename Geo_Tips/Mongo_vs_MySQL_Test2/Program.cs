@@ -18,10 +18,9 @@ class Program
         Random rnd = new Random();
 
         Console.WriteLine("=== MySQL vs. MongoDB Geo-Abfrage Benchmark (Radius) ===\n");
-        Console.WriteLine($"Suchradius: {radiusKm} km\n{numIterations} Durchgänge:\n");
 
         // ---------------------------------------------
-        // MySQL TEST
+        // MySQL TEST mit Bounding Box
         // ---------------------------------------------
         int totalMySqlHits = 0;
         var swMySql = Stopwatch.StartNew();
@@ -34,17 +33,38 @@ class Program
                 double lat = 47.0 + rnd.NextDouble() * 2.0;
                 double lon = 12.0 + rnd.NextDouble() * 3.0;
 
+                // Bounding Box Berechnung
+                double dy = radiusKm / 111.0;                  // Breitengrad Delta
+                double dx = radiusKm / (111.0 * Math.Cos(lat * Math.PI / 180.0)); // Längengrad Delta
+
                 using var cmd = new MySqlCommand(@"
-                    SELECT COUNT(*) 
-                    FROM tipp_locations
-                    WHERE ST_Distance_Sphere(
-                               Coordinates,
-                               ST_GeomFromText(CONCAT('POINT(', @lon, ' ', @lat, ')'), 4326)
-                          ) <= @radius * 1000;", mysql);
+    SELECT COUNT(*) 
+    FROM tipp_locations
+    WHERE MBRContains(
+        ST_GeomFromText(
+            CONCAT('POLYGON((',
+                   @lonMinus, ' ', @latMinus, ', ',
+                   @lonPlus, ' ', @latMinus, ', ',
+                   @lonPlus, ' ', @latPlus, ', ',
+                   @lonMinus, ' ', @latPlus, ', ',
+                   @lonMinus, ' ', @latMinus, '))'), 4326
+        ),
+        Coordinates
+    )
+    AND ST_Distance_Sphere(
+        Coordinates,
+        ST_GeomFromText(CONCAT('POINT(', @lon, ' ', @lat, ')'), 4326)
+    ) <= @radius * 1000;
+", mysql);
+
 
                 cmd.Parameters.AddWithValue("@lat", lat);
                 cmd.Parameters.AddWithValue("@lon", lon);
                 cmd.Parameters.AddWithValue("@radius", radiusKm);
+                cmd.Parameters.AddWithValue("@latMinus", lat - dy);
+                cmd.Parameters.AddWithValue("@latPlus", lat + dy);
+                cmd.Parameters.AddWithValue("@lonMinus", lon - dx);
+                cmd.Parameters.AddWithValue("@lonPlus", lon + dx);
 
                 totalMySqlHits += Convert.ToInt32(cmd.ExecuteScalar());
             }
@@ -54,7 +74,7 @@ class Program
         Console.WriteLine($"Gesamtzahl gefundener Orte: {totalMySqlHits}\n");
 
         // ---------------------------------------------
-        // MongoDB TEST
+        // MongoDB TEST bleibt unverändert
         // ---------------------------------------------
         int totalMongoHits = 0;
         var swMongo = Stopwatch.StartNew();
@@ -84,7 +104,7 @@ class Program
                     { "maxDistance", radiusKm * 1000 }, 
                     { "key", "Coordinates" }
                 }),
-                new BsonDocument("$count", "count") // zählt die Treffer
+                new BsonDocument("$count", "count")
             };
 
             var results = collection.Aggregate<BsonDocument>(pipeline).FirstOrDefault();
