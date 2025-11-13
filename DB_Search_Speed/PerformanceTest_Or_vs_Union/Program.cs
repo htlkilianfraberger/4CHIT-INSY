@@ -12,13 +12,23 @@ class Program
 
         using MySqlConnection conn = new MySqlConnection(connectionString);
         conn.Open();
-            
         RunTest(conn, "value", 2000, () => GenerateRandomWord(10, rnd), rnd);
+        conn.Close();
+        conn.Open();
         RunTest(conn, "number", 30, () => rnd.Next(1, 101), rnd);
+        conn.Close();    
+        conn.Open();
         RunTest(conn, "category", 2, () => new [] { "A","B","C","D","E" }[rnd.Next(5)], rnd);
+        conn.Close();    
+        conn.Open();
         RunTest(conn, "createdAt", 5000, () => RandomDate(rnd), rnd);
+        conn.Close();    
+        conn.Open();
         RunTest(conn, "isActive", 1, () => rnd.Next(0,2)==0, rnd);
+        conn.Close();    
+        conn.Open();
         RunTest(conn, "description", 5, () => GenerateRandomWord(20, rnd), rnd);
+        conn.Close();    
     }
 
     static void RunTest<T>(MySqlConnection conn, string columnName, int count, Func<T> generateValue, Random rnd)

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Union_vs_Or")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1e59bf020a5e602f334804c2fa8febed059f7f13")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2c863d5d5ce34942ec89cd4ea66226ef0801e3d0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Union_vs_Or")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Union_vs_Or")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

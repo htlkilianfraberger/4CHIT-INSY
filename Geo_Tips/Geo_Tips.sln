@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geo_Tips", "Geo_Tips\Geo_Tips.csproj", "{A6E8ADA1-D7D2-4705-A252-F742B616D71F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mongo_vs_MySQL_Test", "Mongo_vs_MySQL_Test\Mongo_vs_MySQL_Test.csproj", "{DE36EB1F-5FCD-4CB5-B9D4-6E447B5B9725}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geo_Tips_Mongo", "Geo_Tips_Mongo\Geo_Tips_Mongo.csproj", "{392C4821-0E91-4BD8-B8FE-98EFBDC5F687}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mongo_vs_MySQL_Test2", "Mongo_vs_MySQL_Test2\Mongo_vs_MySQL_Test2.csproj", "{526D3B56-BA81-49F8-A99D-064CFCECD7AA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A6E8ADA1-D7D2-4705-A252-F742B616D71F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6E8ADA1-D7D2-4705-A252-F742B616D71F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6E8ADA1-D7D2-4705-A252-F742B616D71F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6E8ADA1-D7D2-4705-A252-F742B616D71F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE36EB1F-5FCD-4CB5-B9D4-6E447B5B9725}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE36EB1F-5FCD-4CB5-B9D4-6E447B5B9725}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE36EB1F-5FCD-4CB5-B9D4-6E447B5B9725}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE36EB1F-5FCD-4CB5-B9D4-6E447B5B9725}.Release|Any CPU.Build.0 = Release|Any CPU
+		{392C4821-0E91-4BD8-B8FE-98EFBDC5F687}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{392C4821-0E91-4BD8-B8FE-98EFBDC5F687}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{392C4821-0E91-4BD8-B8FE-98EFBDC5F687}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{392C4821-0E91-4BD8-B8FE-98EFBDC5F687}.Release|Any CPU.Build.0 = Release|Any CPU
+		{526D3B56-BA81-49F8-A99D-064CFCECD7AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{526D3B56-BA81-49F8-A99D-064CFCECD7AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{526D3B56-BA81-49F8-A99D-064CFCECD7AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{526D3B56-BA81-49F8-A99D-064CFCECD7AA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
