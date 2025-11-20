@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -37,7 +38,7 @@ class Program
         }
 
         // ---------------------------------------------
-        // MySQL TEST — ohne MBR (nur ST_Distance_Sphere)
+        // MySQL TEST — ohne MBR
         // ---------------------------------------------
         int totalMySqlNoMbrHits = 0;
         var swMySqlNoMbr = Stopwatch.StartNew();
@@ -48,7 +49,7 @@ class Program
             foreach (var coord in coordinates)
             {
                 using var cmd = new MySqlCommand(@"
-                    SELECT COUNT(*)
+                    SELECT TippID, ST_AsText(Coordinates)
                     FROM tipp_locations
                     WHERE ST_Distance_Sphere(
                         Coordinates,
@@ -60,7 +61,12 @@ class Program
                 cmd.Parameters.AddWithValue("@lon", coord.lon);
                 cmd.Parameters.AddWithValue("@radius", radiusKm);
 
-                totalMySqlNoMbrHits += Convert.ToInt32(cmd.ExecuteScalar());
+                using var reader = cmd.ExecuteReader();
+                int localCount = 0;
+                while (reader.Read())
+                    localCount++;
+
+                totalMySqlNoMbrHits += localCount;
             }
         }
         swMySqlNoMbr.Stop();
@@ -79,8 +85,8 @@ class Program
             foreach (var coord in coordinates)
             {
                 using var cmd = new MySqlCommand(@"
-                    SELECT COUNT(*) 
-                    FROM tipp_locations FORCE INDEX (idx_coordinates)
+                    SELECT TippID, ST_AsText(Coordinates)
+                    FROM tipp_locations 
                     WHERE MBRContains(
                         ST_GeomFromText(
                             CONCAT('POLYGON((',
@@ -106,16 +112,21 @@ class Program
                 cmd.Parameters.AddWithValue("@lonMinus", coord.lonMinus);
                 cmd.Parameters.AddWithValue("@lonPlus", coord.lonPlus);
 
-                totalMySqlHits += Convert.ToInt32(cmd.ExecuteScalar());
+                using var reader = cmd.ExecuteReader();
+                int localCount = 0;
+                while (reader.Read())
+                    localCount++;
+
+                totalMySqlHits += localCount;
             }
         }
         swMySql.Stop();
         Console.WriteLine($"MySQL mit MBR: {numIterations} Abfragen in {swMySql.Elapsed.TotalSeconds:F2} s");
         Console.WriteLine($"Gesamtzahl gefundener Orte: {totalMySqlHits}\n");
 
-        // ---------------------------------------------
-        // MongoDB TEST
-        // ---------------------------------------------
+// ---------------------------------------------
+// MongoDB TEST
+// ---------------------------------------------
         int totalMongoHits = 0;
         var swMongo = Stopwatch.StartNew();
         var client = new MongoClient(mongoConnection);
@@ -140,16 +151,18 @@ class Program
                     { "distanceMultiplier", 0.001 },
                     { "maxDistance", radiusKm * 1000 },
                     { "key", "Coordinates" }
-                }),
-                new BsonDocument("$count", "count")
+                })
             };
+            
+            var results = collection
+                .Aggregate<BsonDocument>(pipeline)
+                .ToList();
 
-            var results = collection.Aggregate<BsonDocument>(pipeline).FirstOrDefault();
-            if (results != null)
-                totalMongoHits += results["count"].AsInt32;
+            totalMongoHits += results.Count;
         }
 
         swMongo.Stop();
+
         Console.WriteLine($"MongoDB: {numIterations} Abfragen in {swMongo.Elapsed.TotalSeconds:F2} s");
         Console.WriteLine($"Gesamtzahl gefundener Orte: {totalMongoHits}\n");
 
