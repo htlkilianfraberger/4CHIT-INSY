@@ -20,7 +20,55 @@ class Program
         Console.WriteLine("=== MySQL vs. MongoDB Geo-Abfrage Benchmark (Radius) ===\n");
 
         // ---------------------------------------------
-        // MySQL TEST mit Bounding Box
+        // Zufallswerte vorberechnen
+        // ---------------------------------------------
+        (double lat, double lon, double latMinus, double latPlus, double lonMinus, double lonPlus)[] coordinates =
+            new (double, double, double, double, double, double)[numIterations];
+
+        for (int i = 0; i < numIterations; i++)
+        {
+            double lat = 47.0 + rnd.NextDouble() * 2.0;
+            double lon = 13.0 + rnd.NextDouble() * 3.0;
+
+            double dy = radiusKm / 111.0;
+            double dx = radiusKm / (111.0 * Math.Cos(lat * Math.PI / 180.0));
+
+            coordinates[i] = (lat, lon, lat - dy, lat + dy, lon - dx, lon + dx);
+        }
+
+        // ---------------------------------------------
+        // MySQL TEST — ohne MBR (nur ST_Distance_Sphere)
+        // ---------------------------------------------
+        int totalMySqlNoMbrHits = 0;
+        var swMySqlNoMbr = Stopwatch.StartNew();
+        using (var mysql2 = new MySqlConnection(mysqlConnection))
+        {
+            mysql2.Open();
+
+            foreach (var coord in coordinates)
+            {
+                using var cmd = new MySqlCommand(@"
+                    SELECT COUNT(*)
+                    FROM tipp_locations
+                    WHERE ST_Distance_Sphere(
+                        Coordinates,
+                        ST_GeomFromText(CONCAT('POINT(', @lon, ' ', @lat, ')'), 4326)
+                    ) <= @radius * 1000;
+                ", mysql2);
+
+                cmd.Parameters.AddWithValue("@lat", coord.lat);
+                cmd.Parameters.AddWithValue("@lon", coord.lon);
+                cmd.Parameters.AddWithValue("@radius", radiusKm);
+
+                totalMySqlNoMbrHits += Convert.ToInt32(cmd.ExecuteScalar());
+            }
+        }
+        swMySqlNoMbr.Stop();
+        Console.WriteLine($"MySQL ohne MBR: {numIterations} Abfragen in {swMySqlNoMbr.Elapsed.TotalSeconds:F2} s");
+        Console.WriteLine($"Gesamtzahl gefundener Orte: {totalMySqlNoMbrHits}\n");
+
+        // ---------------------------------------------
+        // MySQL TEST — mit MBR
         // ---------------------------------------------
         int totalMySqlHits = 0;
         var swMySql = Stopwatch.StartNew();
@@ -28,53 +76,45 @@ class Program
         {
             mysql.Open();
 
-            for (int i = 0; i < numIterations; i++)
+            foreach (var coord in coordinates)
             {
-                double lat = 47.0 + rnd.NextDouble() * 2.0;
-                double lon = 12.0 + rnd.NextDouble() * 3.0;
-
-                // Bounding Box Berechnung
-                double dy = radiusKm / 111.0;                  // Breitengrad Delta
-                double dx = radiusKm / (111.0 * Math.Cos(lat * Math.PI / 180.0)); // Längengrad Delta
-
                 using var cmd = new MySqlCommand(@"
-    SELECT COUNT(*) 
-    FROM tipp_locations
-    WHERE MBRContains(
-        ST_GeomFromText(
-            CONCAT('POLYGON((',
-                   @lonMinus, ' ', @latMinus, ', ',
-                   @lonPlus, ' ', @latMinus, ', ',
-                   @lonPlus, ' ', @latPlus, ', ',
-                   @lonMinus, ' ', @latPlus, ', ',
-                   @lonMinus, ' ', @latMinus, '))'), 4326
-        ),
-        Coordinates
-    )
-    AND ST_Distance_Sphere(
-        Coordinates,
-        ST_GeomFromText(CONCAT('POINT(', @lon, ' ', @lat, ')'), 4326)
-    ) <= @radius * 1000;
-", mysql);
+                    SELECT COUNT(*) 
+                    FROM tipp_locations FORCE INDEX (idx_coordinates)
+                    WHERE MBRContains(
+                        ST_GeomFromText(
+                            CONCAT('POLYGON((',
+                                   @lonMinus, ' ', @latMinus, ', ',
+                                   @lonPlus, ' ', @latMinus, ', ',
+                                   @lonPlus, ' ', @latPlus, ', ',
+                                   @lonMinus, ' ', @latPlus, ', ',
+                                   @lonMinus, ' ', @latMinus, '))'), 4326
+                        ),
+                        Coordinates
+                    )
+                    AND ST_Distance_Sphere(
+                        Coordinates,
+                        ST_GeomFromText(CONCAT('POINT(', @lon, ' ', @lat, ')'), 4326)
+                    ) <= @radius * 1000;
+                ", mysql);
 
-
-                cmd.Parameters.AddWithValue("@lat", lat);
-                cmd.Parameters.AddWithValue("@lon", lon);
+                cmd.Parameters.AddWithValue("@lat", coord.lat);
+                cmd.Parameters.AddWithValue("@lon", coord.lon);
                 cmd.Parameters.AddWithValue("@radius", radiusKm);
-                cmd.Parameters.AddWithValue("@latMinus", lat - dy);
-                cmd.Parameters.AddWithValue("@latPlus", lat + dy);
-                cmd.Parameters.AddWithValue("@lonMinus", lon - dx);
-                cmd.Parameters.AddWithValue("@lonPlus", lon + dx);
+                cmd.Parameters.AddWithValue("@latMinus", coord.latMinus);
+                cmd.Parameters.AddWithValue("@latPlus", coord.latPlus);
+                cmd.Parameters.AddWithValue("@lonMinus", coord.lonMinus);
+                cmd.Parameters.AddWithValue("@lonPlus", coord.lonPlus);
 
                 totalMySqlHits += Convert.ToInt32(cmd.ExecuteScalar());
             }
         }
         swMySql.Stop();
-        Console.WriteLine($"MySQL: {numIterations} Abfragen in {swMySql.Elapsed.TotalSeconds:F2} s");
+        Console.WriteLine($"MySQL mit MBR: {numIterations} Abfragen in {swMySql.Elapsed.TotalSeconds:F2} s");
         Console.WriteLine($"Gesamtzahl gefundener Orte: {totalMySqlHits}\n");
 
         // ---------------------------------------------
-        // MongoDB TEST bleibt unverändert
+        // MongoDB TEST
         // ---------------------------------------------
         int totalMongoHits = 0;
         var swMongo = Stopwatch.StartNew();
@@ -82,15 +122,12 @@ class Program
         var db = client.GetDatabase(mongoDatabase);
         var collection = db.GetCollection<BsonDocument>(mongoCollection);
 
-        for (int i = 0; i < numIterations; i++)
+        foreach (var coord in coordinates)
         {
-            double lat = 47.0 + rnd.NextDouble() * 2.0;
-            double lon = 12.0 + rnd.NextDouble() * 3.0;
-
             var point = new BsonDocument
             {
                 { "type", "Point" },
-                { "coordinates", new BsonArray { lon, lat } }
+                { "coordinates", new BsonArray { coord.lon, coord.lat } }
             };
 
             var pipeline = new[]
@@ -101,7 +138,7 @@ class Program
                     { "distanceField", "distance_km" },
                     { "spherical", true },
                     { "distanceMultiplier", 0.001 },
-                    { "maxDistance", radiusKm * 1000 }, 
+                    { "maxDistance", radiusKm * 1000 },
                     { "key", "Coordinates" }
                 }),
                 new BsonDocument("$count", "count")
@@ -120,9 +157,11 @@ class Program
         // Vergleich
         // ---------------------------------------------
         Console.WriteLine("=== Ergebnis ===");
-        if (swMySql.Elapsed < swMongo.Elapsed)
-            Console.WriteLine($"MySQL war schneller ({swMySql.Elapsed.TotalSeconds:F2}s vs. {swMongo.Elapsed.TotalSeconds:F2}s)");
+        if (swMySql.Elapsed < swMongo.Elapsed && swMySql.Elapsed < swMySqlNoMbr.Elapsed)
+            Console.WriteLine($"MySQL mit MBR war am schnellsten ({swMySql.Elapsed.TotalSeconds:F2}s)");
+        else if (swMySqlNoMbr.Elapsed < swMongo.Elapsed)
+            Console.WriteLine($"MySQL ohne MBR war am schnellsten ({swMySqlNoMbr.Elapsed.TotalSeconds:F2}s)");
         else
-            Console.WriteLine($"MongoDB war schneller ({swMongo.Elapsed.TotalSeconds:F2}s vs. {swMySql.Elapsed.TotalSeconds:F2}s)");
+            Console.WriteLine($"MongoDB war am schnellsten ({swMongo.Elapsed.TotalSeconds:F2}s)");
     }
 }

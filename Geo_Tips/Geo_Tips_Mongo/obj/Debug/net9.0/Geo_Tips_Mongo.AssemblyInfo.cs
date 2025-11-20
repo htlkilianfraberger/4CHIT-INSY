@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Geo_Tips_Mongo")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2c863d5d5ce34942ec89cd4ea66226ef0801e3d0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c91837b84b56bee2a63e412ac85d72a8dc012d33")]
 [assembly: System.Reflection.AssemblyProductAttribute("Geo_Tips_Mongo")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Geo_Tips_Mongo")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
