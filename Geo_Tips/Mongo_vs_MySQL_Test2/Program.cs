@@ -14,8 +14,8 @@ class Program
         string mongoDatabase = "geo_tips";
         string mongoCollection = "tipp_locations";
 
-        int numIterations = 100;   // Anzahl der Testläufe
-        double radiusKm = 10.0;    // Suchradius in Kilometern
+        int numIterations = 1;   // Anzahl der Testläufe
+        double radiusKm = 15.0;    // Suchradius in Kilometern
         Random rnd = new Random();
 
         Console.WriteLine("=== MySQL vs. MongoDB Geo-Abfrage Benchmark (Radius) ===\n");
@@ -28,11 +28,13 @@ class Program
 
         for (int i = 0; i < numIterations; i++)
         {
-            double lat = 47.0 + rnd.NextDouble() * 2.0;
-            double lon = 13.0 + rnd.NextDouble() * 3.0;
+            //double lat = 47.0 + rnd.NextDouble() * 2.0;
+            //double lon = 13.0 + rnd.NextDouble() * 3.0;
+            double lat = 47.0;
+            double lon = 14.0;
 
-            double dy = radiusKm / 111.0;
-            double dx = radiusKm / (111.0 * Math.Cos(lat * Math.PI / 180.0));
+            double dy = radiusKm / 55.0;
+            double dx = radiusKm / (55.0 * Math.Cos(lat * Math.PI / 180.0));
 
             coordinates[i] = (lat, lon, lat - dy, lat + dy, lon - dx, lon + dx);
         }
@@ -49,17 +51,18 @@ class Program
             foreach (var coord in coordinates)
             {
                 using var cmd = new MySqlCommand(@"
-                    SELECT TippID, ST_AsText(Coordinates)
-                    FROM tipp_locations
-                    WHERE ST_Distance_Sphere(
-                        Coordinates,
-                        ST_GeomFromText(CONCAT('POINT(', @lon, ' ', @lat, ')'), 4326)
-                    ) <= @radius * 1000;
-                ", mysql2);
+    SELECT TippID, ST_AsText(Coordinates)
+    FROM tipp_locations
+    WHERE ST_Distance_Sphere(
+        Coordinates,
+        ST_SRID(POINT(@lon, @lat), 4326)
+    ) <= @radius * 1000;
+", mysql2);
 
                 cmd.Parameters.AddWithValue("@lat", coord.lat);
                 cmd.Parameters.AddWithValue("@lon", coord.lon);
                 cmd.Parameters.AddWithValue("@radius", radiusKm);
+
 
                 using var reader = cmd.ExecuteReader();
                 int localCount = 0;
@@ -90,17 +93,17 @@ class Program
                     WHERE MBRContains(
                         ST_GeomFromText(
                             CONCAT('POLYGON((',
-                                   @lonMinus, ' ', @latMinus, ', ',
-                                   @lonPlus, ' ', @latMinus, ', ',
-                                   @lonPlus, ' ', @latPlus, ', ',
-                                   @lonMinus, ' ', @latPlus, ', ',
-                                   @lonMinus, ' ', @latMinus, '))'), 4326
+                                   @latMinus, ' ', @lonMinus, ', ',
+                                   @latPlus, ' ', @lonMinus, ', ',
+                                   @latPlus, ' ', @lonPlus, ', ',
+                                   @latMinus, ' ', @lonPlus, ', ',
+                                   @latMinus, ' ', @lonMinus, '))'), 4326
                         ),
                         Coordinates
                     )
                     AND ST_Distance_Sphere(
                         Coordinates,
-                        ST_GeomFromText(CONCAT('POINT(', @lon, ' ', @lat, ')'), 4326)
+                        ST_GeomFromText(CONCAT('POINT(', @lat, ' ', @lon, ')'), 4326)
                     ) <= @radius * 1000;
                 ", mysql);
 
