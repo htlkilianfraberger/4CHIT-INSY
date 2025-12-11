@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geo_Tips_Mongo", "Geo_Tips_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mongo_vs_MySQL_Test2", "Mongo_vs_MySQL_Test2\Mongo_vs_MySQL_Test2.csproj", "{526D3B56-BA81-49F8-A99D-064CFCECD7AA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZufallsGeoDatenEinfügen", "ZufallsGeoDatenEinfügen\ZufallsGeoDatenEinfügen.csproj", "{6CF27355-C504-416B-9B3F-16B2EFEFBD6A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{526D3B56-BA81-49F8-A99D-064CFCECD7AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{526D3B56-BA81-49F8-A99D-064CFCECD7AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{526D3B56-BA81-49F8-A99D-064CFCECD7AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CF27355-C504-416B-9B3F-16B2EFEFBD6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CF27355-C504-416B-9B3F-16B2EFEFBD6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CF27355-C504-416B-9B3F-16B2EFEFBD6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CF27355-C504-416B-9B3F-16B2EFEFBD6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
