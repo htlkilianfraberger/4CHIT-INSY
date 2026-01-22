@@ -1,0 +1,106 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="FF7D0129-29E5-39AD-710E-D21522E24DA3" name="Bankaccounts">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:30:30 UTC</createdTime>
+<ownerDesignName>Bank</ownerDesignName>
+<engineerTo>
+<item key="D0F69242-DACD-3AE4-1911-D119776BC57B" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<generateDiscrimColumn>true</generateDiscrimColumn>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="9B42E9DA-B990-1C8C-4ECD-E9B27D85817F">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:31:09 UTC</createdTime>
+<commentInRDBMS><![CDATA[10^9 ids]]></commentInRDBMS>
+<ownerDesignName>Bank</ownerDesignName>
+<engineerTo>
+<item key="D0F69242-DACD-3AE4-1911-D119776BC57B" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>9</dataTypePrecision>
+<ownDataTypeParameters>,9,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="CountryCode" id="78F1440F-A590-037D-F5D2-66ADEDB634F6">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:32:01 UTC</createdTime>
+<ownerDesignName>Bank</ownerDesignName>
+<engineerTo>
+<item key="D0F69242-DACD-3AE4-1911-D119776BC57B" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>2</dataTypeSize>
+<ownDataTypeParameters>2,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Checksum" id="49C22A82-3745-4410-D503-57E75B7B336E">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:32:32 UTC</createdTime>
+<ownerDesignName>Bank</ownerDesignName>
+<engineerTo>
+<item key="D0F69242-DACD-3AE4-1911-D119776BC57B" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="RoutingNumber" id="C9F19998-C14B-43C3-6133-A6F4B9D5A3E6">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:33:31 UTC</createdTime>
+<commentInRDBMS><![CDATA[Bankleitzahl in AT]]></commentInRDBMS>
+<ownerDesignName>Bank</ownerDesignName>
+<engineerTo>
+<item key="D0F69242-DACD-3AE4-1911-D119776BC57B" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="AccountNumber" id="452A03F9-D1F6-23C6-2029-8F7953928A05">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:34:55 UTC</createdTime>
+<ownerDesignName>Bank</ownerDesignName>
+<engineerTo>
+<item key="D0F69242-DACD-3AE4-1911-D119776BC57B" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>11</dataTypePrecision>
+<ownDataTypeParameters>,11,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="6789AEA9-0BEE-38BF-4E58-A6AC1851132E" name="Bankaccount PK">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:30:49 UTC</createdTime>
+<ownerDesignName>Bank</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="D0F69242-DACD-3AE4-1911-D119776BC57B" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>CE5761F3-CB97-E1FD-F5A6-58DB6714609E</attributeRef>
+<attributeRef>9B42E9DA-B990-1C8C-4ECD-E9B27D85817F</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

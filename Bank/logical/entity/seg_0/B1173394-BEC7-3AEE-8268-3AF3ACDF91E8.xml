@@ -1,0 +1,34 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="B1173394-BEC7-3AEE-8268-3AF3ACDF91E8" name="SalaryAccounts">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:42:10 UTC</createdTime>
+<ownerDesignName>Bank</ownerDesignName>
+<engineerTo>
+<item key="D0F69242-DACD-3AE4-1911-D119776BC57B" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<hierarchicalParent>FF7D0129-29E5-39AD-710E-D21522E24DA3</hierarchicalParent>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="OverdraftLimit" id="F785CC19-EA4A-0EF2-2E55-2A5D75B060BE">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:42:20 UTC</createdTime>
+<ownerDesignName>Bank</ownerDesignName>
+<engineerTo>
+<item key="D0F69242-DACD-3AE4-1911-D119776BC57B" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+</Entity>

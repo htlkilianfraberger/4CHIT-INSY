@@ -1,0 +1,86 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="BB9ADE63-862B-3EA6-641D-238A043046E3" name="Wheels">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:36:13 UTC</createdTime>
+<ownerDesignName>Car</ownerDesignName>
+<engineerTo>
+<item key="FF9002C4-3E54-E000-64D0-8C8C9137A1B6" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="4705B9C0-FD47-80D7-2FED-D4C440A8617E">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:40:55 UTC</createdTime>
+<ownerDesignName>Car</ownerDesignName>
+<engineerTo>
+<item key="FF9002C4-3E54-E000-64D0-8C8C9137A1B6" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Diameter" id="8D7C1584-2D3B-CD48-092F-1E2D5066A2A9">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:41:01 UTC</createdTime>
+<ownerDesignName>Car</ownerDesignName>
+<engineerTo>
+<item key="FF9002C4-3E54-E000-64D0-8C8C9137A1B6" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Width" id="64E9E61C-1BCD-8A73-F60F-4A15164471E9">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:41:27 UTC</createdTime>
+<ownerDesignName>Car</ownerDesignName>
+<engineerTo>
+<item key="FF9002C4-3E54-E000-64D0-8C8C9137A1B6" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id1" id="ECA04538-B112-18CC-6DCE-05AE72616337">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:41:50 UTC</createdTime>
+<generatorID>11F302CF-D854-79F6-C123-CBBF63F94F8A</generatorID>
+<ownerDesignName>Car</ownerDesignName>
+<engineerTo>
+<item key="FF9002C4-3E54-E000-64D0-8C8C9137A1B6" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>04A2EB25-BADA-0011-D3C9-EC16B7E093A9</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="FC5110BF-3611-7285-4A70-6111BE37662E" name="Wheels PK">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:40:59 UTC</createdTime>
+<ownerDesignName>Car</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="FF9002C4-3E54-E000-64D0-8C8C9137A1B6" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>4705B9C0-FD47-80D7-2FED-D4C440A8617E</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

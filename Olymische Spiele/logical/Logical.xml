@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<LogicalDesign class="oracle.dbtools.crest.model.design.logical.LogicalDesign" name="Logical" id="0243EB51-23ED-9ACF-B690-5A0ACBBD3119" mainViewID="AF56BE8A-8A22-B9B4-6EC2-4DC2F448CDD5">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 08:59:26 UTC</createdTime>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</LogicalDesign>

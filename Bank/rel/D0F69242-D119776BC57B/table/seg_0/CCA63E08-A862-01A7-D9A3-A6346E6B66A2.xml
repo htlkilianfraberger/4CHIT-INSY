@@ -1,0 +1,83 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="CCA63E08-A862-01A7-D9A3-A6346E6B66A2" name="SavingsAccounts">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:49:36 UTC</createdTime>
+<generatorID>670879F3-CFB5-9C7C-CF85-01A08E5B5E05</generatorID>
+<ownerDesignName>Bank</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id1" id="8C5504EB-EBCD-1BC2-61E7-003CB0CB613A">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:49:36 UTC</createdTime>
+<commentInRDBMS><![CDATA[10^9 ids]]></commentInRDBMS>
+<generatorID>9B42E9DA-B990-1C8C-4ECD-E9B27D85817F</generatorID>
+<ownerDesignName>Bank</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>9</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="D8F1400B-CF13-3138-1FC6-6587EA1CCF97" referredColumn="992676E9-ABAF-1C7B-B4D5-5149AD587BD9"/>
+</associations>
+</Column>
+<Column name="InterestCharges" id="6999E474-B0BC-3022-419E-0D5F97843FB7">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:49:36 UTC</createdTime>
+<generatorID>AD90ACA7-8B20-58C0-5739-8F19443F31FE</generatorID>
+<ownerDesignName>Bank</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>1</dataTypePrecision>
+<dataTypeScale>3</dataTypeScale>
+<ownDataTypeParameters>,1,3</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id" id="1B04F53A-CE4B-D018-D485-4D3DA347BD65">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:49:36 UTC</createdTime>
+<generatorID>CE5761F3-CB97-E1FD-F5A6-58DB6714609E</generatorID>
+<ownerDesignName>Bank</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="D8F1400B-CF13-3138-1FC6-6587EA1CCF97" referredColumn="91C0CEC9-695C-AA61-9398-C9CB76C7B3C9"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="036DCECD-3678-0B54-0431-17C7061B3B9A" name="SavingsAccounts_PK">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:49:36 UTC</createdTime>
+<generatorID>6789AEA9-0BEE-38BF-4E58-A6AC1851132E</generatorID>
+<ownerDesignName>Bank</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1B04F53A-CE4B-D018-D485-4D3DA347BD65"/>
+<colUsage columnID="8C5504EB-EBCD-1BC2-61E7-003CB0CB613A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="FDB266EB-A5EB-6B9C-1BC2-4211C571AB6E" name="SavingsAccounts_Bankaccounts_FK">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:50:44 UTC</createdTime>
+<generatorID>6DD2270B-D246-750B-4A2C-2C7EB7CA28E9</generatorID>
+<ownerDesignName>Bank</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1B04F53A-CE4B-D018-D485-4D3DA347BD65"/>
+<colUsage columnID="8C5504EB-EBCD-1BC2-61E7-003CB0CB613A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

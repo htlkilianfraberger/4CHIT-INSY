@@ -1,0 +1,99 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="1AF14579-5685-D07C-9F3A-E4352D75396D" name="Competition">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:20:23 UTC</createdTime>
+<generatorID>5A7979F6-B6A3-2A71-44E1-919847C11969</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="CCEA6552-E594-94D0-60A2-6715EED14C60">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:20:23 UTC</createdTime>
+<generatorID>45315272-2273-2114-CB01-D54AAEF9D9CB</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Sport" id="560F15C9-4A94-E83B-4FBD-B100463E7A15">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:20:23 UTC</createdTime>
+<generatorID>B812F3E3-BE40-DB16-5218-5B84398292A6</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Date" id="2C8425DD-DAEE-205D-4E2C-026E0EEC8DDE">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:20:23 UTC</createdTime>
+<generatorID>200314A9-EFF9-9146-6179-8508ED55FDC0</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Facility" id="951689DD-52DC-1B1D-DC1F-98D5E4E9147E">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:20:23 UTC</createdTime>
+<generatorID>E1D173FC-D91D-AF38-6A1D-3E4D456291C4</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Referee_PersonalNumber" id="1267C19F-3639-C060-AC5A-0993487DD74D">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:20:23 UTC</createdTime>
+<generatorID>E2025004-956A-C2E0-5CCD-E1E159F88581</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="C5D23E7C-4493-95E3-D9D9-94148B7D02B2" name="Competition_PK">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:20:23 UTC</createdTime>
+<generatorID>308E927E-A2F3-496B-A0FE-85856F4057CE</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="CCEA6552-E594-94D0-60A2-6715EED14C60"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="9275E0F2-E248-53A6-816F-1412040E165A" name="Competition__IDX">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:20:23 UTC</createdTime>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<relationGeneratorID>D53B9CFE-5166-3DAD-D6E6-1AD2A0119F4F</relationGeneratorID>
+<indexColumnUsage>
+<colUsage columnID="1267C19F-3639-C060-AC5A-0993487DD74D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

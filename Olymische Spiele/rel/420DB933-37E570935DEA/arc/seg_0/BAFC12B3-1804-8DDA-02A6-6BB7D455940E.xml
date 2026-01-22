@@ -1,0 +1,14 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKArc class="oracle.dbtools.crest.model.design.relational.FKArc" directorySegmentName="seg_0" id="BAFC12B3-1804-8DDA-02A6-6BB7D455940E" name="FKArc_1">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:32:59 UTC</createdTime>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<mandatory>false</mandatory>
+<reverseArc>true</reverseArc>
+<table>5465A64F-B154-B162-C2F8-3BEE5267305C</table>
+<fkeys>
+<fkeyID>5C2EBB8A-7458-9F0C-EA2B-62D0274026F2</fkeyID>
+<fkeyID>0729A095-1810-0C6F-A4AA-E8628F99FAD1</fkeyID>
+<fkeyID>E0AA3E07-6B89-A23C-D5FD-8B7FD7B3B43F</fkeyID>
+</fkeys>
+</FKArc>

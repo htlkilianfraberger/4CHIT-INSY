@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BusinessInfoDesign class="oracle.dbtools.crest.model.businessinfo.BusinessInfoDesign" name="Business Information" id="F7A4E215-BC0F-C461-5823-6714175B59B3">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 08:59:27 UTC</createdTime>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</BusinessInfoDesign>

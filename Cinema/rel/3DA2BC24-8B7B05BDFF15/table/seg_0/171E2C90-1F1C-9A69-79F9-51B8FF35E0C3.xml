@@ -1,0 +1,87 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="171E2C90-1F1C-9A69-79F9-51B8FF35E0C3" name="Relation_1">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:08:37 UTC</createdTime>
+<ownerDesignName>Cinema</ownerDesignName>
+<ordsAlias>relation_1</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Films_id" id="CE547EB4-4258-8A29-A898-E1588450C046">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:08:37 UTC</createdTime>
+<ownerDesignName>Cinema</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="A64B2E88-A73B-107F-FA68-5CBF15D11D68" referredColumn="C3E46138-EA3B-6109-AFFA-7449AF7BE4F8"/>
+</associations>
+</Column>
+<Column name="Actors_id" id="156FBDF4-9A12-56A3-2DD3-5766257759CD">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:08:37 UTC</createdTime>
+<ownerDesignName>Cinema</ownerDesignName>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="95AE4B42-2DB5-7862-D446-C4D866DEBB06" referredColumn="75937EEC-05FB-AB31-7108-F7E439B5B8B5"/>
+</associations>
+</Column>
+<Column name="salary" id="A3F1A532-FBA1-0460-D9D8-401E7E694E92">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:10:02 UTC</createdTime>
+<ownerDesignName>Cinema</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,7,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="BEE61730-F4C1-F080-E751-A362CA7A30C7" name="Relation_1_PK">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:08:37 UTC</createdTime>
+<ownerDesignName>Cinema</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="CE547EB4-4258-8A29-A898-E1588450C046"/>
+<colUsage columnID="156FBDF4-9A12-56A3-2DD3-5766257759CD"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="7C623E6C-B9D4-2D59-63E3-6823F29E9D63" name="Relation_1_Films_FK">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:08:37 UTC</createdTime>
+<generatorID>AA6650B6-BD3B-FD15-6EF1-0A58B98CBFC7</generatorID>
+<ownerDesignName>Cinema</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="CE547EB4-4258-8A29-A898-E1588450C046"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="515FBA41-0BF5-E783-DB93-57AEB9064B13" name="Relation_1_Actors_FK">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:08:37 UTC</createdTime>
+<generatorID>AA6650B6-BD3B-FD15-6EF1-0A58B98CBFC7</generatorID>
+<ownerDesignName>Cinema</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="156FBDF4-9A12-56A3-2DD3-5766257759CD"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

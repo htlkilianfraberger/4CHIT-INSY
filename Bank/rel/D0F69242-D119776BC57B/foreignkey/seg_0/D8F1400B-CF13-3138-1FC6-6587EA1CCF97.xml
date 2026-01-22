@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="D8F1400B-CF13-3138-1FC6-6587EA1CCF97" containerWithKeyObject="CCA63E08-A862-01A7-D9A3-A6346E6B66A2" localFKIndex="FDB266EB-A5EB-6B9C-1BC2-4211C571AB6E" name="SavingsAccounts_Bankaccounts_FK">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:50:44 UTC</createdTime>
+<generatorID>6DD2270B-D246-750B-4A2C-2C7EB7CA28E9</generatorID>
+<ownerDesignName>Bank</ownerDesignName>
+<referredTableLongName>Bankaccounts</referredTableLongName>
+<arc>E9B54F22-8C51-5111-44EE-39C137BCB2B1</arc>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>4C052E3A-9B0F-48E5-AF04-F199763DE157</referredTableID>
+<keyObject>BAF1C413-AA7B-7F36-6DF3-98C3EAC1B3AE</keyObject>
+<referredKeyID>BAF1C413-AA7B-7F36-6DF3-98C3EAC1B3AE</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id,id1</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<discriminatorValue>SavingsAccounts</discriminatorValue>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

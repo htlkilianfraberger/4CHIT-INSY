@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.InheritanceRelation" name="Hierarchy_6" directorySegmentName="seg_0" id="1CA3C72E-57F5-083B-AD83-912AE833FC9D">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 10:03:01 UTC</createdTime>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<engineerTo>
+<item key="5B4E0720-545C-5F38-6E4A-C1671E68C90A" value="true"/>
+</engineerTo>
+<identifying>false</identifying>
+<nameOnSource>Super Type</nameOnSource>
+<nameOnTarget>Sub Type</nameOnTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>true</optionalTarget>
+<sourceEntity>121578FD-B224-11CC-B088-F9E7619EBC99</sourceEntity>
+<targetEntity>E31C895C-022E-F945-C0CF-5110686D846E</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

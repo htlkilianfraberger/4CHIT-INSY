@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Relation_24" directorySegmentName="seg_0" id="2B1B7FA9-8738-107B-FD33-62CFC599205E">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 10:06:26 UTC</createdTime>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<engineerTo>
+<item key="5B4E0720-545C-5F38-6E4A-C1671E68C90A" value="true"/>
+</engineerTo>
+<sourcePk>B6D2A426-EEF0-DBDC-572A-9863165C1495</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>DE352AA5-C9CD-6185-984D-60A39B2A5893</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>5A7979F6-B6A3-2A71-44E1-919847C11969</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

@@ -1,0 +1,46 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="E31C895C-022E-F945-C0CF-5110686D846E" name="Assistant">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:10:17 UTC</createdTime>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<engineerTo>
+<item key="5B4E0720-545C-5F38-6E4A-C1671E68C90A" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<hierarchicalParent>121578FD-B224-11CC-B088-F9E7619EBC99</hierarchicalParent>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="PersonalNumber" id="ABF0F4F5-3949-AEE6-67D6-F56AB4AA8889">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:10:25 UTC</createdTime>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<engineerTo>
+<item key="5B4E0720-545C-5F38-6E4A-C1671E68C90A" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="73AA0E92-7FA1-7F21-F839-C06DF286D9A3" name="Assistant PK">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:10:29 UTC</createdTime>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<engineerTo>
+<item key="5B4E0720-545C-5F38-6E4A-C1671E68C90A" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>ABF0F4F5-3949-AEE6-67D6-F56AB4AA8889</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

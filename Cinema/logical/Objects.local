@@ -1,0 +1,6 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oracle.dbtools.crest.model.design.logical.LogicalDesign>
+   <object objectType="Entity" objectID="F40DCBA6-2F75-8DC5-A9D4-32F1CACEEFE3" name="Actors" seqName="seg_0" propertyClassName="oracle.dbtools.crest.model.design.logical.Entity" propertyParentId="42372A03-C536-E163-2F43-D07D6672E5C6" propertySourceId="" propertyTargetId=""/>
+   <object objectType="Entity" objectID="F8B1A28E-32AE-E9B7-0B80-10C46C2521BE" name="Films" seqName="seg_0" propertyClassName="oracle.dbtools.crest.model.design.logical.Entity" propertyParentId="42372A03-C536-E163-2F43-D07D6672E5C6" propertySourceId="" propertyTargetId=""/>
+   <object objectType="Relation" objectID="AA6650B6-BD3B-FD15-6EF1-0A58B98CBFC7" name="Relation_1" seqName="seg_0" propertyClassName="oracle.dbtools.crest.model.design.logical.Relation" propertyParentId="42372A03-C536-E163-2F43-D07D6672E5C6" propertySourceId="F8B1A28E-32AE-E9B7-0B80-10C46C2521BE" propertyTargetId="F40DCBA6-2F75-8DC5-A9D4-32F1CACEEFE3"/>
+</oracle.dbtools.crest.model.design.logical.LogicalDesign>

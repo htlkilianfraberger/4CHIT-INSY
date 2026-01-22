@@ -1,0 +1,35 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Relation_1" directorySegmentName="seg_0" id="AA6650B6-BD3B-FD15-6EF1-0A58B98CBFC7">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:07:22 UTC</createdTime>
+<ownerDesignName>Cinema</ownerDesignName>
+<engineerTo>
+<item key="3DA2BC24-01B5-5421-ADA0-8B7B05BDFF15" value="true"/>
+</engineerTo>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>true</optionalTarget>
+<sourceCardinality>*</sourceCardinality>
+<sourceEntity>F8B1A28E-32AE-E9B7-0B80-10C46C2521BE</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>F40DCBA6-2F75-8DC5-A9D4-32F1CACEEFE3</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<attribute name="salary" id="C330C909-2E54-6844-1D32-E8ED5356BFF1">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:26:07 UTC</createdTime>
+<generatorID>A3F1A532-FBA1-0460-D9D8-401E7E694E92</generatorID>
+<ownerDesignName>Cinema</ownerDesignName>
+<engineerTo>
+<item key="3DA2BC24-01B5-5421-ADA0-8B7B05BDFF15" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,7,</ownDataTypeParameters>
+</attribute>
+</attributes>
+</Relation>

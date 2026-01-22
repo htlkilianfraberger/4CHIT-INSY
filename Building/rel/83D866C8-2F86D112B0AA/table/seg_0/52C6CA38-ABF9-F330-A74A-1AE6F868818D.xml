@@ -1,0 +1,77 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="52C6CA38-ABF9-F330-A74A-1AE6F868818D" name="Rooms">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:10:36 UTC</createdTime>
+<generatorID>9A867D3B-E7CA-F4B8-FD52-A4560C1023A4</generatorID>
+<ownerDesignName>Building</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="540C15EC-BDDE-E55F-9111-F7BD7D173E7D">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:10:36 UTC</createdTime>
+<generatorID>47C300DA-FE1E-0444-13C8-8D65CE354D9E</generatorID>
+<ownerDesignName>Building</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Description" id="4564E8FA-9505-F4FD-58E6-A9CFD3CF2133">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:10:36 UTC</createdTime>
+<generatorID>902CD002-305A-A387-4448-416E6AEF2DD4</generatorID>
+<ownerDesignName>Building</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Buildings_id" id="4BB6FE2F-54C4-9EDB-DE2E-8D6DEAE4227D">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:10:36 UTC</createdTime>
+<generatorID>0F1F99FC-5730-CF61-F3FE-B245F8EB9596</generatorID>
+<ownerDesignName>Building</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="9440E0DF-BDF4-C20E-CA4F-F293A32F0CC3" referredColumn="0BAA12B0-95AD-91C1-0D5F-DA31CAD64463"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="12706FBC-3C98-632C-EECC-A5777C65FD83" name="Rooms_PK">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:10:36 UTC</createdTime>
+<generatorID>B3F74078-686A-8D0A-C582-EE5C6D28D8B4</generatorID>
+<ownerDesignName>Building</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="540C15EC-BDDE-E55F-9111-F7BD7D173E7D"/>
+<colUsage columnID="4BB6FE2F-54C4-9EDB-DE2E-8D6DEAE4227D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="7136DAB2-F73F-83DA-C845-F2EDE08B7B61" name="Rooms_Buildings_FK">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:10:36 UTC</createdTime>
+<generatorID>90AF9704-A685-E45C-28E5-681AF8EC27D9</generatorID>
+<ownerDesignName>Building</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4BB6FE2F-54C4-9EDB-DE2E-8D6DEAE4227D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

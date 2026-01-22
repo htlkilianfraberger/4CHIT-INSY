@@ -1,0 +1,76 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="3E4148B2-5E82-8A9E-A6A7-7DA26F27DCE3" name="Person">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 10:08:12 UTC</createdTime>
+<generatorID>121578FD-B224-11CC-B088-F9E7619EBC99</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="43F90BBC-FF73-D2EA-D8BD-588927ADFC1C">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 10:08:12 UTC</createdTime>
+<generatorID>2682033E-B740-2064-4366-CB312B7A1589</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Name" id="D3C51B8E-40A5-FF62-DCF7-2F47048FB626">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 10:08:12 UTC</createdTime>
+<generatorID>33BA234B-DB0A-CC41-F88C-05A342B76834</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Nation_id" id="49A1FBD2-1FD6-24B0-461C-89417466A18F">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 10:08:12 UTC</createdTime>
+<generatorID>0794DDB2-6EBF-E1C7-45F4-B538903BCC15</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="C00EF3A8-46EE-C7BA-A779-E3B1169CB133" referredColumn="4F13A52F-8BCA-8C8B-8560-1926204EF12A"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="B4AB29F0-313F-F0AD-A912-B29E8709DC17" name="Person_PK">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 10:08:12 UTC</createdTime>
+<generatorID>89443672-FAF7-99EB-9C41-0EF9F00D8887</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="43F90BBC-FF73-D2EA-D8BD-588927ADFC1C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="9F3C45FB-6A02-D3C4-BEAC-9AA913336739" name="Person_Nation_FK">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 10:08:12 UTC</createdTime>
+<generatorID>4384435E-FD22-7F99-1552-690B57FEE39A</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="49A1FBD2-1FD6-24B0-461C-89417466A18F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

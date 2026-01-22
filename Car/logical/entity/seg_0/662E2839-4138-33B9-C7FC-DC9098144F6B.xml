@@ -1,0 +1,87 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="662E2839-4138-33B9-C7FC-DC9098144F6B" name="Seats">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:39:35 UTC</createdTime>
+<ownerDesignName>Car</ownerDesignName>
+<engineerTo>
+<item key="FF9002C4-3E54-E000-64D0-8C8C9137A1B6" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="2359EDD8-1141-81C1-793E-4E47F84FC17A">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:39:38 UTC</createdTime>
+<ownerDesignName>Car</ownerDesignName>
+<engineerTo>
+<item key="FF9002C4-3E54-E000-64D0-8C8C9137A1B6" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Color" id="31F13266-A53C-1752-FCF7-7CAD35102C9B">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:39:49 UTC</createdTime>
+<ownerDesignName>Car</ownerDesignName>
+<engineerTo>
+<item key="FF9002C4-3E54-E000-64D0-8C8C9137A1B6" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Material" id="CC03FE6B-CC46-FF94-AF41-3683CB4A1D05">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:39:57 UTC</createdTime>
+<ownerDesignName>Car</ownerDesignName>
+<engineerTo>
+<item key="FF9002C4-3E54-E000-64D0-8C8C9137A1B6" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id1" id="7F7129F5-52BB-3D03-F007-2CB3220B0506">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:40:29 UTC</createdTime>
+<generatorID>6AA1FD82-9360-DD4D-07D2-16CDE2A7EF5B</generatorID>
+<ownerDesignName>Car</ownerDesignName>
+<engineerTo>
+<item key="FF9002C4-3E54-E000-64D0-8C8C9137A1B6" value="true"/>
+</engineerTo>
+<referedAttribute>04A2EB25-BADA-0011-D3C9-EC16B7E093A9</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="79DAE702-A963-0E0C-ABE3-E98C50BF8F70" name="Seats PK">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:39:48 UTC</createdTime>
+<ownerDesignName>Car</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="FF9002C4-3E54-E000-64D0-8C8C9137A1B6" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>2359EDD8-1141-81C1-793E-4E47F84FC17A</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

@@ -1,0 +1,82 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="6FD0AC71-F9CE-7B4E-3F0F-B0924AF7C619" name="SalaryAccounts">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:49:36 UTC</createdTime>
+<generatorID>B1173394-BEC7-3AEE-8268-3AF3ACDF91E8</generatorID>
+<ownerDesignName>Bank</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id1" id="D5725749-DE3B-7A59-B7D0-FBD4F2B33D5B">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:49:36 UTC</createdTime>
+<commentInRDBMS><![CDATA[10^9 ids]]></commentInRDBMS>
+<generatorID>9B42E9DA-B990-1C8C-4ECD-E9B27D85817F</generatorID>
+<ownerDesignName>Bank</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>9</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="CF7F5A9B-1E72-281C-3EBB-F3FA7778F135" referredColumn="992676E9-ABAF-1C7B-B4D5-5149AD587BD9"/>
+</associations>
+</Column>
+<Column name="OverdraftLimit" id="4A940D73-C3F2-8E7A-CBE7-4AF449AA56E9">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:49:36 UTC</createdTime>
+<generatorID>F785CC19-EA4A-0EF2-2E55-2A5D75B060BE</generatorID>
+<ownerDesignName>Bank</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id" id="56CF31C5-4705-3163-9309-785E0199A984">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:49:36 UTC</createdTime>
+<generatorID>CE5761F3-CB97-E1FD-F5A6-58DB6714609E</generatorID>
+<ownerDesignName>Bank</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="CF7F5A9B-1E72-281C-3EBB-F3FA7778F135" referredColumn="91C0CEC9-695C-AA61-9398-C9CB76C7B3C9"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="D3B20DD1-32D8-496A-575B-5A319C24A38D" name="SalaryAccounts_PK">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:49:36 UTC</createdTime>
+<generatorID>6789AEA9-0BEE-38BF-4E58-A6AC1851132E</generatorID>
+<ownerDesignName>Bank</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="56CF31C5-4705-3163-9309-785E0199A984"/>
+<colUsage columnID="D5725749-DE3B-7A59-B7D0-FBD4F2B33D5B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="C9459572-9B13-ECFB-272B-0C608B126922" name="SalaryAccounts_Bankaccounts_FK">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:50:44 UTC</createdTime>
+<generatorID>F92C3BB3-090C-2E52-9F0C-F77B6FCEC988</generatorID>
+<ownerDesignName>Bank</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="56CF31C5-4705-3163-9309-785E0199A984"/>
+<colUsage columnID="D5725749-DE3B-7A59-B7D0-FBD4F2B33D5B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,74 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="F8B1A28E-32AE-E9B7-0B80-10C46C2521BE" name="Films">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:05:37 UTC</createdTime>
+<ownerDesignName>Cinema</ownerDesignName>
+<engineerTo>
+<item key="3DA2BC24-01B5-5421-ADA0-8B7B05BDFF15" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="FA822A38-5741-1164-EF61-D8E98F73BF3E">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:05:48 UTC</createdTime>
+<ownerDesignName>Cinema</ownerDesignName>
+<engineerTo>
+<item key="3DA2BC24-01B5-5421-ADA0-8B7B05BDFF15" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Title" id="1B6201DF-2083-BD7A-A538-F1A98968525E">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:06:06 UTC</createdTime>
+<ownerDesignName>Cinema</ownerDesignName>
+<engineerTo>
+<item key="3DA2BC24-01B5-5421-ADA0-8B7B05BDFF15" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Year" id="8F1216D0-85A4-3FC1-0634-5B9ECEF69E4C">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:12:10 UTC</createdTime>
+<ownerDesignName>Cinema</ownerDesignName>
+<engineerTo>
+<item key="3DA2BC24-01B5-5421-ADA0-8B7B05BDFF15" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>4</dataTypePrecision>
+<ownDataTypeParameters>,4,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="B500C32E-91D5-AFA5-9A95-9CBA1BB622FF" name="Films PK">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:06:02 UTC</createdTime>
+<ownerDesignName>Cinema</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="3DA2BC24-01B5-5421-ADA0-8B7B05BDFF15" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>FA822A38-5741-1164-EF61-D8E98F73BF3E</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

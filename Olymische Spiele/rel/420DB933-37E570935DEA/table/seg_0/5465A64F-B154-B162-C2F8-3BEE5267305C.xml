@@ -1,0 +1,50 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="5465A64F-B154-B162-C2F8-3BEE5267305C" name="Person">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:32:59 UTC</createdTime>
+<generatorID>121578FD-B224-11CC-B088-F9E7619EBC99</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="1017AF89-F4C0-ADC2-F3C8-665C8B608228">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:32:59 UTC</createdTime>
+<generatorID>2682033E-B740-2064-4366-CB312B7A1589</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Name" id="6346C7CB-863D-870F-A942-5DA7FCAD789F">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:32:59 UTC</createdTime>
+<generatorID>33BA234B-DB0A-CC41-F88C-05A342B76834</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="CF0FEC99-90A4-297E-62BE-8E58464C7F2D" name="Person_PK">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:32:59 UTC</createdTime>
+<generatorID>89443672-FAF7-99EB-9C41-0EF9F00D8887</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1017AF89-F4C0-ADC2-F3C8-665C8B608228"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

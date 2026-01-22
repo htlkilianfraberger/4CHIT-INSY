@@ -1,0 +1,75 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="9A867D3B-E7CA-F4B8-FD52-A4560C1023A4" name="Rooms">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:09:18 UTC</createdTime>
+<ownerDesignName>Building</ownerDesignName>
+<engineerTo>
+<item key="83D866C8-D6FF-CF69-9D84-2F86D112B0AA" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="47C300DA-FE1E-0444-13C8-8D65CE354D9E">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:09:23 UTC</createdTime>
+<ownerDesignName>Building</ownerDesignName>
+<engineerTo>
+<item key="83D866C8-D6FF-CF69-9D84-2F86D112B0AA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Description" id="902CD002-305A-A387-4448-416E6AEF2DD4">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:09:30 UTC</createdTime>
+<ownerDesignName>Building</ownerDesignName>
+<engineerTo>
+<item key="83D866C8-D6FF-CF69-9D84-2F86D112B0AA" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id1" id="0F1F99FC-5730-CF61-F3FE-B245F8EB9596">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:10:14 UTC</createdTime>
+<generatorID>90AF9704-A685-E45C-28E5-681AF8EC27D9</generatorID>
+<ownerDesignName>Building</ownerDesignName>
+<engineerTo>
+<item key="83D866C8-D6FF-CF69-9D84-2F86D112B0AA" value="true"/>
+</engineerTo>
+<referedAttribute>66533271-A1D1-9930-8AF1-D039CA4D1E2A</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="B3F74078-686A-8D0A-C582-EE5C6D28D8B4" name="Rooms PK">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:09:29 UTC</createdTime>
+<ownerDesignName>Building</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="83D866C8-D6FF-CF69-9D84-2F86D112B0AA" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>47C300DA-FE1E-0444-13C8-8D65CE354D9E</attributeRef>
+<attributeRef>0F1F99FC-5730-CF61-F3FE-B245F8EB9596</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

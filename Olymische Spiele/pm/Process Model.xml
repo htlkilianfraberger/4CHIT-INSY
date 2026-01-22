@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<ProcessModel class="oracle.dbtools.crest.model.design.process.ProcessModel" name="Process Model" id="A7C468EA-49DB-5F60-DFF8-DFBD6516B4B4">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 08:59:27 UTC</createdTime>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</ProcessModel>

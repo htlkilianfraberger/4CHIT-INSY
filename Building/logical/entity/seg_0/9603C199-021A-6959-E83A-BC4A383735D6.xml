@@ -1,0 +1,59 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="9603C199-021A-6959-E83A-BC4A383735D6" name="Buildings">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:08:44 UTC</createdTime>
+<ownerDesignName>Building</ownerDesignName>
+<engineerTo>
+<item key="83D866C8-D6FF-CF69-9D84-2F86D112B0AA" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="66533271-A1D1-9930-8AF1-D039CA4D1E2A">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:08:50 UTC</createdTime>
+<ownerDesignName>Building</ownerDesignName>
+<engineerTo>
+<item key="83D866C8-D6FF-CF69-9D84-2F86D112B0AA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Description" id="6F76D0F3-DC3D-7B9E-FD93-010FB596696C">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:09:04 UTC</createdTime>
+<ownerDesignName>Building</ownerDesignName>
+<engineerTo>
+<item key="83D866C8-D6FF-CF69-9D84-2F86D112B0AA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="0F9CEE32-70ED-F978-2EBB-067282D1EF98" name="Buildings PK">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:08:52 UTC</createdTime>
+<ownerDesignName>Building</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="83D866C8-D6FF-CF69-9D84-2F86D112B0AA" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>66533271-A1D1-9930-8AF1-D039CA4D1E2A</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

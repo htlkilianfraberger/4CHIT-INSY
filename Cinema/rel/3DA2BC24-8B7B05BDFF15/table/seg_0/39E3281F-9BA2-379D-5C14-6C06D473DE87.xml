@@ -1,0 +1,63 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="39E3281F-9BA2-379D-5C14-6C06D473DE87" name="Actors">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:08:37 UTC</createdTime>
+<generatorID>F40DCBA6-2F75-8DC5-A9D4-32F1CACEEFE3</generatorID>
+<ownerDesignName>Cinema</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="75937EEC-05FB-AB31-7108-F7E439B5B8B5">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:08:37 UTC</createdTime>
+<generatorID>5302D283-94A8-1F76-A1E6-F82BA3AB596B</generatorID>
+<ownerDesignName>Cinema</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="FirstName" id="259559F5-C14C-579B-9C15-4B82BA0D64DB">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:08:37 UTC</createdTime>
+<generatorID>A343BCC4-4BCB-1BAA-120C-257145AE9934</generatorID>
+<ownerDesignName>Cinema</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="LastName" id="3684F79A-E5D6-599E-7AFF-8BDC725D31A5">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:08:37 UTC</createdTime>
+<generatorID>8AE2D781-A990-C304-A583-75DB4D3B2638</generatorID>
+<ownerDesignName>Cinema</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="81238C66-B7DF-5FEB-F2F0-26E178721D8A" name="Actors_PK">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:08:37 UTC</createdTime>
+<generatorID>56D0FB3F-B626-C3FF-2FAF-1A01FD35AE32</generatorID>
+<ownerDesignName>Cinema</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="75937EEC-05FB-AB31-7108-F7E439B5B8B5"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

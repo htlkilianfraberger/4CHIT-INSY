@@ -1,0 +1,42 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Diagram class="oracle.dbtools.crest.swingui.logical.DPVLogical" name="Logical" id="568C7B95-A2EE-17A5-3EB7-20CAE260F766">
+<createdBy>kilia</createdBy>
+<modifiedBy>kilia</modifiedBy>
+<createdTime>2025-12-18 11:30:30 UTC</createdTime>
+<autoRoute>false</autoRoute>
+<boxInbox>true</boxInbox>
+<showLegend>false</showLegend>
+<showLabels>false</showLabels>
+<showRelAttributes>false</showRelAttributes>
+<gridEnabled>false</gridEnabled>
+<showGrid>false</showGrid>
+<diagramColor>-1</diagramColor>
+<display>false</display>
+<notation>1</notation>
+<objectViews>
+<OView class="oracle.dbtools.crest.swingui.logical.TVEntity" oid="670879F3-CFB5-9C7C-CF85-01A08E5B5E05" otype="Entity" vid="5D136821-551E-5655-8D79-1A9CA67F4577">
+<hideElementsInCurrentOnly>false</hideElementsInCurrentOnly>
+<bounds x="162" y="128" width="210" height="112"/>
+</OView>
+<OView class="oracle.dbtools.crest.swingui.logical.TVEntity" oid="B1173394-BEC7-3AEE-8268-3AF3ACDF91E8" otype="Entity" vid="6DE025C7-B0A0-4304-9C51-EA5A4A72948C">
+<hideElementsInCurrentOnly>false</hideElementsInCurrentOnly>
+<bounds x="411" y="135" width="204" height="94"/>
+</OView>
+<OView class="oracle.dbtools.crest.swingui.logical.TVEntity" oid="FF7D0129-29E5-39AD-710E-D21522E24DA3" otype="Entity" vid="9586617E-3AFE-2F9F-DD10-A3D9217823E3">
+<hideElementsInCurrentOnly>false</hideElementsInCurrentOnly>
+<bounds x="128" y="18" width="517" height="272"/>
+</OView>
+</objectViews>
+<connectors>
+<Connector class="oracle.dbtools.crest.swingui.logical.TVInheritanceRelation" oid="6DD2270B-D246-750B-4A2C-2C7EB7CA28E9" otype="Hierarchy relation" vid_source="9586617E-3AFE-2F9F-DD10-A3D9217823E3" vid_target="5D136821-551E-5655-8D79-1A9CA67F4577">
+<hideElementsInCurrentOnly>false</hideElementsInCurrentOnly>
+<backgroundColor>-65536</backgroundColor>
+<lineWidth>1</lineWidth>
+</Connector>
+<Connector class="oracle.dbtools.crest.swingui.logical.TVInheritanceRelation" oid="F92C3BB3-090C-2E52-9F0C-F77B6FCEC988" otype="Hierarchy relation" vid_source="9586617E-3AFE-2F9F-DD10-A3D9217823E3" vid_target="6DE025C7-B0A0-4304-9C51-EA5A4A72948C">
+<hideElementsInCurrentOnly>false</hideElementsInCurrentOnly>
+<backgroundColor>-65536</backgroundColor>
+<lineWidth>1</lineWidth>
+</Connector>
+</connectors>
+</Diagram>

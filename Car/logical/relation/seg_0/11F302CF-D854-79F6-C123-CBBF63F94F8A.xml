@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Relation_4" directorySegmentName="seg_0" id="11F302CF-D854-79F6-C123-CBBF63F94F8A">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:41:50 UTC</createdTime>
+<ownerDesignName>Car</ownerDesignName>
+<engineerTo>
+<item key="FF9002C4-3E54-E000-64D0-8C8C9137A1B6" value="true"/>
+</engineerTo>
+<sourcePk>BBA559B4-E360-BC7A-FBD0-8F638ADC34C7</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>true</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>9211795A-8A7B-EEBF-E755-405E56EE12A0</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>BB9ADE63-862B-3EA6-641D-238A043046E3</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="DA37CB9D-14C4-B6EC-12A7-584649D75CE4" containerWithKeyObject="0CCE7834-68F8-5285-D275-F9AFF82B0828" localFKIndex="E860AD4E-82D6-0047-F7F0-E5AA24DAD34F" name="Referee_Nation_FK">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:20:23 UTC</createdTime>
+<generatorID>C6ABFC20-B2E4-1CF3-8EBB-69AE2C744D27</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<referredTableLongName>Nation</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>15834271-28C8-2CFA-5F43-DD099DAD6EA5</referredTableID>
+<keyObject>BCB1AA92-7686-3C7F-AE5F-3B008AA9014C</keyObject>
+<referredKeyID>BCB1AA92-7686-3C7F-AE5F-3B008AA9014C</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

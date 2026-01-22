@@ -1,0 +1,62 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="B3921B46-4614-3F45-337C-79EE197DA567" name="Cars">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:42:08 UTC</createdTime>
+<generatorID>9211795A-8A7B-EEBF-E755-405E56EE12A0</generatorID>
+<ownerDesignName>Car</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="F90E4D26-154E-826C-059E-EC2B2AB445BD">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:42:08 UTC</createdTime>
+<generatorID>04A2EB25-BADA-0011-D3C9-EC16B7E093A9</generatorID>
+<ownerDesignName>Car</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Brand" id="202FCEA4-CF35-1F0C-356C-D971DC45DB60">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:42:08 UTC</createdTime>
+<generatorID>D808443F-09EC-DCC0-9DEE-7F930AC3C02C</generatorID>
+<ownerDesignName>Car</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Model" id="550C5F86-BCFC-CB80-D97C-A952B8F6DD2B">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:42:08 UTC</createdTime>
+<generatorID>B976A2E0-09D6-58F2-2EAF-2A3EE3C8CAB3</generatorID>
+<ownerDesignName>Car</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="2DE09621-34B7-7B83-E7F1-64E6B5B4CFB0" name="Cars_PK">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:42:08 UTC</createdTime>
+<generatorID>BBA559B4-E360-BC7A-FBD0-8F638ADC34C7</generatorID>
+<ownerDesignName>Car</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F90E4D26-154E-826C-059E-EC2B2AB445BD"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

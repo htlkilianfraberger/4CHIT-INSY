@@ -1,0 +1,138 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="D0A95977-D54D-97C1-AF5B-A52640C7AB20" name="Sportsman">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:20:23 UTC</createdTime>
+<generatorID>B392AF17-0CDD-DA89-B71C-BB759813053F</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="StartingNumber" id="70BA70EF-39D4-C8AD-98BD-87FC3EC250F4">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:20:23 UTC</createdTime>
+<generatorID>18DBF079-B25F-77C8-783E-72B5B105996E</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Name" id="1D1A08BC-0F8A-3DE6-5EA0-D8FFF6525FF7">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:20:23 UTC</createdTime>
+<generatorID>73A8D597-F10A-0A1A-1EBE-23BDD8FCF73B</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Nation_id" id="B08F86F9-007F-A64D-1927-19446F3BC5FC">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:20:23 UTC</createdTime>
+<generatorID>59087BA9-C906-16D6-41FD-8A353B91AB67</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="3811A8E6-3471-1CF9-81D1-D0275FD79BAC" referredColumn="97E75DA4-A5F7-008F-A1B3-CB0BB2E650BA"/>
+</associations>
+</Column>
+<Column name="Competition_id" id="B0706E9C-9378-160E-F041-05507A300675">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:20:23 UTC</createdTime>
+<generatorID>35AC15E2-BDF3-23F4-A4A3-C42D4D62B942</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="CD13AF77-ACAE-027D-8831-59884009FF47" referredColumn="CCEA6552-E594-94D0-60A2-6715EED14C60"/>
+</associations>
+</Column>
+<Column name="id" id="25E42CCB-90E3-DF51-A6E8-1EAE13C593B9">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:32:59 UTC</createdTime>
+<generatorID>2682033E-B740-2064-4366-CB312B7A1589</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="0729A095-1810-0C6F-A4AA-E8628F99FAD1" referredColumn="1017AF89-F4C0-ADC2-F3C8-665C8B608228"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="FED85A38-0696-07B6-DB6C-0CF45FCE15CB" name="Sportsman_PKv1">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:32:59 UTC</createdTime>
+<generatorID>89443672-FAF7-99EB-9C41-0EF9F00D8887</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="25E42CCB-90E3-DF51-A6E8-1EAE13C593B9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="DFC29F11-90DF-C112-5480-17EDC9F243FD" name="Sportsman_PK">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:20:23 UTC</createdTime>
+<generatorID>61DD3298-2620-6423-5409-E275C0B4F084</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="70BA70EF-39D4-C8AD-98BD-87FC3EC250F4"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="EE81599E-C12E-12E6-2740-BE2AEB2DB1A6" name="Sportsman_Nation_FK">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:20:23 UTC</createdTime>
+<generatorID>4483E752-CA74-C529-FC9B-F0C1F117376A</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B08F86F9-007F-A64D-1927-19446F3BC5FC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="57FA9F74-B37A-66F2-894C-541C074E81CD" name="Sportsman_Competition_FK">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:20:23 UTC</createdTime>
+<generatorID>F745E9F1-DDDB-553C-9ED8-FCBF20B30E15</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B0706E9C-9378-160E-F041-05507A300675"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="FE778CBF-3955-745F-B34F-F4B2E232EA69" name="Sportsman_Person_FK">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 09:32:59 UTC</createdTime>
+<generatorID>0E6675EA-0D3A-B61B-71B8-AFE9ABBD5B6C</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="25E42CCB-90E3-DF51-A6E8-1EAE13C593B9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

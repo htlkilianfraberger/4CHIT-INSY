@@ -1,0 +1,87 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="7E07B792-BE40-939A-3643-55C7F611E914" name="Wheels">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:42:08 UTC</createdTime>
+<generatorID>BB9ADE63-862B-3EA6-641D-238A043046E3</generatorID>
+<ownerDesignName>Car</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="494C852E-C364-0A65-B18A-D22354606505">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:42:08 UTC</createdTime>
+<generatorID>4705B9C0-FD47-80D7-2FED-D4C440A8617E</generatorID>
+<ownerDesignName>Car</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Diameter" id="5FE5BBCF-14CD-BDBC-66E4-41F945463427">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:42:08 UTC</createdTime>
+<generatorID>8D7C1584-2D3B-CD48-092F-1E2D5066A2A9</generatorID>
+<ownerDesignName>Car</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Width" id="CEA13C96-7348-5C2D-1D54-9D48565FB512">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:42:08 UTC</createdTime>
+<generatorID>64E9E61C-1BCD-8A73-F60F-4A15164471E9</generatorID>
+<ownerDesignName>Car</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Cars_id" id="B6B26F79-5609-555B-5D84-90442507B1CE">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:42:08 UTC</createdTime>
+<generatorID>ECA04538-B112-18CC-6DCE-05AE72616337</generatorID>
+<ownerDesignName>Car</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="B4AB9AFC-44B9-46B1-D30A-A9D4A7D29A7D" referredColumn="F90E4D26-154E-826C-059E-EC2B2AB445BD"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="A599745B-E66E-C558-4395-EB92BDF44865" name="Wheels_PK">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:42:08 UTC</createdTime>
+<generatorID>FC5110BF-3611-7285-4A70-6111BE37662E</generatorID>
+<ownerDesignName>Car</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="494C852E-C364-0A65-B18A-D22354606505"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="FD2FDBF9-BFD1-B1B3-D3A9-E0592CD6843A" name="Wheels_Cars_FK">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-22 13:42:08 UTC</createdTime>
+<generatorID>11F302CF-D854-79F6-C123-CBBF63F94F8A</generatorID>
+<ownerDesignName>Car</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B6B26F79-5609-555B-5D84-90442507B1CE"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

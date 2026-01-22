@@ -1,0 +1,73 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="01FA8B4B-3832-3709-2D7A-DBFA1D1DD666" name="Referee">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 10:08:12 UTC</createdTime>
+<generatorID>DE352AA5-C9CD-6185-984D-60A39B2A5893</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="289C7570-46CF-ACD6-92D5-0A14C738F634">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 10:08:12 UTC</createdTime>
+<generatorID>2682033E-B740-2064-4366-CB312B7A1589</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="557AD11F-DD0A-9747-D2E8-E61847AF2331" referredColumn="43F90BBC-FF73-D2EA-D8BD-588927ADFC1C"/>
+</associations>
+</Column>
+<Column name="PersonalNumber" id="A1D7FA8A-75D1-946A-468B-BC966DABC6AC">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 10:08:12 UTC</createdTime>
+<generatorID>58B1D17C-8B7B-530A-4DAC-333B46729566</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="46FC8A88-801B-19BA-3BC7-7468819C8896" name="Referee_PK">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 10:08:12 UTC</createdTime>
+<generatorID>89443672-FAF7-99EB-9C41-0EF9F00D8887</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="289C7570-46CF-ACD6-92D5-0A14C738F634"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="15DD889D-D605-B89D-FB7C-EA98752135BD" name="Referee_PKv1">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 10:08:12 UTC</createdTime>
+<generatorID>B6D2A426-EEF0-DBDC-572A-9863165C1495</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A1D7FA8A-75D1-946A-468B-BC966DABC6AC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="E1CE4467-D921-485A-D77F-DBE9A74C6566" name="Referee_Person_FK">
+<createdBy>kilia</createdBy>
+<createdTime>2026-01-08 10:08:12 UTC</createdTime>
+<generatorID>0DC96802-50E5-DEA7-C4CE-1435570F1572</generatorID>
+<ownerDesignName>Olymische Spiele</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="289C7570-46CF-ACD6-92D5-0A14C738F634"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,121 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="4C052E3A-9B0F-48E5-AF04-F199763DE157" name="Bankaccounts">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:50:44 UTC</createdTime>
+<generatorID>FF7D0129-29E5-39AD-710E-D21522E24DA3</generatorID>
+<ownerDesignName>Bank</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id1" id="992676E9-ABAF-1C7B-B4D5-5149AD587BD9">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:50:44 UTC</createdTime>
+<commentInRDBMS><![CDATA[10^9 ids]]></commentInRDBMS>
+<generatorID>9B42E9DA-B990-1C8C-4ECD-E9B27D85817F</generatorID>
+<ownerDesignName>Bank</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>9</dataTypePrecision>
+<ownDataTypeParameters>,9,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CountryCode" id="87B196D7-19E9-8A24-2BD0-87D9E7DF215F">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:50:44 UTC</createdTime>
+<generatorID>78F1440F-A590-037D-F5D2-66ADEDB634F6</generatorID>
+<ownerDesignName>Bank</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>2</dataTypeSize>
+<ownDataTypeParameters>2,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Checksum" id="1F901B94-FFDB-3B6D-4D5D-FEA5F9627287">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:50:44 UTC</createdTime>
+<generatorID>49C22A82-3745-4410-D503-57E75B7B336E</generatorID>
+<ownerDesignName>Bank</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="RoutingNumber" id="DBAA419D-BBD7-48B0-9B4B-16BA7A5117D6">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:50:44 UTC</createdTime>
+<commentInRDBMS><![CDATA[Bankleitzahl in AT]]></commentInRDBMS>
+<generatorID>C9F19998-C14B-43C3-6133-A6F4B9D5A3E6</generatorID>
+<ownerDesignName>Bank</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="AccountNumber" id="0C86D3A9-E5F4-F8B1-7518-3E733E071ECD">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:50:44 UTC</createdTime>
+<generatorID>452A03F9-D1F6-23C6-2029-8F7953928A05</generatorID>
+<ownerDesignName>Bank</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>11</dataTypePrecision>
+<ownDataTypeParameters>,11,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id" id="91C0CEC9-695C-AA61-9398-C9CB76C7B3C9">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:50:44 UTC</createdTime>
+<generatorID>CE5761F3-CB97-E1FD-F5A6-58DB6714609E</generatorID>
+<ownerDesignName>Bank</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Bankaccounts_TYPE" id="3C92AEA4-F10D-E04E-7BD1-9B97ED0B563B">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:53:05 UTC</createdTime>
+<ownerDesignName>Bank</ownerDesignName>
+<constraintName>CH_INH_Bankaccounts</constraintName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15</dataTypeSize>
+<listOfValues>
+<valueDef value="Bankaccounts" description="entity Bankaccounts"/>
+<valueDef value="SalaryAccounts" description="entity SalaryAccounts"/>
+<valueDef value="SavingsAccounts" description="entity SavingsAccounts"/>
+</listOfValues>
+<ownDataTypeParameters>15,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<isDiscriminatorColumn>true</isDiscriminatorColumn>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="BAF1C413-AA7B-7F36-6DF3-98C3EAC1B3AE" name="Bankaccounts_PK">
+<createdBy>kilia</createdBy>
+<createdTime>2025-12-18 11:50:44 UTC</createdTime>
+<generatorID>6789AEA9-0BEE-38BF-4E58-A6AC1851132E</generatorID>
+<ownerDesignName>Bank</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="91C0CEC9-695C-AA61-9398-C9CB76C7B3C9"/>
+<colUsage columnID="992676E9-ABAF-1C7B-B4D5-5149AD587BD9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
