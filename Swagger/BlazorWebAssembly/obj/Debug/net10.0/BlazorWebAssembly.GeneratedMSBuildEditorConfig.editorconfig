@@ -32,8 +32,12 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kilia/Github/4CHIT-INSY/Swagger/BlazorWebAssembly/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
+[C:/Users/kilia/Github/4CHIT-INSY/Swagger/BlazorWebAssembly/Pages/Add.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kilia/Github/4CHIT-INSY/Swagger/BlazorWebAssembly/Pages/Edit.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWRpdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/kilia/Github/4CHIT-INSY/Swagger/BlazorWebAssembly/Pages/Home.razor]

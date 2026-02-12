@@ -1,0 +1,47 @@
+﻿@page "/{id:int}"
+
+@inject HttpClient Http
+@using Model
+@inject NavigationManager NavManager
+
+<PageTitle>Details</PageTitle>
+
+@if (demo == null)
+{
+    <p><em>Datensatz mit ID @id wird geladen...</em></p>
+}
+else
+{
+    <EditForm Model="@demo">
+        <input @bind="@demo.Id">
+        <input @bind="@demo.Value">
+        <input type="submit" @onclick="@UpdateDemo">
+    </EditForm>
+}
+
+@code {
+    private Model.Demos? demo;
+    [Parameter]
+    public int id { get; set; }
+
+    string url = "";
+    
+    protected override async Task OnInitializedAsync()
+    {
+        url = "http://localhost:5191/api/Demo/" + id;
+        try 
+        {
+            demo = await Http.GetFromJsonAsync<Model.Demos>(url);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Fehler beim Laden: {ex.Message}");
+        }
+    }
+
+    private async Task UpdateDemo()
+    {
+        await Http.PutAsJsonAsync<Model.Demos>(url, demo);
+        NavManager.NavigateTo("/");
+    }
+}

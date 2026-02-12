@@ -1,0 +1,27 @@
+﻿@page "/add"
+@inject HttpClient Http
+@inject NavigationManager NavManager
+@using Model
+
+<h3>Neuen Datensatz erstellen</h3>
+
+<div class="form-group">
+    <label>Value:</label>
+    <input class="form-control" @bind="newDemo.Value" />
+</div>
+
+<button class="btn btn-primary mt-2" @onclick="Save">Speichern</button>
+<button class="btn btn-secondary mt-2" @onclick='() => NavManager.NavigateTo("/")'>Abbrechen</button>
+
+@code {
+    private Model.Demos newDemo = new Model.Demos();
+
+    private async Task Save()
+    {
+        // POST Request an die API
+        await Http.PostAsJsonAsync("http://localhost:5191/api/Demo", newDemo);
+        
+        // Zurück zur Übersicht
+        NavManager.NavigateTo("/");
+    }
+}

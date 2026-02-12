@@ -6,15 +6,17 @@
 
 @if (demos == null)
 {
-    <p>
-        <em>Loading...</em>
-    </p>
+    <p><em>Loading...</em></p>
 }
 else
 {
+    <div class="mb-3">
+        <a class="btn btn-success" href="/add">Neuen Datensatz hinzufügen</a>
+    </div>
     <table class="table">
         <thead>
         <tr>
+            <th>Actions</th>
             <th>Id</th>
             <th>Value</th>
         </tr>
@@ -23,6 +25,10 @@ else
         @foreach (var d in demos)
         {
             <tr>
+                <td>
+                    <a class="btn btn-sm btn-primary" href="/@d.Id">Edit</a>
+                    <button class="btn btn-sm btn-danger" @onclick="() => DeleteDemo(d.Id)">Delete</button>
+                </td>
                 <td>@d.Id</td>
                 <td>@d.Value</td>
             </tr>
@@ -33,10 +39,32 @@ else
 
 @code {
     private Model.Demos[]? demos;
-    
+    private string baseUrl = "http://localhost:5191/api/Demo";
+
     protected override async Task OnInitializedAsync()
     {
-        string url = "http://localhost:5191";
-        demos = await Http.GetFromJsonAsync<Model.Demos[]>(url+"/api/Demo");
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        demos = await Http.GetFromJsonAsync<Model.Demos[]>(baseUrl);
+    }
+
+    private async Task DeleteDemo(int id)
+    {
+        // 1. DELETE Request an die API senden
+        var response = await Http.DeleteAsync($"{baseUrl}/{id}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            // 2. Liste neu laden, damit die Zeile verschwindet
+            await LoadData();
+        }
+        else
+        {
+            // Optional: Fehlerbehandlung
+            Console.WriteLine("Fehler beim Löschen");
+        }
     }
 }
