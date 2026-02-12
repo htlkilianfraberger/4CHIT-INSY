@@ -12,3 +12,18 @@ C:\Users\kilia\OneDrive - HTL Krems\SEW\C#\Swagger\Model\obj\Debug\net10.0\refin
 C:\Users\kilia\OneDrive - HTL Krems\SEW\C#\Swagger\Model\obj\Debug\net10.0\Model.pdb
 C:\Users\kilia\OneDrive - HTL Krems\SEW\C#\Swagger\Model\obj\Debug\net10.0\Model.genruntimeconfig.cache
 C:\Users\kilia\OneDrive - HTL Krems\SEW\C#\Swagger\Model\obj\Debug\net10.0\ref\Model.dll
+C:\Users\kilia\Github\4CHIT-INSY\Swagger\Model\bin\Debug\net10.0\Model.deps.json
+C:\Users\kilia\Github\4CHIT-INSY\Swagger\Model\bin\Debug\net10.0\Model.runtimeconfig.json
+C:\Users\kilia\Github\4CHIT-INSY\Swagger\Model\bin\Debug\net10.0\Model.dll
+C:\Users\kilia\Github\4CHIT-INSY\Swagger\Model\bin\Debug\net10.0\Model.pdb
+C:\Users\kilia\Github\4CHIT-INSY\Swagger\Model\obj\Debug\net10.0\Model.csproj.AssemblyReference.cache
+C:\Users\kilia\Github\4CHIT-INSY\Swagger\Model\obj\Debug\net10.0\Model.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kilia\Github\4CHIT-INSY\Swagger\Model\obj\Debug\net10.0\Model.AssemblyInfoInputs.cache
+C:\Users\kilia\Github\4CHIT-INSY\Swagger\Model\obj\Debug\net10.0\Model.AssemblyInfo.cs
+C:\Users\kilia\Github\4CHIT-INSY\Swagger\Model\obj\Debug\net10.0\Model.csproj.CoreCompileInputs.cache
+C:\Users\kilia\Github\4CHIT-INSY\Swagger\Model\obj\Debug\net10.0\Model.sourcelink.json
+C:\Users\kilia\Github\4CHIT-INSY\Swagger\Model\obj\Debug\net10.0\Model.dll
+C:\Users\kilia\Github\4CHIT-INSY\Swagger\Model\obj\Debug\net10.0\refint\Model.dll
+C:\Users\kilia\Github\4CHIT-INSY\Swagger\Model\obj\Debug\net10.0\Model.pdb
+C:\Users\kilia\Github\4CHIT-INSY\Swagger\Model\obj\Debug\net10.0\Model.genruntimeconfig.cache
+C:\Users\kilia\Github\4CHIT-INSY\Swagger\Model\obj\Debug\net10.0\ref\Model.dll

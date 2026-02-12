@@ -22,14 +22,14 @@ namespace WebAPISwagger.Controllers
 
         // GET: api/Demo
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Demo>>> GetDemos()
+        public async Task<ActionResult<IEnumerable<Demos>>> GetDemos()
         {
             return await _context.Demos.ToListAsync();
         }
 
         // GET: api/Demo/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Demo>> GetDemo(int id)
+        public async Task<ActionResult<Demos>> GetDemo(int id)
         {
             var demo = await _context.Demos.FindAsync(id);
 
@@ -44,14 +44,14 @@ namespace WebAPISwagger.Controllers
         // PUT: api/Demo/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDemo(int id, Demo demo)
+        public async Task<IActionResult> PutDemo(int id, Demos demos)
         {
-            if (id != demo.Id)
+            if (id != demos.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(demo).State = EntityState.Modified;
+            _context.Entry(demos).State = EntityState.Modified;
 
             try
             {
@@ -75,12 +75,12 @@ namespace WebAPISwagger.Controllers
         // POST: api/Demo
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Demo>> PostDemo(Demo demo)
+        public async Task<ActionResult<Demos>> PostDemo(Demos demos)
         {
-            _context.Demos.Add(demo);
+            _context.Demos.Add(demos);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetDemo", new { id = demo.Id }, demo);
+            return CreatedAtAction("GetDemo", new { id = demos.Id }, demos);
         }
 
         // DELETE: api/Demo/5
