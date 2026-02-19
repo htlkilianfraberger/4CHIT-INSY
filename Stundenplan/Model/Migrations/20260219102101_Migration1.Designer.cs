@@ -3,14 +3,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Model;
 
 #nullable disable
 
 namespace Model.Migrations
 {
     [DbContext(typeof(StundenplanContext))]
-    [Migration("20260219091434_migration2")]
-    partial class migration2
+    [Migration("20260219102101_Migration1")]
+    partial class Migration1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,6 +34,23 @@ namespace Model.Migrations
                     b.HasIndex("SId");
 
                     b.ToTable("ClassesSubjects");
+
+                    b.HasData(
+                        new
+                        {
+                            CId = 5,
+                            SId = 2
+                        },
+                        new
+                        {
+                            CId = 5,
+                            SId = 3
+                        },
+                        new
+                        {
+                            CId = 1,
+                            SId = 2
+                        });
                 });
 
             modelBuilder.Entity("Model.Classes", b =>
@@ -48,6 +66,33 @@ namespace Model.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Classes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "1CHIT"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "2CHIT"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "3CHIT"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "4CHIT"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "5CHIT"
+                        });
                 });
 
             modelBuilder.Entity("Model.Subjects", b =>
@@ -63,6 +108,33 @@ namespace Model.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Subjects");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "AM"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "SEW"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "INSY"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "D"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "E"
+                        });
                 });
 
             modelBuilder.Entity("ClassesSubjects", b =>

@@ -3,10 +3,12 @@ using MySql.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Model.Migrations
 {
     /// <inheritdoc />
-    public partial class migration2 : Migration
+    public partial class Migration1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -66,6 +68,40 @@ namespace Model.Migrations
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.InsertData(
+                table: "Classes",
+                columns: new[] { "Id", "Description" },
+                values: new object[,]
+                {
+                    { 1, "1CHIT" },
+                    { 2, "2CHIT" },
+                    { 3, "3CHIT" },
+                    { 4, "4CHIT" },
+                    { 5, "5CHIT" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Subjects",
+                columns: new[] { "Id", "Description" },
+                values: new object[,]
+                {
+                    { 1, "AM" },
+                    { 2, "SEW" },
+                    { 3, "INSY" },
+                    { 4, "D" },
+                    { 5, "E" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ClassesSubjects",
+                columns: new[] { "CId", "SId" },
+                values: new object[,]
+                {
+                    { 1, 2 },
+                    { 5, 2 },
+                    { 5, 3 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ClassesSubjects_SId",
