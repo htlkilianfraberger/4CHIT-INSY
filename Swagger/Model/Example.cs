@@ -2,7 +2,7 @@
 
 namespace Model;
 [Table("Examples")]
-public class Example
+public class Example : IHasId
 {
     public int Id { get; set; }
     public int Value1 { get; set; }

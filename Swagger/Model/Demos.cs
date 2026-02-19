@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Model;
 
-public partial class Demos
+public partial class Demos : IHasId
 {
     public int Id { get; set; }
 

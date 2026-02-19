@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WebAPISwagger")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+81e4c4dae716f1d3ed30e053bc80933cbc9aba21")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bb63045f6321ad67bd29454ea3e9d1ae44ca6541")]
 [assembly: System.Reflection.AssemblyProductAttribute("WebAPISwagger")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WebAPISwagger")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
