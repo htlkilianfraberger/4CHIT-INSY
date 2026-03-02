@@ -117,51 +117,61 @@ namespace Model.Migrations
                         new
                         {
                             Id = 1,
+                            ClassId = 4,
                             Name = "Lukas Huber"
                         },
                         new
                         {
                             Id = 2,
+                            ClassId = 4,
                             Name = "Sarah Maier"
                         },
                         new
                         {
                             Id = 3,
+                            ClassId = 5,
                             Name = "Maximilian Gruber"
                         },
                         new
                         {
                             Id = 4,
+                            ClassId = 5,
                             Name = "Julia Pichler"
                         },
                         new
                         {
                             Id = 5,
+                            ClassId = 1,
                             Name = "Felix Müller"
                         },
                         new
                         {
                             Id = 6,
+                            ClassId = 1,
                             Name = "Emma Wagner"
                         },
                         new
                         {
                             Id = 7,
+                            ClassId = 2,
                             Name = "Tobias Berger"
                         },
                         new
                         {
                             Id = 8,
+                            ClassId = 2,
                             Name = "Anna Fuchs"
                         },
                         new
                         {
                             Id = 9,
+                            ClassId = 3,
                             Name = "Moritz Hofer"
                         },
                         new
                         {
                             Id = 10,
+                            ClassId = 3,
                             Name = "Elena Steiner"
                         });
                 });
@@ -203,7 +213,8 @@ namespace Model.Migrations
                 {
                     b.HasOne("Model.Class", "Class")
                         .WithMany("Pupils")
-                        .HasForeignKey("ClassId");
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Class");
                 });

@@ -23,7 +23,13 @@ public partial class MyDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        
+
+        modelBuilder.Entity<Pupil>()
+            .HasOne(p => p.Class)
+            .WithMany(c => c.Pupils)
+            .HasForeignKey(p => p.ClassId)
+            .OnDelete(DeleteBehavior.SetNull);
+
         modelBuilder.Entity<School>().HasData(
             new School { Id = 1, Name = "HTL Krems" }
         );
@@ -42,16 +48,16 @@ public partial class MyDbContext : DbContext
         );
         
         modelBuilder.Entity<Pupil>().HasData(
-            new Pupil { Id = 1, Name = "Lukas Huber"},
-            new Pupil { Id = 2, Name = "Sarah Maier"},
-            new Pupil { Id = 3, Name = "Maximilian Gruber"},
-            new Pupil { Id = 4, Name = "Julia Pichler"},
-            new Pupil { Id = 5, Name = "Felix Müller"},
-            new Pupil { Id = 6, Name = "Emma Wagner"},
-            new Pupil { Id = 7, Name = "Tobias Berger"},
-            new Pupil { Id = 8, Name = "Anna Fuchs"},
-            new Pupil { Id = 9, Name = "Moritz Hofer"},
-            new Pupil { Id = 10, Name = "Elena Steiner"}
+            new Pupil { Id = 1, Name = "Lukas Huber", ClassId = 4 },
+            new Pupil { Id = 2, Name = "Sarah Maier", ClassId = 4 },
+            new Pupil { Id = 3, Name = "Maximilian Gruber", ClassId = 5 },
+            new Pupil { Id = 4, Name = "Julia Pichler", ClassId = 5 },
+            new Pupil { Id = 5, Name = "Felix Müller", ClassId = 1 },
+            new Pupil { Id = 6, Name = "Emma Wagner", ClassId = 1 },
+            new Pupil { Id = 7, Name = "Tobias Berger", ClassId = 2 },
+            new Pupil { Id = 8, Name = "Anna Fuchs", ClassId = 2 },
+            new Pupil { Id = 9, Name = "Moritz Hofer", ClassId = 3 },
+            new Pupil { Id = 10, Name = "Elena Steiner", ClassId = 3 }
         );
     }
 }

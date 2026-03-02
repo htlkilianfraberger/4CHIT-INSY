@@ -1,0 +1,92 @@
+﻿@page "/"
+@using Model
+@inject HttpClient Http
+
+<PageTitle>Schulverwaltung - Klassen & Schüler</PageTitle>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Klassen</h3>
+            @if (classes == null)
+            {
+                <div class="spinner-border" role="status"></div>
+            }
+            else
+            {
+                <div class="list-group">
+                    @foreach (var c in classes)
+                    {
+                        <button type="button" 
+                                class="list-group-item list-group-item-action @(selectedClass?.Id == c.Id ? "active" : "")"
+                                @onclick="() => LoadPupils(c)">
+                            @c.Name
+                        </button>
+                    }
+                </div>
+            }
+        </div>
+
+        <div class="col-md-8">
+            @if (selectedClass != null)
+            {
+                <h3>Schüler in Klasse @selectedClass.Name</h3>
+                @if (pupils == null)
+                {
+                    <p>Lade Schüler...</p>
+                }
+                else if (!pupils.Any())
+                {
+                    <div class="alert alert-info">Diese Klasse hat noch keine Schüler.</div>
+                }
+                else
+                {
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var p in pupils)
+                            {
+                                <tr>
+                                    <td>@p.Id</td>
+                                    <td>@p.Name</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            }
+            else
+            {
+                <div class="mt-5 text-center text-muted">
+                    <p>Bitte wählen Sie links eine Klasse aus, um die Schüler anzuzeigen.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private List<Class>? classes;
+    private List<Pupil>? pupils;
+    private Class? selectedClass;
+
+    protected override async Task OnInitializedAsync()
+    {
+        classes = await Http.GetFromJsonAsync<List<Class>>("api/Class");
+    }
+
+    private async Task LoadPupils(Class c)
+    {
+        selectedClass = c;
+        pupils = null;
+        
+        var allPupils = await Http.GetFromJsonAsync<List<Pupil>>("api/Pupil");
+        
+        pupils = allPupils?.Where(p => p.ClassId == c.Id).ToList();
+    }
+}

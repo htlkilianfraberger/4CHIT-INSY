@@ -10,4 +10,5 @@ public class Department
     
     public int SchoolId { get; set; }
     public School School { get; set; } = null!;
+
 }
