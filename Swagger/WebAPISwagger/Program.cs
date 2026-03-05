@@ -1,4 +1,5 @@
 using Model;
+using Model.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<SwaggerContext>();
+builder.Services.AddDbContext<MyDbContext>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

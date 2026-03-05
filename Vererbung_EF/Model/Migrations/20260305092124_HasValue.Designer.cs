@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Model.Context;
 
@@ -10,9 +11,11 @@ using Model.Context;
 namespace Model.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260305092124_HasValue")]
+    partial class HasValue
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,16 +25,24 @@ namespace Model.Migrations
             modelBuilder.Entity("Model.Animal", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Recorded")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<string>("animal_type")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("varchar(13)");
+
                     b.HasKey("Id");
 
-                    b.ToTable((string)null);
+                    b.ToTable("Animals");
 
-                    b.UseTpcMappingStrategy();
+                    b.HasDiscriminator<string>("animal_type").HasValue("Common_animal");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Model.Bird", b =>
@@ -42,7 +53,7 @@ namespace Model.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.ToTable("Birds", (string)null);
+                    b.HasDiscriminator().HasValue("Beep");
                 });
 
             modelBuilder.Entity("Model.Dog", b =>
@@ -53,7 +64,7 @@ namespace Model.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.ToTable("Dogs", (string)null);
+                    b.HasDiscriminator().HasValue("Wauwau");
                 });
 #pragma warning restore 612, 618
         }

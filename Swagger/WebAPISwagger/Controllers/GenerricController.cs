@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Model;
+using Model.Context;
 
 namespace WebAPISwagger.Controllers
 {
@@ -8,9 +9,9 @@ namespace WebAPISwagger.Controllers
     [ApiController]
     public class GenericController<T> : ControllerBase where T : class, IHasId
     {
-        private readonly SwaggerContext _context;
+        private readonly DbContext _context;
 
-        public GenericController(SwaggerContext context)
+        public GenericController(DbContext context)
         {
             _context = context;
         }
@@ -96,4 +97,6 @@ namespace WebAPISwagger.Controllers
     }
     //mit primary constructor
     public class ExamplesController(SwaggerContext context) : GenericController<Example>(context);
+    public class DogController(MyDbContext context) : GenericController<Dog>(context);
+    public class BirdController(MyDbContext context) : GenericController<Bird>(context);
 }
