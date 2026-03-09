@@ -6,8 +6,7 @@
 <PageTitle>Tier-Management</PageTitle>
 
 <div class="container mt-4">
-    <h2>Übersicht aller Tiere (TPC-Mapping)</h2>
-    <p class="text-muted">Daten kommen als polymorphes JSON mit Typerkennung.</p>
+    <h2>Übersicht aller Tiere</h2>
 
     @if (animals == null)
     {
@@ -67,8 +66,6 @@
     {
         try
         {
-            // Da wir JsonDerivedType im Model nutzen, 
-            // erkennt GetFromJsonAsync automatisch die Untertypen!
             animals = await Http.GetFromJsonAsync<List<Animal>>("api/animals");
         }
         catch (Exception ex)
