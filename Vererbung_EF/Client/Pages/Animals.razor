@@ -1,0 +1,79 @@
+﻿@page "/"
+@using System.Net.Http.Json
+@using Model
+@inject HttpClient Http
+
+<PageTitle>Tier-Management</PageTitle>
+
+<div class="container mt-4">
+    <h2>Übersicht aller Tiere (TPC-Mapping)</h2>
+    <p class="text-muted">Daten kommen als polymorphes JSON mit Typerkennung.</p>
+
+    @if (animals == null)
+    {
+        <div class="d-flex align-items-center">
+            <strong>Lade Daten...</strong>
+            <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+        </div>
+    }
+    else if (!animals.Any())
+    {
+        <div class="alert alert-info">Keine Tiere in der Datenbank gefunden.</div>
+    }
+    else
+    {
+        <table class="table table-hover border">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Typ</th>
+                    <th>Aufgenommen am</th>
+                    <th>Spezifische Info</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var animal in animals)
+                {
+                    <tr>
+                        <td>@animal.Id</td>
+                        <td>
+                            @* Badge-Design für die Optik *@
+                            <span class="badge @(animal is Dog ? "bg-primary" : "bg-success")">
+                                @(animal is Dog ? "Hund" : "Vogel")
+                            </span>
+                        </td>
+                        <td>@animal.Recorded.ToString("dd.MM.yyyy HH:mm")</td>
+                        <td>
+                            @if (animal is Dog dog)
+                            {
+                                <strong>Rasse:</strong> @dog.Breed
+                            }
+                            else if (animal is Bird bird)
+                            {
+                                <strong>Spannweite:</strong> @bird.Wingspan
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+@code {
+    private List<Animal>? animals;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            // Da wir JsonDerivedType im Model nutzen, 
+            // erkennt GetFromJsonAsync automatisch die Untertypen!
+            animals = await Http.GetFromJsonAsync<List<Animal>>("api/animals");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Fehler beim Abrufen der Tiere: {ex.Message}");
+        }
+    }
+}
