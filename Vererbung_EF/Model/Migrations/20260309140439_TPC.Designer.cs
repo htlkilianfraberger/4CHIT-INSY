@@ -11,8 +11,8 @@ using Model.Context;
 namespace Model.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20260309135609_ChangeToTPH")]
-    partial class ChangeToTPH
+    [Migration("20260309140439_TPC")]
+    partial class TPC
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,24 +25,16 @@ namespace Model.Migrations
             modelBuilder.Entity("Model.Animal", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Recorded")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("animal_type")
-                        .IsRequired()
-                        .HasMaxLength(13)
-                        .HasColumnType("varchar(13)");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Animals", (string)null);
+                    b.ToTable((string)null);
 
-                    b.HasDiscriminator<string>("animal_type").HasValue("Common_animal");
-
-                    b.UseTphMappingStrategy();
+                    b.UseTpcMappingStrategy();
                 });
 
             modelBuilder.Entity("Model.Bird", b =>
@@ -53,7 +45,7 @@ namespace Model.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.HasDiscriminator().HasValue("Beep");
+                    b.ToTable("Birds", (string)null);
                 });
 
             modelBuilder.Entity("Model.Dog", b =>
@@ -64,7 +56,7 @@ namespace Model.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.HasDiscriminator().HasValue("Wauwau");
+                    b.ToTable("Dogs", (string)null);
                 });
 #pragma warning restore 612, 618
         }
