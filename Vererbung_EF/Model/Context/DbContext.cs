@@ -31,7 +31,7 @@ public class MyDbContext : DbContext
 
         //modelBuilder.Entity<Animal>().UseTptMappingStrategy(); //TPT
         modelBuilder.Entity<Animal>().UseTpcMappingStrategy(); //TPC
-        //modelBuilder.Entity<Animal>().ToTable("Animals"); (optional)
+        //modelBuilder.Entity<Animal>().ToTable("Animals"); //(optional)
         modelBuilder.Entity<Dog>().ToTable("Dogs");
         modelBuilder.Entity<Bird>().ToTable("Birds");
     }
