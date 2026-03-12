@@ -1,56 +1,101 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Model;
 
 namespace Model;
 
-public partial class StundenplanContext(DbContextOptions<StundenplanContext> options) : DbContext(options)
-{
-    public StundenplanContext() : this(new DbContextOptions<StundenplanContext>()) { }
+public class StundenplanContext : DbContext {
+    public StundenplanContext() { }
+    public StundenplanContext(DbContextOptions<StundenplanContext> options) : base(options) { }
 
-    public virtual DbSet<Classes> Classes { get; set; }
-    public virtual DbSet<Subjects> Subjects { get; set; }
+    public DbSet<Teacher> Teachers => Set<Teacher>();
+    public DbSet<Subject> Subjects => Set<Subject>();
+    public DbSet<SchoolClass> Classes => Set<SchoolClass>();
+    public DbSet<TeacherSubject> TeacherSubjects => Set<TeacherSubject>();
+    public DbSet<ClassSubject> ClassSubjects => Set<ClassSubject>();
+    public DbSet<Lesson> Lessons => Set<Lesson>();
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
         if (!optionsBuilder.IsConfigured)
-        {
             optionsBuilder.UseMySQL("Server=127.0.0.1;uid=root;pwd=insy;database=Stundenplan");
-        }
     }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        base.OnModelCreating(modelBuilder);
+    protected override void OnModelCreating(ModelBuilder modelBuilder) {
+        // WICHTIG: Definition der Primärschlüssel für m:n Tabellen
+        modelBuilder.Entity<TeacherSubject>().HasKey(ts => new { ts.Tid, ts.Sid });
+        modelBuilder.Entity<ClassSubject>().HasKey(cs => new { cs.Cid, cs.Sid });
+
+        // Fremdschlüssel-Konfiguration
+        modelBuilder.Entity<TeacherSubject>(e => {
+            e.HasOne(ts => ts.Teacher).WithMany(t => t.TeacherSubjects).HasForeignKey(ts => ts.Tid);
+            e.HasOne(ts => ts.Subject).WithMany().HasForeignKey(ts => ts.Sid);
+        });
+
+        modelBuilder.Entity<ClassSubject>(e => {
+            e.HasOne(cs => cs.SchoolClass).WithMany(c => c.ClassSubjects).HasForeignKey(cs => cs.Cid);
+            e.HasOne(cs => cs.Subject).WithMany().HasForeignKey(cs => cs.Sid);
+        });
+
+        // Validierung für Lesson (Unterricht)
+        modelBuilder.Entity<Lesson>(e => {
+            e.HasOne(l => l.TeacherSubject).WithMany().HasForeignKey(l => new { l.Tid, l.Sid }).OnDelete(DeleteBehavior.Restrict);
+            e.HasOne(l => l.ClassSubject).WithMany().HasForeignKey(l => new { l.Cid, l.Sid }).OnDelete(DeleteBehavior.Restrict);
+        });
+
+        // --- SEED DATA ---
         
-        modelBuilder.Entity<Classes>()
-            .HasMany(c => c.S)
-            .WithMany(s => s.C)
-            .UsingEntity<Dictionary<string, object>>(
-                "ClassesSubjects",
-                j => j.HasOne<Subjects>().WithMany().HasForeignKey("SId"),
-                j => j.HasOne<Classes>().WithMany().HasForeignKey("CId")
-            );
-        
-        modelBuilder.Entity<Classes>().HasData(
-            new Classes { Id = 1, Description = "1CHIT" },
-            new Classes { Id = 2, Description = "2CHIT" },
-            new Classes { Id = 3, Description = "3CHIT" },
-            new Classes { Id = 4, Description = "4CHIT" },
-            new Classes { Id = 5, Description = "5CHIT" }
-        );
-        
-        modelBuilder.Entity<Subjects>().HasData(
-            new Subjects { Id = 1, Description = "AM" },
-            new Subjects { Id = 2, Description = "SEW" },
-            new Subjects { Id = 3, Description = "INSY" },
-            new Subjects { Id = 4, Description = "D" },
-            new Subjects { Id = 5, Description = "E" }
-        );
-        
-        modelBuilder.Entity("ClassesSubjects").HasData(
-            new { CId = 5, SId = 2 }, 
-            new { CId = 5, SId = 3 },
-            new { CId = 1, SId = 2 }
-        );
+        modelBuilder.Entity<Teacher>().HasData(
+    new Teacher { Id = 1, Abbr = "ALLI" },
+    new Teacher { Id = 2, Abbr = "BIRN" },
+    new Teacher { Id = 13, Abbr = "MACO" },
+    new Teacher { Id = 14, Abbr = "NIGI" },
+    new Teacher { Id = 19, Abbr = "STRO" }
+);
+
+// 2. Subjects
+modelBuilder.Entity<Subject>().HasData(
+    new Subject { Id = 1, Desc = "AM" },
+    new Subject { Id = 4, Desc = "D" },
+    new Subject { Id = 5, Desc = "E" },
+    new Subject { Id = 9, Desc = "INSY" },
+    new Subject { Id = 18, Desc = "REL" },
+    new Subject { Id = 19, Desc = "SEW" },
+    new Subject { Id = 20, Desc = "SOPK" },
+    new Subject { Id = 21, Desc = "SYT" }
+);
+
+// 3. SchoolClasses
+modelBuilder.Entity<SchoolClass>().HasData(
+    new SchoolClass { Id = 1, Abbr = "1CHIT" },
+    new SchoolClass { Id = 2, Abbr = "2CHIT" },
+    new SchoolClass { Id = 3, Abbr = "3CHIT" },
+    new SchoolClass { Id = 4, Abbr = "4CHIT" },
+    new SchoolClass { Id = 5, Abbr = "5CHIT" }
+);
+
+// 4. T_has_S (Lehrer - Fach)
+modelBuilder.Entity<TeacherSubject>().HasData(
+    new { Tid = 1, Sid = 18 }, // Lesson 203, 299
+    new { Tid = 13, Sid = 9 }, // Lesson 378
+    new { Tid = 13, Sid = 19 },// Lesson 379, 399
+    new { Tid = 2, Sid = 19 }  // Lesson 1277
+);
+
+// 5. C_has_S (Klasse - Fach) - ALLE Kombinationen, die in Lessons vorkommen!
+modelBuilder.Entity<ClassSubject>().HasData(
+    new { Cid = 1, Sid = 18 }, // Lesson 203
+    new { Cid = 4, Sid = 18 }, // Lesson 299
+    new { Cid = 4, Sid = 9 },  // Lesson 378
+    new { Cid = 4, Sid = 19 }, // Lesson 379
+    new { Cid = 5, Sid = 19 }  // Lesson 399, 1277
+);
+
+// 6. Lessons (Unterricht)
+modelBuilder.Entity<Lesson>().HasData(
+    new Lesson { Id = 203, Tid = 1, Sid = 18, Cid = 1, Day = "Mo", Hour = 1 },
+    new Lesson { Id = 299, Tid = 1, Sid = 18, Cid = 4, Day = "Di", Hour = 2 },
+    new Lesson { Id = 378, Tid = 13, Sid = 9, Cid = 4, Day = "Mi", Hour = 3 },
+    new Lesson { Id = 379, Tid = 13, Sid = 19, Cid = 4, Day = "Do", Hour = 4 },
+    new Lesson { Id = 399, Tid = 13, Sid = 19, Cid = 5, Day = "Fr", Hour = 5 },
+    new Lesson { Id = 1277, Tid = 2, Sid = 19, Cid = 5, Day = "Mo", Hour = 6 }
+);
     }
 }
