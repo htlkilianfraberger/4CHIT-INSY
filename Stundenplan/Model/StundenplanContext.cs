@@ -19,6 +19,22 @@ public class StundenplanContext : DbContext {
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
+        modelBuilder.Entity<TeacherSubject>()
+            .HasKey(ts => new { ts.Tid, ts.Sid });
+
+        modelBuilder.Entity<ClassSubject>()
+            .HasKey(cs => new { cs.Cid, cs.Sid });
+        
+        modelBuilder.Entity<Lesson>()
+            .HasOne(l => l.TeacherSubject)
+            .WithMany()
+            .HasForeignKey(l => new { l.Tid, l.Sid });
+
+        modelBuilder.Entity<Lesson>()
+            .HasOne(l => l.ClassSubject)
+            .WithMany()
+            .HasForeignKey(l => new { l.Cid, l.Sid });
+        
         modelBuilder.Entity<TeacherSubject>().HasKey(ts => new { ts.Tid, ts.Sid });
         modelBuilder.Entity<ClassSubject>().HasKey(cs => new { cs.Cid, cs.Sid });
         
