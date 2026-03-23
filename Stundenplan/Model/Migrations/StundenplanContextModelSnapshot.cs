@@ -69,10 +69,6 @@ namespace Model.Migrations
                     b.Property<int>("Cid")
                         .HasColumnType("int");
 
-                    b.Property<string>("Day")
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
-
                     b.Property<int?>("Hour")
                         .HasColumnType("int");
 
@@ -80,6 +76,9 @@ namespace Model.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Tid")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WeekDay")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -95,55 +94,55 @@ namespace Model.Migrations
                         {
                             Id = 203,
                             Cid = 1,
-                            Day = "Mo",
                             Hour = 1,
                             Sid = 18,
-                            Tid = 1
+                            Tid = 1,
+                            WeekDay = 1
                         },
                         new
                         {
                             Id = 299,
                             Cid = 4,
-                            Day = "Di",
                             Hour = 2,
                             Sid = 18,
-                            Tid = 1
+                            Tid = 1,
+                            WeekDay = 2
                         },
                         new
                         {
                             Id = 378,
                             Cid = 4,
-                            Day = "Mi",
                             Hour = 3,
                             Sid = 9,
-                            Tid = 13
+                            Tid = 13,
+                            WeekDay = 3
                         },
                         new
                         {
                             Id = 379,
                             Cid = 4,
-                            Day = "Do",
                             Hour = 4,
                             Sid = 19,
-                            Tid = 13
+                            Tid = 13,
+                            WeekDay = 4
                         },
                         new
                         {
                             Id = 399,
                             Cid = 5,
-                            Day = "Fr",
                             Hour = 5,
                             Sid = 19,
-                            Tid = 13
+                            Tid = 13,
+                            WeekDay = 5
                         },
                         new
                         {
                             Id = 1277,
                             Cid = 5,
-                            Day = "Mo",
                             Hour = 6,
                             Sid = 19,
-                            Tid = 2
+                            Tid = 2,
+                            WeekDay = 1
                         });
                 });
 

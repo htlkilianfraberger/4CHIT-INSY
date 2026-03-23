@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Model;
 
@@ -33,14 +34,17 @@ public class ClassSubject {
     public int Sid { get; set; }
     public virtual Subject Subject { get; set; } = null!;
 }
-
+public enum WeekDay{Mo=1, Di, Mi, Do, Fr}
 public class Lesson {
     public int Id { get; set; }
     public int Tid { get; set; }
     public int Sid { get; set; }
     public int Cid { get; set; }
-    [MaxLength(20)] public string? Day { get; set; }
+    public WeekDay WeekDay { get; set; }
     public int? Hour { get; set; }
-    public virtual TeacherSubject TeacherSubject { get; set; } = null!;
-    public virtual ClassSubject ClassSubject { get; set; } = null!;
+    [JsonIgnore]
+    public virtual TeacherSubject? TeacherSubject { get; set; }
+        
+    [JsonIgnore]
+    public virtual ClassSubject? ClassSubject { get; set; }
 }

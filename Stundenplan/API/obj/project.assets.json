@@ -701,6 +701,25 @@
           }
         }
       },
+      "Microsoft.AspNetCore.Components.WebAssembly/10.0.4": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.JSInterop.WebAssembly": "10.0.4"
+        },
+        "compile": {
+          "lib/net10.0/Microsoft.AspNetCore.Components.WebAssembly.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.AspNetCore.Components.WebAssembly.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "build/net10.0/_._": {}
+        }
+      },
       "Microsoft.AspNetCore.OpenApi/10.0.3": {
         "type": "package",
         "dependencies": {
@@ -1449,6 +1468,21 @@
           }
         }
       },
+      "Microsoft.DotNet.HotReload.WebAssembly.Browser/10.0.104": {
+        "type": "package",
+        "compile": {
+          "lib/net10.0/Microsoft.DotNet.HotReload.WebAssembly.Browser.dll": {}
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.DotNet.HotReload.WebAssembly.Browser.dll": {}
+        },
+        "build": {
+          "buildTransitive/Microsoft.DotNet.HotReload.WebAssembly.Browser.props": {}
+        },
+        "buildMultiTargeting": {
+          "buildMultiTargeting/Microsoft.DotNet.HotReload.WebAssembly.Browser.props": {}
+        }
+      },
       "Microsoft.DotNet.Scaffolding.Shared/10.0.2": {
         "type": "package",
         "dependencies": {
@@ -1763,6 +1797,19 @@
         },
         "runtime": {
           "lib/net8.0/Microsoft.IdentityModel.Tokens.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.JSInterop.WebAssembly/10.0.4": {
+        "type": "package",
+        "compile": {
+          "lib/net10.0/Microsoft.JSInterop.WebAssembly.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.JSInterop.WebAssembly.dll": {
             "related": ".xml"
           }
         }
@@ -2800,6 +2847,21 @@
           "lib/net9.0/ZstdSharp.dll": {}
         }
       },
+      "Client/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Components.WebAssembly": "10.0.4",
+          "Microsoft.DotNet.HotReload.WebAssembly.Browser": "10.0.104",
+          "Model": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Client.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Client.dll": {}
+        }
+      },
       "Model/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
@@ -3707,6 +3769,24 @@
         "lib/netstandard2.0/K4os.Hash.xxHash.xml",
         "lib/netstandard2.1/K4os.Hash.xxHash.dll",
         "lib/netstandard2.1/K4os.Hash.xxHash.xml"
+      ]
+    },
+    "Microsoft.AspNetCore.Components.WebAssembly/10.0.4": {
+      "sha512": "zL6/TfmcmrqN8pn43oCX44bnDs0VdVz174IEMmuBan0wkGVzIO/zAWiOcjP441D2tJJCU+4BadBhWpIo+sH3Og==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.components.webassembly/10.0.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "PACKAGE.md",
+        "THIRD-PARTY-NOTICES.txt",
+        "build/net10.0/Microsoft.AspNetCore.Components.WebAssembly.props",
+        "build/net10.0/blazor.webassembly.js",
+        "lib/net10.0/Microsoft.AspNetCore.Components.WebAssembly.dll",
+        "lib/net10.0/Microsoft.AspNetCore.Components.WebAssembly.xml",
+        "microsoft.aspnetcore.components.webassembly.10.0.4.nupkg.sha512",
+        "microsoft.aspnetcore.components.webassembly.nuspec"
       ]
     },
     "Microsoft.AspNetCore.OpenApi/10.0.3": {
@@ -5229,6 +5309,25 @@
         "microsoft.diasymreader.nuspec"
       ]
     },
+    "Microsoft.DotNet.HotReload.WebAssembly.Browser/10.0.104": {
+      "sha512": "OkWFygvFdm9emwxRW5ahcsU6saKO9EOYCFVNEXWl+23A4ssZy40VCQuqPhyurU7IyaPEhgA4iXh0/o7fhyNngA==",
+      "type": "package",
+      "path": "microsoft.dotnet.hotreload.webassembly.browser/10.0.104",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "build/Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+        "build/Microsoft.AspNetCore.StaticWebAssets.props",
+        "build/Microsoft.DotNet.HotReload.WebAssembly.Browser.props",
+        "buildMultiTargeting/Microsoft.DotNet.HotReload.WebAssembly.Browser.props",
+        "buildTransitive/Microsoft.DotNet.HotReload.WebAssembly.Browser.props",
+        "lib/net10.0/Microsoft.DotNet.HotReload.WebAssembly.Browser.dll",
+        "microsoft.dotnet.hotreload.webassembly.browser.10.0.104.nupkg.sha512",
+        "microsoft.dotnet.hotreload.webassembly.browser.nuspec",
+        "staticwebassets/Microsoft.DotNet.HotReload.WebAssembly.Browser.99zm1jdh75.lib.module.js"
+      ]
+    },
     "Microsoft.DotNet.Scaffolding.Shared/10.0.2": {
       "sha512": "jDtDiBUsSCRWKZWC1VIjr0IlybvkrpySpufNLp8s6ZaCdSGoYOIGb13Mv7fnSfksHrLrUFPVtcfS6PznX8iBsg==",
       "type": "package",
@@ -5855,6 +5954,21 @@
         "lib/netstandard2.0/Microsoft.IdentityModel.Tokens.xml",
         "microsoft.identitymodel.tokens.7.7.1.nupkg.sha512",
         "microsoft.identitymodel.tokens.nuspec"
+      ]
+    },
+    "Microsoft.JSInterop.WebAssembly/10.0.4": {
+      "sha512": "9i1nsLzyh+liVUwpqnz/wyz/10zTdZowFCTL3XQ8U3nJcJb2TUUIJLWz6P97N8g33smPcvLe4Rfxz5+NjyZ7kQ==",
+      "type": "package",
+      "path": "microsoft.jsinterop.webassembly/10.0.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.txt",
+        "lib/net10.0/Microsoft.JSInterop.WebAssembly.dll",
+        "lib/net10.0/Microsoft.JSInterop.WebAssembly.xml",
+        "microsoft.jsinterop.webassembly.10.0.4.nupkg.sha512",
+        "microsoft.jsinterop.webassembly.nuspec"
       ]
     },
     "Microsoft.NET.StringTools/17.11.48": {
@@ -7356,6 +7470,11 @@
         "zstdsharp.port.nuspec"
       ]
     },
+    "Client/1.0.0": {
+      "type": "project",
+      "path": "../Client/Client.csproj",
+      "msbuildProject": "../Client/Client.csproj"
+    },
     "Model/1.0.0": {
       "type": "project",
       "path": "../Model/Model.csproj",
@@ -7364,6 +7483,7 @@
   },
   "projectFileDependencyGroups": {
     "net10.0": [
+      "Client >= 1.0.0",
       "Microsoft.AspNetCore.OpenApi >= 10.0.3",
       "Microsoft.EntityFrameworkCore.SqlServer >= 10.0.3",
       "Microsoft.EntityFrameworkCore.Sqlite >= 10.0.3",
@@ -7406,6 +7526,9 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "projectReferences": {
+            "C:\\Users\\kilia\\Github\\4CHIT-INSY\\Stundenplan\\Client\\Client.csproj": {
+              "projectPath": "C:\\Users\\kilia\\Github\\4CHIT-INSY\\Stundenplan\\Client\\Client.csproj"
+            },
             "C:\\Users\\kilia\\Github\\4CHIT-INSY\\Stundenplan\\Model\\Model.csproj": {
               "projectPath": "C:\\Users\\kilia\\Github\\4CHIT-INSY\\Stundenplan\\Model\\Model.csproj"
             }

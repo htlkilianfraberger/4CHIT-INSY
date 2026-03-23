@@ -320,3 +320,15 @@ C:\Users\kilia\Github\4CHIT-INSY\Stundenplan\API\obj\Debug\net10.0\ref\API.dll
 C:\Users\kilia\Github\4CHIT-INSY\Stundenplan\API\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\kilia\Github\4CHIT-INSY\Stundenplan\API\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\kilia\Github\4CHIT-INSY\Stundenplan\API\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\kilia\Github\4CHIT-INSY\Stundenplan\API\bin\Debug\net10.0\Client.runtimeconfig.json
+C:\Users\kilia\Github\4CHIT-INSY\Stundenplan\API\bin\Debug\net10.0\Client.staticwebassets.runtime.json
+C:\Users\kilia\Github\4CHIT-INSY\Stundenplan\API\bin\Debug\net10.0\Client.staticwebassets.endpoints.json
+C:\Users\kilia\Github\4CHIT-INSY\Stundenplan\API\bin\Debug\net10.0\API.staticwebassets.runtime.json
+C:\Users\kilia\Github\4CHIT-INSY\Stundenplan\API\bin\Debug\net10.0\Microsoft.AspNetCore.Components.WebAssembly.dll
+C:\Users\kilia\Github\4CHIT-INSY\Stundenplan\API\bin\Debug\net10.0\Microsoft.DotNet.HotReload.WebAssembly.Browser.dll
+C:\Users\kilia\Github\4CHIT-INSY\Stundenplan\API\bin\Debug\net10.0\Microsoft.JSInterop.WebAssembly.dll
+C:\Users\kilia\Github\4CHIT-INSY\Stundenplan\API\bin\Debug\net10.0\Client.dll
+C:\Users\kilia\Github\4CHIT-INSY\Stundenplan\API\bin\Debug\net10.0\Client.pdb
+C:\Users\kilia\Github\4CHIT-INSY\Stundenplan\API\obj\Debug\net10.0\jsmodules\jsmodules.build.manifest.json
+C:\Users\kilia\Github\4CHIT-INSY\Stundenplan\API\obj\Debug\net10.0\compressed\f9o902iofb-{0}-99zm1jdh75-99zm1jdh75.gz
+C:\Users\kilia\Github\4CHIT-INSY\Stundenplan\API\obj\Debug\net10.0\compressed\vuva4mlom4-{0}-0i02oychrm-0i02oychrm.gz

@@ -81,12 +81,12 @@ public class StundenplanContext : DbContext {
         );
 
         modelBuilder.Entity<Lesson>().HasData(
-            new Lesson { Id = 203, Tid = 1, Sid = 18, Cid = 1, Day = "Mo", Hour = 1 },
-            new Lesson { Id = 299, Tid = 1, Sid = 18, Cid = 4, Day = "Di", Hour = 2 },
-            new Lesson { Id = 378, Tid = 13, Sid = 9, Cid = 4, Day = "Mi", Hour = 3 },
-            new Lesson { Id = 379, Tid = 13, Sid = 19, Cid = 4, Day = "Do", Hour = 4 },
-            new Lesson { Id = 399, Tid = 13, Sid = 19, Cid = 5, Day = "Fr", Hour = 5 },
-            new Lesson { Id = 1277, Tid = 2, Sid = 19, Cid = 5, Day = "Mo", Hour = 6 }
+            new Lesson { Id = 203, Tid = 1, Sid = 18, Cid = 1, WeekDay = WeekDay.Mo, Hour = 1 },
+            new Lesson { Id = 299, Tid = 1, Sid = 18, Cid = 4, WeekDay = WeekDay.Di, Hour = 2 },
+            new Lesson { Id = 378, Tid = 13, Sid = 9, Cid = 4, WeekDay = WeekDay.Mi, Hour = 3 },
+            new Lesson { Id = 379, Tid = 13, Sid = 19, Cid = 4, WeekDay = WeekDay.Do, Hour = 4 },
+            new Lesson { Id = 399, Tid = 13, Sid = 19, Cid = 5, WeekDay = WeekDay.Fr, Hour = 5 },
+            new Lesson { Id = 1277, Tid = 2, Sid = 19, Cid = 5, WeekDay = WeekDay.Mo, Hour = 6 }
         );
     }
 }
