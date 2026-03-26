@@ -1,0 +1,116 @@
+﻿@using Model
+@using System.Net.Http.Json
+@using Client.Pages
+@inject HttpClient Http
+
+<div class="modal-backdrop" @onclick="CancelInternal">
+    <div class="edit-card" @onclick:stopPropagation="true">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h6 class="mb-0">@(Lesson.Id == 0 ? "Neue Stunde" : "Stunde bearbeiten")</h6>
+            <button type="button" class="btn-icon" @onclick="CancelInternal">✕</button>
+        </div>
+
+        <EditForm Model="Lesson" OnValidSubmit="InternalHandleSubmit">
+            <div class="row g-2">
+                <div class="col-6">
+                    <label class="form-label small">Tag</label>
+                    <InputSelect @bind-Value="Lesson.WeekDay" class="form-select form-select-sm">
+                        @foreach (var day in Enum.GetValues<WeekDay>())
+                        {
+                            <option value="@day">@day</option>
+                        }
+                    </InputSelect>
+                </div>
+
+                <div class="col-6">
+                    <label class="form-label small">Stunde</label>
+                    <InputSelect @bind-Value="Lesson.Hour" class="form-select form-select-sm">
+                        @foreach (var h in Enum.GetValues<LessonHour>())
+                        {
+                            <option value="@h">@GetHourLabel(h)</option>
+                        }
+                    </InputSelect>
+                </div>
+
+                <div class="col-4">
+                    <label class="form-label small">Lehrer</label>
+                    <InputSelect @bind-Value="Lesson.Tid" class="form-select form-select-sm">
+                        @foreach (var t in Enum.GetValues<TeacherEnum>())
+                        {
+                            <option value="@((int)t + 1)">@t</option>
+                        }
+                    </InputSelect>
+                </div>
+
+                <div class="col-4">
+                    <label class="form-label small">Fach</label>
+                    <InputSelect @bind-Value="Lesson.Sid" class="form-select form-select-sm">
+                        @foreach (var s in Enum.GetValues<SubjectEnum>())
+                        {
+                            <option value="@((int)s + 1)">@s</option>
+                        }
+                    </InputSelect>
+                </div>
+
+                <div class="col-4">
+                    <label class="form-label small">Klasse (Cid)</label>
+                    <InputNumber @bind-Value="Lesson.Cid" class="form-control form-control-sm" />
+                </div>
+            </div>
+
+            <div class="mt-3 d-flex gap-2">
+                <button type="submit" class="btn btn-sm btn-success">Speichern</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary" @onclick="CancelInternal">Abbrechen</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    [Parameter] public Lesson Lesson { get; set; } = new();
+    [Parameter] public EventCallback OnSaveSuccess { get; set; }
+    [Parameter] public EventCallback OnCancel { get; set; }
+    [Parameter] public EventCallback<string> OnError { get; set; }
+
+    private async Task InternalHandleSubmit()
+    {
+        HttpResponseMessage response;
+        if (Lesson.Id == 0)
+            response = await Http.PostAsJsonAsync("api/lesson", Lesson);
+        else
+            response = await Http.PutAsJsonAsync($"api/lesson/{Lesson.Id}", Lesson);
+
+        if (response.IsSuccessStatusCode)
+        {
+            await OnSaveSuccess.InvokeAsync();
+        }
+        else
+        {
+            var errorObj = await response.Content.ReadFromJsonAsync<Home.ErrorDetail>();
+            await OnError.InvokeAsync(errorObj?.message ?? "Fehler beim Speichern");
+        }
+    }
+
+    private async Task CancelInternal()
+    {
+        await OnCancel.InvokeAsync();
+    }
+    
+    private string GetHourLabel(LessonHour h)
+    {
+        return h switch
+        {
+            LessonHour.H1_0745 => "07:45–08:35",
+            LessonHour.H2_0835 => "08:35–09:25",
+            LessonHour.H3_0940 => "09:40–10:30",
+            LessonHour.H4_1030 => "10:30–11:20",
+            LessonHour.H5_1125 => "11:25–12:15",
+            LessonHour.H6_1215 => "12:15–13:05",
+            LessonHour.H7_1305 => "13:05–13:55",
+            LessonHour.H8_1355 => "13:55–14:45",
+            LessonHour.H9_1455 => "14:55–15:45",
+            LessonHour.H10_1545 => "15:45–16:35",
+            _ => h.ToString()
+        };
+    }
+}

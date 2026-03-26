@@ -69,62 +69,10 @@
 
         @if (showForm)
         {
-            <div class="modal-backdrop" @onclick="Reset">
-                <div class="edit-card" @onclick:stopPropagation="true">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h6 class="mb-0">@(currentLesson.Id == 0 ? "Neue Stunde" : "Stunde bearbeiten")</h6>
-                        <button class="btn-icon" @onclick="Reset">✕</button>
-                    </div>
-                    <EditForm Model="currentLesson" OnValidSubmit="HandleSubmit">
-                        <div class="row g-2">
-                            <div class="col-6">
-                                <label class="form-label small">Tag</label>
-                                <InputSelect @bind-Value="currentLesson.WeekDay" class="form-select form-select-sm">
-                                    @foreach (var day in Enum.GetValues<WeekDay>())
-                                    {
-                                        <option value="@day">@day</option>
-                                    }
-                                </InputSelect>
-                            </div>
-                            <div class="col-6">
-                                <label class="form-label small">Stunde</label>
-                                <InputSelect @bind-Value="currentLesson.Hour" class="form-select form-select-sm">
-                                    @foreach (var h in Enum.GetValues<LessonHour>())
-                                    {
-                                        <option value="@h">@GetHourLabel(h)</option>
-                                    }
-                                </InputSelect>
-                            </div>
-                            <div class="col-4">
-                                <label class="form-label small">Lehrer</label>
-                                <InputSelect @bind-Value="currentLesson.Tid" class="form-select form-select-sm">
-                                    @foreach (var t in Enum.GetValues<TeacherEnum>())
-                                    {
-                                        <option value="@((int)t + 1)">@t</option>
-                                    }
-                                </InputSelect>
-                            </div>
-                            <div class="col-4">
-                                <label class="form-label small">Fach</label>
-                                <InputSelect @bind-Value="currentLesson.Sid" class="form-select form-select-sm">
-                                    @foreach (var s in Enum.GetValues<SubjectEnum>())
-                                    {
-                                        <option value="@((int)s + 1)">@s</option>
-                                    }
-                                </InputSelect>
-                            </div>
-                            <div class="col-4">
-                                <label class="form-label small">Klasse (Cid)</label>
-                                <InputNumber @bind-Value="currentLesson.Cid" class="form-control form-control-sm" />
-                            </div>
-                        </div>
-                        <div class="mt-3 d-flex gap-2">
-                            <button type="submit" class="btn btn-sm btn-success">Speichern</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" @onclick="Reset">Abbrechen</button>
-                        </div>
-                    </EditForm>
-                </div>
-            </div>
+            <Edit Lesson="currentLesson" 
+                  OnSaveSuccess="HandleSaveSuccess" 
+                  OnCancel="Reset" 
+                  OnError="HandleError" />
         }
     }
 </div>
@@ -270,8 +218,7 @@
     private Lesson currentLesson = new();
     private bool showForm = false;
     private string? errorMessage;
-
-    // Hilfsklasse für die Fehlermeldung vom Server
+    
     public class ErrorDetail {
         public string? error { get; set; }
         public string? message { get; set; }
@@ -281,40 +228,15 @@
 
     private async Task Load() => lessons = await LessonService.GetLessonsAsync();
 
-    // NUR EINE HandleSubmit Methode!
-    private async Task HandleSubmit()
+    private async Task HandleSaveSuccess()
     {
-        errorMessage = null;
-        HttpResponseMessage response;
+        await Load();
+        Reset();
+    }
 
-        // Prüfen, ob wir erstellen oder bearbeiten
-        if (currentLesson.Id == 0)
-        {
-            response = await Http.PostAsJsonAsync("api/lesson", currentLesson);
-        }
-        else
-        {
-            response = await Http.PutAsJsonAsync($"api/lesson/{currentLesson.Id}", currentLesson);
-        }
-
-        if (response.IsSuccessStatusCode)
-        {
-            await Load();
-            Reset();
-        }
-        else
-        {
-            // Hier fangen wir deine Fehlermeldung vom Server ab!
-            try 
-            {
-                var errorObj = await response.Content.ReadFromJsonAsync<ErrorDetail>();
-                errorMessage = errorObj?.message ?? "Ein Fehler ist aufgetreten.";
-            }
-            catch 
-            {
-                errorMessage = "Serverfehler (Kombination ungültig oder Datenbankfehler).";
-            }
-        }
+    private void HandleError(string message)
+    {
+        errorMessage = message;
     }
 
     private async Task DeleteLesson(int id)
@@ -323,7 +245,7 @@
         await Load();
     }
 
-    private void Reset()
+    public void Reset()
     {
         currentLesson = new Lesson();
         showForm = false;
@@ -332,7 +254,7 @@
 
     private void ShowAddForm()
     {
-        currentLesson = new Lesson { Cid = 4 }; // Standardwert für deine Klasse
+        currentLesson = new Lesson { Cid = 4 }; 
         showForm = true;
     }
 
@@ -349,9 +271,7 @@
         };
         showForm = true;
     }
-
-    // --- Helper für die Anzeige ---
-
+    
     private static readonly Dictionary<LessonHour, (string From, string To)> HourRanges = new()
     {
         { LessonHour.H1_0745,  ("07:45", "08:35") },
@@ -368,6 +288,7 @@
 
     private string GetHourFrom(LessonHour h) => HourRanges.GetValueOrDefault(h).From ?? "";
     private string GetHourTo(LessonHour h) => HourRanges.GetValueOrDefault(h).To ?? "";
+    
     private string GetHourLabel(LessonHour h) => HourRanges.TryGetValue(h, out var r) ? $"{r.From}–{r.To}" : h.ToString();
 
     private string GetSubjectAbbr(int sid)
