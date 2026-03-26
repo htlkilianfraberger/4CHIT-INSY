@@ -1,6 +1,11 @@
 ﻿@page "/"
+@using System.Net
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
 @using Model
 @inject LessonService LessonService
+@inject NavigationManager Navigation
+@inject HttpClient Http
+@using System.Net.Http.Json
 
 <div class="container-fluid mt-3 px-4">
     <div class="d-flex align-items-center justify-content-between mb-3">
@@ -9,7 +14,12 @@
             + Neue Stunde
         </button>
     </div>
-
+    @if (errorMessage != null)
+    {
+        <div class="alert alert-danger">
+            <strong>Fehler:</strong> @errorMessage
+        </div>
+    }
     @if (lessons == null)
     {
         <p class="text-muted">Lade...</p>
@@ -259,49 +269,70 @@
     private List<Lesson>? lessons;
     private Lesson currentLesson = new();
     private bool showForm = false;
+    private string? errorMessage;
+
+    // Hilfsklasse für die Fehlermeldung vom Server
+    public class ErrorDetail {
+        public string? error { get; set; }
+        public string? message { get; set; }
+    }
 
     protected override async Task OnInitializedAsync() => await Load();
 
     private async Task Load() => lessons = await LessonService.GetLessonsAsync();
 
-    private static readonly Dictionary<LessonHour, (string From, string To)> HourRanges = new()
+    // NUR EINE HandleSubmit Methode!
+    private async Task HandleSubmit()
     {
-        { LessonHour.H1_0745,  ("07:45", "08:35") },
-        { LessonHour.H2_0835,  ("08:35", "09:25") },
-        { LessonHour.H3_0940,  ("09:40", "10:30") },
-        { LessonHour.H4_1030,  ("10:30", "11:20") },
-        { LessonHour.H5_1125,  ("11:25", "12:15") },
-        { LessonHour.H6_1215,  ("12:15", "13:05") },
-        { LessonHour.H7_1305,  ("13:05", "13:55") },
-        { LessonHour.H8_1355,  ("13:55", "14:45") },
-        { LessonHour.H9_1455,  ("14:55", "15:45") },
-        { LessonHour.H10_1545, ("15:45", "16:35") },
-    };
+        errorMessage = null;
+        HttpResponseMessage response;
 
-    private string GetHourFrom(LessonHour h)
-        => HourRanges.TryGetValue(h, out var r) ? r.From : "";
+        // Prüfen, ob wir erstellen oder bearbeiten
+        if (currentLesson.Id == 0)
+        {
+            response = await Http.PostAsJsonAsync("api/lesson", currentLesson);
+        }
+        else
+        {
+            response = await Http.PutAsJsonAsync($"api/lesson/{currentLesson.Id}", currentLesson);
+        }
 
-    private string GetHourTo(LessonHour h)
-        => HourRanges.TryGetValue(h, out var r) ? r.To : "";
+        if (response.IsSuccessStatusCode)
+        {
+            await Load();
+            Reset();
+        }
+        else
+        {
+            // Hier fangen wir deine Fehlermeldung vom Server ab!
+            try 
+            {
+                var errorObj = await response.Content.ReadFromJsonAsync<ErrorDetail>();
+                errorMessage = errorObj?.message ?? "Ein Fehler ist aufgetreten.";
+            }
+            catch 
+            {
+                errorMessage = "Serverfehler (Kombination ungültig oder Datenbankfehler).";
+            }
+        }
+    }
 
-    private string GetHourLabel(LessonHour h)
-        => HourRanges.TryGetValue(h, out var r) ? $"{r.From}–{r.To}" : h.ToString();
+    private async Task DeleteLesson(int id)
+    {
+        await LessonService.DeleteAsync(id);
+        await Load();
+    }
 
-    private string GetSubjectAbbr(int sid)
-        => Enum.IsDefined(typeof(SubjectEnum), sid - 1)
-            ? ((SubjectEnum)(sid - 1)).ToString()
-            : sid.ToString();
-
-    private string GetTeacherAbbr(int tid)
-        => Enum.IsDefined(typeof(TeacherEnum), tid - 1)
-            ? ((TeacherEnum)(tid - 1)).ToString()
-            : tid.ToString();
-
-    private int GetSubjectColor(int sid) => (sid - 1) % 5;
+    private void Reset()
+    {
+        currentLesson = new Lesson();
+        showForm = false;
+        errorMessage = null;
+    }
 
     private void ShowAddForm()
     {
-        currentLesson = new Lesson();
+        currentLesson = new Lesson { Cid = 4 }; // Standardwert für deine Klasse
         showForm = true;
     }
 
@@ -319,22 +350,31 @@
         showForm = true;
     }
 
-    private async Task HandleSubmit()
-    {
-        await LessonService.SaveAsync(currentLesson);
-        await Load();
-        Reset();
-    }
+    // --- Helper für die Anzeige ---
 
-    private async Task DeleteLesson(int id)
+    private static readonly Dictionary<LessonHour, (string From, string To)> HourRanges = new()
     {
-        await LessonService.DeleteAsync(id);
-        await Load();
-    }
+        { LessonHour.H1_0745,  ("07:45", "08:35") },
+        { LessonHour.H2_0835,  ("08:35", "09:25") },
+        { LessonHour.H3_0940,  ("09:40", "10:30") },
+        { LessonHour.H4_1030,  ("10:30", "11:20") },
+        { LessonHour.H5_1125,  ("11:25", "12:15") },
+        { LessonHour.H6_1215,  ("12:15", "13:05") },
+        { LessonHour.H7_1305,  ("13:05", "13:55") },
+        { LessonHour.H8_1355,  ("13:55", "14:45") },
+        { LessonHour.H9_1455,  ("14:55", "15:45") },
+        { LessonHour.H10_1545, ("15:45", "16:35") },
+    };
 
-    private void Reset()
-    {
-        currentLesson = new Lesson();
-        showForm = false;
-    }
+    private string GetHourFrom(LessonHour h) => HourRanges.GetValueOrDefault(h).From ?? "";
+    private string GetHourTo(LessonHour h) => HourRanges.GetValueOrDefault(h).To ?? "";
+    private string GetHourLabel(LessonHour h) => HourRanges.TryGetValue(h, out var r) ? $"{r.From}–{r.To}" : h.ToString();
+
+    private string GetSubjectAbbr(int sid)
+        => Enum.IsDefined(typeof(SubjectEnum), sid - 1) ? ((SubjectEnum)(sid - 1)).ToString() : sid.ToString();
+
+    private string GetTeacherAbbr(int tid)
+        => Enum.IsDefined(typeof(TeacherEnum), tid - 1) ? ((TeacherEnum)(tid - 1)).ToString() : tid.ToString();
+
+    private int GetSubjectColor(int sid) => (sid - 1) % 5;
 }

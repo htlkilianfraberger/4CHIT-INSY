@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Model;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Diagnostics; // WICHTIG für ExceptionHandler
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,16 +10,14 @@ builder.Services.AddDbContext<StundenplanContext>(options =>
     options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection") 
                      ?? "Server=127.0.0.1;uid=root;pwd=insy;database=Stundenplan"));
 
-// 2. Controller mit JSON-Optionen (verhindert Zyklen bei 1:n Beziehungen)
+// 2. Controller mit JSON-Optionen
 builder.Services.AddControllers().AddJsonOptions(x =>
     x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
-// 3. Swagger/OpenAPI Konfiguration
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddOpenApi();
 
-// 4. CORS aktivieren (damit der Blazor-Client auf die API zugreifen darf)
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
@@ -31,7 +30,28 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// --- NEU: Globaler Exception Handler ---
+app.UseExceptionHandler(exceptionHandlerApp =>
+{
+    exceptionHandlerApp.Run(async context =>
+    {
+        // Wir senden immer einen BadRequest (400) oder InternalServerError (500)
+        context.Response.StatusCode = StatusCodes.Status400BadRequest; 
+        context.Response.ContentType = "application/json";
+
+        var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
+        var exception = exceptionHandlerPathFeature?.Error;
+
+        // Das JSON, das beim Client (Blazor) ankommt
+        await context.Response.WriteAsJsonAsync(new 
+        { 
+            error = "Server-Fehler",
+            message = exception?.Message // Hier steht z.B. deine Fehlermeldung drin
+        });
+    });
+});
+// ---------------------------------------
+
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
@@ -42,9 +62,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-// WICHTIG: Die Reihenfolge der Middleware
 app.UseCors(); 
-
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
