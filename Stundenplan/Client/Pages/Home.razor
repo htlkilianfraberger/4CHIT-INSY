@@ -1,6 +1,6 @@
 ﻿@page "/"
+@page "/{Id:int}"
 @using System.Net
-@using Microsoft.EntityFrameworkCore.Metadata.Internal
 @using Model
 @inject LessonService LessonService
 @inject NavigationManager Navigation
@@ -14,12 +14,14 @@
             + Neue Stunde
         </button>
     </div>
+
     @if (errorMessage != null)
     {
         <div class="alert alert-danger">
             <strong>Fehler:</strong> @errorMessage
         </div>
     }
+
     @if (lessons == null)
     {
         <p class="text-muted">Lade...</p>
@@ -45,7 +47,7 @@
                     {
                         var lesson = lessons.FirstOrDefault(l => l.WeekDay == day && l.Hour == hour);
                         <div class="timetable-cell @(lesson != null ? "has-lesson" : "empty-cell")"
-                             @onclick="() => { if (lesson != null) PrepareEdit(lesson); }">
+                             @onclick="() => { if (lesson != null) NavigateToEdit(lesson.Id); }">
                             @if (lesson != null)
                             {
                                 <div class="lesson-card lesson-color-@GetSubjectColor(lesson.Sid)">
@@ -54,7 +56,7 @@
                                     <div class="lesson-actions">
                                         <button class="btn-icon edit" title="Bearbeiten"
                                                 @onclick:stopPropagation="true"
-                                                @onclick="() => PrepareEdit(lesson)">✏</button>
+                                                @onclick="() => NavigateToEdit(lesson.Id)">✏</button>
                                         <button class="btn-icon delete" title="Löschen"
                                                 @onclick:stopPropagation="true"
                                                 @onclick="() => DeleteLesson(lesson.Id)">✕</button>
@@ -71,149 +73,64 @@
         {
             <Edit Lesson="currentLesson" 
                   OnSaveSuccess="HandleSaveSuccess" 
-                  OnCancel="Reset" 
+                  OnCancel="CloseForm" 
                   OnError="HandleError" />
         }
     }
 </div>
 
 <style>
-    .timetable-wrapper {
-        overflow-x: auto;
-    }
-
+    .timetable-wrapper { overflow-x: auto; }
     .timetable-grid {
         display: grid;
         grid-template-columns: 80px repeat(5, 1fr);
         gap: 3px;
         min-width: 620px;
     }
-
-    .timetable-corner,
-    .timetable-day-header {
-        padding: 6px 8px;
-        text-align: center;
-        font-weight: 500;
-        font-size: 13px;
-        background: #f0f2f5;
-        border-radius: 4px;
-        color: #555;
+    .timetable-corner, .timetable-day-header {
+        padding: 6px 8px; text-align: center; font-weight: 500; font-size: 13px;
+        background: #f0f2f5; border-radius: 4px; color: #555;
     }
-
     .timetable-hour-label {
-        font-size: 11px;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 1px;
-        padding: 4px 2px;
-        background: #f8f9fa;
-        border-radius: 4px;
+        font-size: 11px; text-align: center; display: flex; flex-direction: column;
+        align-items: center; justify-content: center; gap: 1px; padding: 4px 2px;
+        background: #f8f9fa; border-radius: 4px;
     }
-
-    .hour-from {
-        font-size: 11px;
-        font-weight: 500;
-        color: #555;
-    }
-
-    .hour-to {
-        font-size: 10px;
-        color: #aaa;
-    }
-
-    .timetable-cell {
-        min-height: 58px;
-        border-radius: 5px;
-        background: #f8f9fa;
-        border: 1px solid #eee;
-    }
-
-    .timetable-cell.empty-cell {
-        background: transparent;
-        border: 1px dashed #e8e8e8;
-    }
-
+    .hour-from { font-size: 11px; font-weight: 500; color: #555; }
+    .hour-to { font-size: 10px; color: #aaa; }
+    .timetable-cell { min-height: 58px; border-radius: 5px; background: #f8f9fa; border: 1px solid #eee; }
+    .timetable-cell.empty-cell { background: transparent; border: 1px dashed #e8e8e8; }
     .lesson-card {
-        height: 100%;
-        padding: 5px 8px;
-        border-radius: 5px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        position: relative;
-        cursor: pointer;
-        transition: filter 0.15s;
+        height: 100%; padding: 5px 8px; border-radius: 5px; display: flex;
+        flex-direction: column; justify-content: center; position: relative;
+        cursor: pointer; transition: filter 0.15s;
     }
-
     .lesson-card:hover { filter: brightness(0.95); }
     .lesson-card:hover .lesson-actions { opacity: 1; }
-
-    .lesson-subject {
-        font-weight: 600;
-        font-size: 13px;
-        line-height: 1.2;
-    }
-
-    .lesson-teacher {
-        font-size: 11px;
-        opacity: 0.75;
-    }
-
+    .lesson-subject { font-weight: 600; font-size: 13px; line-height: 1.2; }
+    .lesson-teacher { font-size: 11px; opacity: 0.75; }
     .lesson-actions {
-        position: absolute;
-        top: 3px;
-        right: 3px;
-        display: flex;
-        gap: 2px;
-        opacity: 0;
-        transition: opacity 0.15s;
+        position: absolute; top: 3px; right: 3px; display: flex; gap: 2px;
+        opacity: 0; transition: opacity 0.15s;
     }
-
-    .btn-icon {
-        background: none;
-        border: none;
-        cursor: pointer;
-        font-size: 11px;
-        padding: 2px 4px;
-        border-radius: 3px;
-        line-height: 1;
-    }
-
+    .btn-icon { background: none; border: none; cursor: pointer; font-size: 11px; padding: 2px 4px; border-radius: 3px; }
     .btn-icon.edit { color: #0d6efd; }
-    .btn-icon.edit:hover { background: #e8f0fe; }
     .btn-icon.delete { color: #dc3545; }
-    .btn-icon.delete:hover { background: #fde8ea; }
-
     .lesson-color-0 { background: #e8f4fd; color: #0c5e9e; border: 1px solid #b8d9f5; }
     .lesson-color-1 { background: #e8f5ee; color: #0a6e40; border: 1px solid #a3dfc0; }
     .lesson-color-2 { background: #f3eefe; color: #4a2d9c; border: 1px solid #c9b8f5; }
     .lesson-color-3 { background: #fff4e6; color: #7a4600; border: 1px solid #f5cc85; }
     .lesson-color-4 { background: #fde8ea; color: #991b2c; border: 1px solid #f5b0ba; }
-
     .modal-backdrop {
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.35);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 1000;
+        position: fixed; inset: 0; background: rgba(0,0,0,0.35);
+        display: flex; align-items: center; justify-content: center; z-index: 1000;
     }
-
-    .edit-card {
-        background: white;
-        border-radius: 10px;
-        padding: 1.25rem;
-        width: 420px;
-        max-width: 95vw;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-    }
+    .edit-card { background: white; border-radius: 10px; padding: 1.25rem; width: 420px; box-shadow: 0 8px 32px rgba(0,0,0,0.18); }
 </style>
 
 @code {
+    [Parameter] public int? Id { get; set; }
+
     private List<Lesson>? lessons;
     private Lesson currentLesson = new();
     private bool showForm = false;
@@ -226,37 +143,24 @@
 
     protected override async Task OnInitializedAsync() => await Load();
 
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Id.HasValue && Id.Value > 0)
+        {
+            // Wir suchen die Lesson in der bereits geladenen Liste oder laden sie nach
+            if (lessons == null) await Load();
+            
+            var lessonToEdit = lessons?.FirstOrDefault(l => l.Id == Id.Value);
+            if (lessonToEdit != null)
+            {
+                PrepareEdit(lessonToEdit);
+            }
+        }
+    }
+
     private async Task Load() => lessons = await LessonService.GetLessonsAsync();
 
-    private async Task HandleSaveSuccess()
-    {
-        await Load();
-        Reset();
-    }
-
-    private void HandleError(string message)
-    {
-        errorMessage = message;
-    }
-
-    private async Task DeleteLesson(int id)
-    {
-        await LessonService.DeleteAsync(id);
-        await Load();
-    }
-
-    public void Reset()
-    {
-        currentLesson = new Lesson();
-        showForm = false;
-        errorMessage = null;
-    }
-
-    private void ShowAddForm()
-    {
-        currentLesson = new Lesson { Cid = 4 }; 
-        showForm = true;
-    }
+    private void NavigateToEdit(int id) => Navigation.NavigateTo($"/{id}");
 
     private void PrepareEdit(Lesson lesson)
     {
@@ -271,7 +175,35 @@
         };
         showForm = true;
     }
-    
+
+    private void CloseForm()
+    {
+        showForm = false;
+        errorMessage = null;
+        Navigation.NavigateTo("/"); // URL säubern
+    }
+
+    private async Task HandleSaveSuccess()
+    {
+        await Load();
+        CloseForm();
+    }
+
+    private void HandleError(string message) => errorMessage = message;
+
+    private async Task DeleteLesson(int id)
+    {
+        await LessonService.DeleteAsync(id);
+        await Load();
+    }
+
+    private void ShowAddForm()
+    {
+        currentLesson = new Lesson { Cid = 4 }; 
+        showForm = true;
+    }
+
+    // --- Hilfsmethoden ---
     private static readonly Dictionary<LessonHour, (string From, string To)> HourRanges = new()
     {
         { LessonHour.H1_0745,  ("07:45", "08:35") },
@@ -288,14 +220,7 @@
 
     private string GetHourFrom(LessonHour h) => HourRanges.GetValueOrDefault(h).From ?? "";
     private string GetHourTo(LessonHour h) => HourRanges.GetValueOrDefault(h).To ?? "";
-    
-    private string GetHourLabel(LessonHour h) => HourRanges.TryGetValue(h, out var r) ? $"{r.From}–{r.To}" : h.ToString();
-
-    private string GetSubjectAbbr(int sid)
-        => Enum.IsDefined(typeof(SubjectEnum), sid - 1) ? ((SubjectEnum)(sid - 1)).ToString() : sid.ToString();
-
-    private string GetTeacherAbbr(int tid)
-        => Enum.IsDefined(typeof(TeacherEnum), tid - 1) ? ((TeacherEnum)(tid - 1)).ToString() : tid.ToString();
-
+    private string GetSubjectAbbr(int sid) => Enum.IsDefined(typeof(SubjectEnum), sid - 1) ? ((SubjectEnum)(sid - 1)).ToString() : sid.ToString();
+    private string GetTeacherAbbr(int tid) => Enum.IsDefined(typeof(TeacherEnum), tid - 1) ? ((TeacherEnum)(tid - 1)).ToString() : tid.ToString();
     private int GetSubjectColor(int sid) => (sid - 1) % 5;
 }
