@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Model;
@@ -57,6 +52,14 @@ namespace API.Controllers
             {
                 throw new Exception("Dieses Fach ist für die gewählte Klasse nicht vorgesehen!");
             }
+            
+            var isSlotTaken = await _context.Lessons
+                .AnyAsync(l => l.Cid == lesson.Cid && l.WeekDay == lesson.WeekDay && l.Hour == lesson.Hour);
+
+            if (isSlotTaken)
+            {
+                throw new Exception($"Die Klasse hat am {lesson.WeekDay} in der {lesson.Hour} bereits Unterricht!");
+            }
 
             _context.Entry(lesson).State = EntityState.Modified;
 
@@ -77,14 +80,28 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<Lesson>> PostLesson(Lesson lesson)
         {
-            // --- CHECK: Darf der Lehrer dieses Fach unterrichten? ---
-            var isValid = await _context.TeacherSubjects
+            var teacherCanTeachSubject = await _context.TeacherSubjects
                 .AnyAsync(ts => ts.Tid == lesson.Tid && ts.Sid == lesson.Sid);
 
-            if (!isValid)
+            if (!teacherCanTeachSubject)
             {
-                // Auch hier: Exception werfen für den globalen Handler
                 throw new Exception("Dieser Lehrer unterrichtet dieses Fach nicht!");
+            }
+            
+            var classHasSubject = await _context.ClassSubjects
+                .AnyAsync(cs => cs.Cid == lesson.Cid && cs.Sid == lesson.Sid);
+
+            if (!classHasSubject)
+            {
+                throw new Exception("Dieses Fach ist für die gewählte Klasse nicht vorgesehen!");
+            }
+            
+            var isSlotTaken = await _context.Lessons
+                .AnyAsync(l => l.Cid == lesson.Cid && l.WeekDay == lesson.WeekDay && l.Hour == lesson.Hour);
+
+            if (isSlotTaken)
+            {
+                throw new Exception($"Die Klasse hat am {lesson.WeekDay} in der {lesson.Hour} bereits Unterricht!");
             }
 
             _context.Lessons.Add(lesson);
