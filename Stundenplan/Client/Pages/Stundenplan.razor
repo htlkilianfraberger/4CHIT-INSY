@@ -1,0 +1,647 @@
+﻿@page "/"
+@using Model
+@using System.Net.Http.Json
+@inject LessonService LessonService
+@inject HttpClient Http
+
+<div class="sp-page">
+    <div class="sp-header">
+        <div>
+            <h1 class="sp-title">Stundenplan</h1>
+            <span class="sp-subtitle">4CHIT · 2024/25</span>
+        </div>
+        <button class="sp-btn-add" @onclick="ShowAddForm">+ Neue Stunde</button>
+    </div>
+
+    @if (lessons == null)
+    {
+        <div class="sp-loading"><span>Lade Stundenplan…</span></div>
+    }
+    else
+    {
+        <div class="timetable-wrapper">
+            <div class="timetable-grid">
+                <div class="timetable-corner"></div>
+                @foreach (var day in Enum.GetValues<WeekDay>())
+                {
+                    <div class="timetable-day-header">@day</div>
+                }
+
+                @foreach (var hour in Enum.GetValues<LessonHour>())
+                {
+                    <div class="timetable-hour-label">
+                        <span class="hour-from">@GetHourFrom(hour)</span>
+                        <span class="hour-sep">–</span>
+                        <span class="hour-to">@GetHourTo(hour)</span>
+                    </div>
+
+                    @foreach (var day in Enum.GetValues<WeekDay>())
+                    {
+                        var lesson = lessons.FirstOrDefault(l => l.WeekDay == day && l.Hour == hour);
+                        <div class="timetable-cell @(lesson != null ? "has-lesson" : "empty-cell")"
+                             @onclick="() => { if (lesson != null) PrepareEdit(lesson); }">
+                            @if (lesson != null)
+                            {
+                                <div class="lesson-card lc-@GetSubjectColor(lesson.Sid)">
+                                    <span class="lesson-subject">@GetSubjectAbbr(lesson.Sid)</span>
+                                    <span class="lesson-teacher">@GetTeacherAbbr(lesson.Tid)</span>
+                                    <div class="lesson-actions">
+                                        <button class="la-btn la-edit" title="Bearbeiten"
+                                                @onclick:stopPropagation="true"
+                                                @onclick="() => PrepareEdit(lesson)">✏</button>
+                                        <button class="la-btn la-del" title="Löschen"
+                                                @onclick:stopPropagation="true"
+                                                @onclick="() => AskDelete(lesson.Id)">✕</button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+
+        @* ── Toast ── *@
+        @if (errorMessage != null)
+        {
+            <div class="sp-toast sp-toast-error" @onclick="() => errorMessage = null">
+                <span class="toast-icon">⚠</span> @errorMessage
+                <span class="toast-dismiss">✕</span>
+            </div>
+        }
+
+        @* ── Edit / Add Modal ── *@
+        @if (showForm)
+        {
+            <div class="modal-backdrop" @onclick="Reset">
+                <div class="modal-card" @onclick:stopPropagation="true">
+                    <div class="modal-card-header">
+                        <span>@(currentLesson.Id == 0 ? "Neue Stunde hinzufügen" : "Stunde bearbeiten")</span>
+                        <button class="modal-close" @onclick="Reset">✕</button>
+                    </div>
+                    <EditForm Model="currentLesson" OnValidSubmit="HandleSubmit">
+                        <div class="modal-fields">
+                            <div class="field-group">
+                                <label>Tag</label>
+                                <InputSelect @bind-Value="currentLesson.WeekDay" class="sp-select">
+                                    @foreach (var day in Enum.GetValues<WeekDay>())
+                                    {
+                                        <option value="@day">@day</option>
+                                    }
+                                </InputSelect>
+                            </div>
+                            <div class="field-group">
+                                <label>Stunde</label>
+                                <InputSelect @bind-Value="currentLesson.Hour" class="sp-select">
+                                    @foreach (var h in Enum.GetValues<LessonHour>())
+                                    {
+                                        <option value="@h">@GetHourLabel(h)</option>
+                                    }
+                                </InputSelect>
+                            </div>
+                            <div class="field-group">
+                                <label>Lehrer</label>
+                                <InputSelect @bind-Value="currentLesson.Tid" class="sp-select">
+                                    @foreach (var t in Enum.GetValues<TeacherEnum>())
+                                    {
+                                        <option value="@((int)t + 1)">@t</option>
+                                    }
+                                </InputSelect>
+                            </div>
+                            <div class="field-group">
+                                <label>Fach</label>
+                                <InputSelect @bind-Value="currentLesson.Sid" class="sp-select">
+                                    @foreach (var s in Enum.GetValues<SubjectEnum>())
+                                    {
+                                        <option value="@((int)s + 1)">@s</option>
+                                    }
+                                </InputSelect>
+                            </div>
+                            <div class="field-group field-group-full">
+                                <label>Klasse</label>
+                                <InputSelect @bind-Value="currentLesson.Cid" class="sp-select">
+                                    @foreach (var c in Enum.GetValues<SchoolClassEnum>())
+                                    {
+                                        <option value="@((int)c)">@GetClassName(c)</option>
+                                    }
+                                </InputSelect>
+                            </div>
+                        </div>
+                        <div class="modal-actions">
+                            <button type="submit" class="sp-btn-save">Speichern</button>
+                            <button type="button" class="sp-btn-cancel" @onclick="Reset">Abbrechen</button>
+                        </div>
+                    </EditForm>
+                </div>
+            </div>
+        }
+
+        @* ── Delete Confirm Modal ── *@
+        @if (deleteId != null)
+        {
+            <div class="modal-backdrop" @onclick="CancelDelete">
+                <div class="modal-card modal-card-sm" @onclick:stopPropagation="true">
+                    <div class="delete-icon">⚠</div>
+                    <div class="modal-card-header modal-card-header-center">
+                        <span>Stunde löschen?</span>
+                    </div>
+                    <div class="delete-body">
+                        <p class="delete-hint">Möchtest du diese Unterrichtsstunde wirklich unwiderruflich entfernen?</p>
+                        <div class="delete-actions">
+                            <button class="sp-btn-danger" @onclick="ConfirmDelete">Ja, löschen</button>
+                            <button class="sp-btn-cancel" @onclick="CancelDelete">Abbrechen</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<style>
+    .sp-page {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem;
+    }
+
+    .sp-header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        margin-bottom: 1.75rem;
+    }
+
+    .sp-title {
+        font-size: 22px;
+        font-weight: 600;
+        color: #1a1a2e;
+        margin: 0 0 2px;
+        letter-spacing: -0.3px;
+    }
+
+    .sp-subtitle {
+        font-size: 13px;
+        color: #888;
+    }
+
+    .sp-btn-add {
+        background: #1a1a2e;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 16px;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.15s;
+    }
+
+    .sp-btn-add:hover { background: #2d2d4e; }
+
+    .sp-loading {
+        padding: 3rem;
+        text-align: center;
+        color: #aaa;
+        font-size: 14px;
+    }
+
+    .timetable-wrapper { overflow-x: auto; }
+
+    .timetable-grid {
+        display: grid;
+        grid-template-columns: 82px repeat(5, 1fr);
+        gap: 4px;
+        min-width: 640px;
+    }
+
+    .timetable-day-header {
+        padding: 8px 4px;
+        text-align: center;
+        font-weight: 600;
+        font-size: 13px;
+        color: #1a1a2e;
+        background: #f4f4f8;
+        border-radius: 8px;
+        letter-spacing: 0.3px;
+    }
+
+    .timetable-hour-label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 4px;
+        background: #f4f4f8;
+        border-radius: 8px;
+    }
+
+    .hour-from { font-size: 11px; font-weight: 600; color: #444; line-height: 1.3; }
+    .hour-sep  { font-size: 9px; color: #ccc; line-height: 1; }
+    .hour-to   { font-size: 10px; color: #aaa; line-height: 1.3; }
+
+    .timetable-cell { min-height: 62px; border-radius: 8px; }
+
+    .timetable-cell.empty-cell {
+        background: #fafafa;
+        border: 1.5px dashed #ebebeb;
+    }
+
+    .lesson-card {
+        height: 100%;
+        min-height: 62px;
+        padding: 7px 9px;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        cursor: pointer;
+        transition: filter 0.12s, transform 0.12s;
+        border-width: 1px;
+        border-style: solid;
+    }
+
+    .lesson-card:hover { filter: brightness(0.96); transform: scale(1.015); }
+    .lesson-card:hover .lesson-actions { opacity: 1; }
+
+    .lesson-subject { font-weight: 700; font-size: 13px; line-height: 1.2; letter-spacing: 0.2px; }
+    .lesson-teacher { font-size: 11px; margin-top: 2px; opacity: 0.65; font-weight: 500; }
+
+    .lesson-actions {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        display: flex;
+        gap: 2px;
+        opacity: 0;
+        transition: opacity 0.12s;
+    }
+
+    .la-btn {
+        background: rgba(255,255,255,0.75);
+        border: none;
+        cursor: pointer;
+        font-size: 10px;
+        padding: 2px 5px;
+        border-radius: 4px;
+        line-height: 1.4;
+    }
+
+    .la-edit { color: #1a4fa0; }
+    .la-edit:hover { background: #dbeafe; }
+    .la-del  { color: #991b1b; }
+    .la-del:hover  { background: #fee2e2; }
+
+    .lc-0  { background: #dbeafe; color: #1e3a8a; border-color: #bfdbfe; }
+    .lc-1  { background: #dcfce7; color: #14532d; border-color: #bbf7d0; }
+    .lc-2  { background: #ede9fe; color: #3b0764; border-color: #ddd6fe; }
+    .lc-3  { background: #ffedd5; color: #7c2d12; border-color: #fed7aa; }
+    .lc-4  { background: #fee2e2; color: #7f1d1d; border-color: #fecaca; }
+    .lc-5  { background: #ccfbf1; color: #134e4a; border-color: #99f6e4; }
+    .lc-6  { background: #fef9c3; color: #713f12; border-color: #fef08a; }
+    .lc-7  { background: #fce7f3; color: #831843; border-color: #fbcfe8; }
+    .lc-8  { background: #e0f2fe; color: #0c4a6e; border-color: #bae6fd; }
+    .lc-9  { background: #f0fdf4; color: #14532d; border-color: #bbf7d0; }
+    .lc-10 { background: #fff7ed; color: #7c2d12; border-color: #fed7aa; }
+    .lc-11 { background: #f3e8ff; color: #3b0764; border-color: #e9d5ff; }
+    .lc-12 { background: #cffafe; color: #164e63; border-color: #a5f3fc; }
+    .lc-13 { background: #fdf2f8; color: #701a75; border-color: #f5d0fe; }
+    .lc-14 { background: #f0fdf4; color: #166534; border-color: #bbf7d0; }
+    .lc-15 { background: #eef2ff; color: #1e1b4b; border-color: #c7d2fe; }
+    .lc-16 { background: #fdf4ff; color: #581c87; border-color: #f0abfc; }
+    .lc-17 { background: #fefce8; color: #713f12; border-color: #fde68a; }
+
+    /* ── Toast ── */
+    .sp-toast {
+        position: fixed;
+        bottom: 1.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 11px 18px;
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        z-index: 2000;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+        max-width: 90vw;
+        white-space: nowrap;
+    }
+
+    .sp-toast-error {
+        background: #7f1d1d;
+        color: #fff;
+        border: 1px solid #991b1b;
+    }
+
+    .toast-icon { font-size: 15px; }
+    .toast-dismiss { margin-left: 6px; opacity: 0.6; font-size: 11px; }
+
+    /* ── Modal shared ── */
+    .modal-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 15, 30, 0.45);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        backdrop-filter: blur(2px);
+    }
+
+    .modal-card {
+        background: #fff;
+        border-radius: 14px;
+        width: 440px;
+        max-width: 95vw;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        overflow: hidden;
+    }
+
+    .modal-card-sm {
+        width: 340px;
+    }
+
+    .modal-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid #f0f0f0;
+        font-weight: 600;
+        font-size: 14px;
+        color: #1a1a2e;
+        background: #fafafa;
+    }
+
+    .modal-card-header-center {
+        justify-content: center;
+        border-bottom: none;
+        padding-bottom: 0;
+        background: #fff;
+    }
+
+    .modal-close {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        color: #aaa;
+        padding: 2px 6px;
+        border-radius: 4px;
+    }
+
+    .modal-close:hover { background: #f0f0f0; color: #555; }
+
+    /* ── Edit form ── */
+    .modal-fields {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        padding: 1.25rem;
+    }
+
+    .field-group {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .field-group-full {
+        grid-column: 1 / -1;
+    }
+
+    .field-group label {
+        font-size: 11px;
+        font-weight: 600;
+        color: #888;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .sp-select {
+        width: 100%;
+        padding: 7px 10px;
+        border: 1px solid #e5e7eb;
+        border-radius: 7px;
+        font-size: 13px;
+        color: #1a1a2e;
+        background: #fff;
+        outline: none;
+        transition: border-color 0.15s;
+    }
+
+    .sp-select:focus { border-color: #6366f1; }
+
+    .modal-actions {
+        display: flex;
+        gap: 8px;
+        padding: 1rem 1.25rem;
+        border-top: 1px solid #f0f0f0;
+        background: #fafafa;
+    }
+
+    /* ── Delete modal ── */
+    .delete-icon {
+        font-size: 32px;
+        text-align: center;
+        padding: 1.25rem 1.25rem 0;
+        color: #dc2626;
+    }
+
+    .delete-body {
+        padding: 0.75rem 1.25rem 1.25rem;
+    }
+
+    .delete-hint {
+        font-size: 13px;
+        color: #666;
+        text-align: center;
+        margin: 0 0 1rem;
+        line-height: 1.5;
+    }
+
+    .delete-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    /* ── Buttons ── */
+    .sp-btn-save {
+        background: #1a1a2e;
+        color: #fff;
+        border: none;
+        border-radius: 7px;
+        padding: 8px 20px;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.15s;
+    }
+
+    .sp-btn-save:hover { background: #2d2d4e; }
+
+    .sp-btn-cancel {
+        background: none;
+        color: #666;
+        border: 1px solid #e5e7eb;
+        border-radius: 7px;
+        padding: 8px 16px;
+        font-size: 13px;
+        cursor: pointer;
+        transition: background 0.15s;
+        width: 100%;
+        text-align: center;
+    }
+
+    .sp-btn-cancel:hover { background: #f5f5f5; }
+
+    .sp-btn-danger {
+        background: #dc2626;
+        color: #fff;
+        border: none;
+        border-radius: 7px;
+        padding: 9px 16px;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        width: 100%;
+        transition: background 0.15s;
+    }
+
+    .sp-btn-danger:hover { background: #b91c1c; }
+</style>
+
+@code {
+    private List<Lesson>? lessons;
+    private Lesson currentLesson = new();
+    private bool showForm = false;
+    private int? deleteId = null;
+    private string? errorMessage = null;
+
+    protected override async Task OnInitializedAsync() => await Load();
+
+    private async Task Load() => lessons = await LessonService.GetLessonsAsync();
+    
+    private static string GetClassName(SchoolClassEnum c) => c switch
+    {
+        SchoolClassEnum.CHIT  => "1CHIT",
+        SchoolClassEnum.CHIT2 => "2CHIT",
+        SchoolClassEnum.CHIT3 => "3CHIT",
+        SchoolClassEnum.CHIT4 => "4CHIT",
+        SchoolClassEnum.CHIT5 => "5CHIT",
+        _                     => c.ToString()
+    };
+
+    private static readonly Dictionary<SubjectEnum, int> SubjectColors = new()
+    {
+        { SubjectEnum.AM,   0  }, { SubjectEnum.D,    1  }, { SubjectEnum.E1,   2  },
+        { SubjectEnum.INSY, 3  }, { SubjectEnum.RK,   4  }, { SubjectEnum.SEW,  5  },
+        { SubjectEnum.SYTD, 6  }, { SubjectEnum.GGPH, 7  }, { SubjectEnum.GGPG, 8  },
+        { SubjectEnum.NW2P, 9  }, { SubjectEnum.NW2C, 10 }, { SubjectEnum.DSAI, 11 },
+        { SubjectEnum.WIR,  12 }, { SubjectEnum.ITPL, 13 }, { SubjectEnum.ITPP, 14 },
+        { SubjectEnum.BESP, 15 }, { SubjectEnum.SYTI, 16 }, { SubjectEnum.SYTS, 17 },
+    };
+
+    private static readonly Dictionary<LessonHour, (string From, string To)> HourRanges = new()
+    {
+        { LessonHour.H1_0745,  ("07:45", "08:35") },
+        { LessonHour.H2_0835,  ("08:35", "09:25") },
+        { LessonHour.H3_0940,  ("09:40", "10:30") },
+        { LessonHour.H4_1030,  ("10:30", "11:20") },
+        { LessonHour.H5_1125,  ("11:25", "12:15") },
+        { LessonHour.H6_1215,  ("12:15", "13:05") },
+        { LessonHour.H7_1305,  ("13:05", "13:55") },
+        { LessonHour.H8_1355,  ("13:55", "14:45") },
+        { LessonHour.H9_1455,  ("14:55", "15:45") },
+        { LessonHour.H10_1545, ("15:45", "16:35") },
+    };
+
+    private string GetHourFrom(LessonHour h)  => HourRanges.TryGetValue(h, out var r) ? r.From : "";
+    private string GetHourTo(LessonHour h)    => HourRanges.TryGetValue(h, out var r) ? r.To   : "";
+    private string GetHourLabel(LessonHour h) => HourRanges.TryGetValue(h, out var r) ? $"{r.From}–{r.To}" : h.ToString();
+
+    private string GetSubjectAbbr(int sid)
+    {
+        var val = sid - 1;
+        return Enum.IsDefined(typeof(SubjectEnum), val) ? ((SubjectEnum)val).ToString() : sid.ToString();
+    }
+
+    private string GetTeacherAbbr(int tid)
+    {
+        var val = tid - 1;
+        return Enum.IsDefined(typeof(TeacherEnum), val) ? ((TeacherEnum)val).ToString() : tid.ToString();
+    }
+
+    private int GetSubjectColor(int sid)
+    {
+        var val = sid - 1;
+        if (Enum.IsDefined(typeof(SubjectEnum), val))
+            return SubjectColors.TryGetValue((SubjectEnum)val, out var c) ? c : 0;
+        return 0;
+    }
+
+    private void ShowAddForm() { currentLesson = new Lesson(); showForm = true; }
+
+    private void PrepareEdit(Lesson lesson)
+    {
+        currentLesson = new Lesson
+        {
+            Id      = lesson.Id,
+            Tid     = lesson.Tid,
+            Sid     = lesson.Sid,
+            Cid     = lesson.Cid,
+            WeekDay = lesson.WeekDay,
+            Hour    = lesson.Hour
+        };
+        showForm = true;
+    }
+
+    private async Task HandleSubmit()
+    {
+        HttpResponseMessage response;
+        if (currentLesson.Id == 0)
+            response = await Http.PostAsJsonAsync("api/lesson", currentLesson);
+        else
+            response = await Http.PutAsJsonAsync($"api/lesson/{currentLesson.Id}", currentLesson);
+
+        if (response.IsSuccessStatusCode)
+        {
+            await Load();
+            Reset();
+        }
+        else
+        {
+            var errorText = await response.Content.ReadAsStringAsync();
+            errorMessage = string.IsNullOrWhiteSpace(errorText)
+                ? "Fehler beim Speichern."
+                : errorText.Trim('"');
+        }
+    }
+
+    private void AskDelete(int id)    { deleteId = id; }
+    private void CancelDelete()       { deleteId = null; }
+
+    private async Task ConfirmDelete()
+    {
+        if (deleteId == null) return;
+        var response = await Http.DeleteAsync($"api/lesson/{deleteId}");
+        if (response.IsSuccessStatusCode)
+        {
+            await Load();
+        }
+        else
+        {
+            var errorText = await response.Content.ReadAsStringAsync();
+            errorMessage = string.IsNullOrWhiteSpace(errorText) ? "Fehler beim Löschen." : errorText.Trim('"');
+        }
+        deleteId = null;
+    }
+
+    private void Reset() { currentLesson = new Lesson(); showForm = false; }
+}
