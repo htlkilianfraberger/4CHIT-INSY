@@ -2,98 +2,321 @@
 @using Model
 @inject LessonService LessonService
 
-<div class="container mt-4">
-    <h3>Stundenplan Verwaltung</h3>
+<div class="container-fluid mt-3 px-4">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+        <h4 class="mb-0">Stundenplan 4CHIT</h4>
+        <button class="btn btn-sm btn-outline-primary" @onclick="ShowAddForm">
+            + Neue Stunde
+        </button>
+    </div>
 
     @if (lessons == null)
     {
-        <p>Lade...</p>
+        <p class="text-muted">Lade...</p>
     }
     else
     {
-        <table class="table table-sm table-bordered">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Tag</th>
-                    <th>Stunde</th>
-                    <th>Aktionen</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var l in lessons)
+        <div class="timetable-wrapper">
+            <div class="timetable-grid">
+                <div class="timetable-corner"></div>
+                @foreach (var day in Enum.GetValues<WeekDay>())
                 {
-                    <tr>
-                        <td>@l.Id</td>
-                        <td>@l.WeekDay</td>
-                        <td>@l.Hour</td>
-                        <td>
-                            <button class="btn btn-primary btn-sm" @onclick="() => PrepareEdit(l)">Edit</button>
-                            <button class="btn btn-danger btn-sm" @onclick="() => DeleteLesson(l.Id)">Delete</button>
-                        </td>
-                    </tr>
+                    <div class="timetable-day-header">@day</div>
                 }
-            </tbody>
-        </table>
 
-        <div class="card p-3 mt-4">
-            <h5>@(currentLesson.Id == 0 ? "Neu erstellen" : "Bearbeiten")</h5>
-            <EditForm Model="currentLesson" OnValidSubmit="HandleSubmit">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>Tag</label>
-                        <InputSelect @bind-Value="currentLesson.WeekDay" class="form-control">
-                            @foreach (var day in Enum.GetValues<WeekDay>())
+                @foreach (var hour in Enum.GetValues<LessonHour>())
+                {
+                    <div class="timetable-hour-label">
+                        <span class="hour-from">@GetHourFrom(hour)</span>
+                        <span class="hour-to">@GetHourTo(hour)</span>
+                    </div>
+
+                    @foreach (var day in Enum.GetValues<WeekDay>())
+                    {
+                        var lesson = lessons.FirstOrDefault(l => l.WeekDay == day && l.Hour == hour);
+                        <div class="timetable-cell @(lesson != null ? "has-lesson" : "empty-cell")"
+                             @onclick="() => { if (lesson != null) PrepareEdit(lesson); }">
+                            @if (lesson != null)
                             {
-                                <option value="@day">@day</option>
+                                <div class="lesson-card lesson-color-@GetSubjectColor(lesson.Sid)">
+                                    <span class="lesson-subject">@GetSubjectAbbr(lesson.Sid)</span>
+                                    <span class="lesson-teacher">@GetTeacherAbbr(lesson.Tid)</span>
+                                    <div class="lesson-actions">
+                                        <button class="btn-icon edit" title="Bearbeiten"
+                                                @onclick:stopPropagation="true"
+                                                @onclick="() => PrepareEdit(lesson)">✏</button>
+                                        <button class="btn-icon delete" title="Löschen"
+                                                @onclick:stopPropagation="true"
+                                                @onclick="() => DeleteLesson(lesson.Id)">✕</button>
+                                    </div>
+                                </div>
                             }
-                        </InputSelect>
-                    </div>
-                    <div class="col-md-2">
-                        <label>Stunde</label>
-                        <InputNumber @bind-Value="currentLesson.Hour" class="form-control" />
-                    </div>
-                    <div class="col-md-2">
-                        <label>Tid</label>
-                        <InputNumber @bind-Value="currentLesson.Tid" class="form-control" />
-                    </div>
-                    <div class="col-md-2">
-                        <label>Sid</label>
-                        <InputNumber @bind-Value="currentLesson.Sid" class="form-control" />
-                    </div>
-                    <div class="col-md-2">
-                        <label>Cid</label>
-                        <InputNumber @bind-Value="currentLesson.Cid" class="form-control" />
-                    </div>
-                </div>
-                <div class="mt-3">
-                    <button type="submit" class="btn btn-success">Speichern</button>
-                    <button type="button" class="btn btn-link" @onclick="Reset">Abbrechen</button>
-                </div>
-            </EditForm>
+                        </div>
+                    }
+                }
+            </div>
         </div>
+
+        @if (showForm)
+        {
+            <div class="modal-backdrop" @onclick="Reset">
+                <div class="edit-card" @onclick:stopPropagation="true">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h6 class="mb-0">@(currentLesson.Id == 0 ? "Neue Stunde" : "Stunde bearbeiten")</h6>
+                        <button class="btn-icon" @onclick="Reset">✕</button>
+                    </div>
+                    <EditForm Model="currentLesson" OnValidSubmit="HandleSubmit">
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <label class="form-label small">Tag</label>
+                                <InputSelect @bind-Value="currentLesson.WeekDay" class="form-select form-select-sm">
+                                    @foreach (var day in Enum.GetValues<WeekDay>())
+                                    {
+                                        <option value="@day">@day</option>
+                                    }
+                                </InputSelect>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label small">Stunde</label>
+                                <InputSelect @bind-Value="currentLesson.Hour" class="form-select form-select-sm">
+                                    @foreach (var h in Enum.GetValues<LessonHour>())
+                                    {
+                                        <option value="@h">@GetHourLabel(h)</option>
+                                    }
+                                </InputSelect>
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label small">Lehrer</label>
+                                <InputSelect @bind-Value="currentLesson.Tid" class="form-select form-select-sm">
+                                    @foreach (var t in Enum.GetValues<TeacherEnum>())
+                                    {
+                                        <option value="@((int)t + 1)">@t</option>
+                                    }
+                                </InputSelect>
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label small">Fach</label>
+                                <InputSelect @bind-Value="currentLesson.Sid" class="form-select form-select-sm">
+                                    @foreach (var s in Enum.GetValues<SubjectEnum>())
+                                    {
+                                        <option value="@((int)s + 1)">@s</option>
+                                    }
+                                </InputSelect>
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label small">Klasse (Cid)</label>
+                                <InputNumber @bind-Value="currentLesson.Cid" class="form-control form-control-sm" />
+                            </div>
+                        </div>
+                        <div class="mt-3 d-flex gap-2">
+                            <button type="submit" class="btn btn-sm btn-success">Speichern</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" @onclick="Reset">Abbrechen</button>
+                        </div>
+                    </EditForm>
+                </div>
+            </div>
+        }
     }
 </div>
+
+<style>
+    .timetable-wrapper {
+        overflow-x: auto;
+    }
+
+    .timetable-grid {
+        display: grid;
+        grid-template-columns: 80px repeat(5, 1fr);
+        gap: 3px;
+        min-width: 620px;
+    }
+
+    .timetable-corner,
+    .timetable-day-header {
+        padding: 6px 8px;
+        text-align: center;
+        font-weight: 500;
+        font-size: 13px;
+        background: #f0f2f5;
+        border-radius: 4px;
+        color: #555;
+    }
+
+    .timetable-hour-label {
+        font-size: 11px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1px;
+        padding: 4px 2px;
+        background: #f8f9fa;
+        border-radius: 4px;
+    }
+
+    .hour-from {
+        font-size: 11px;
+        font-weight: 500;
+        color: #555;
+    }
+
+    .hour-to {
+        font-size: 10px;
+        color: #aaa;
+    }
+
+    .timetable-cell {
+        min-height: 58px;
+        border-radius: 5px;
+        background: #f8f9fa;
+        border: 1px solid #eee;
+    }
+
+    .timetable-cell.empty-cell {
+        background: transparent;
+        border: 1px dashed #e8e8e8;
+    }
+
+    .lesson-card {
+        height: 100%;
+        padding: 5px 8px;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        cursor: pointer;
+        transition: filter 0.15s;
+    }
+
+    .lesson-card:hover { filter: brightness(0.95); }
+    .lesson-card:hover .lesson-actions { opacity: 1; }
+
+    .lesson-subject {
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 1.2;
+    }
+
+    .lesson-teacher {
+        font-size: 11px;
+        opacity: 0.75;
+    }
+
+    .lesson-actions {
+        position: absolute;
+        top: 3px;
+        right: 3px;
+        display: flex;
+        gap: 2px;
+        opacity: 0;
+        transition: opacity 0.15s;
+    }
+
+    .btn-icon {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 11px;
+        padding: 2px 4px;
+        border-radius: 3px;
+        line-height: 1;
+    }
+
+    .btn-icon.edit { color: #0d6efd; }
+    .btn-icon.edit:hover { background: #e8f0fe; }
+    .btn-icon.delete { color: #dc3545; }
+    .btn-icon.delete:hover { background: #fde8ea; }
+
+    .lesson-color-0 { background: #e8f4fd; color: #0c5e9e; border: 1px solid #b8d9f5; }
+    .lesson-color-1 { background: #e8f5ee; color: #0a6e40; border: 1px solid #a3dfc0; }
+    .lesson-color-2 { background: #f3eefe; color: #4a2d9c; border: 1px solid #c9b8f5; }
+    .lesson-color-3 { background: #fff4e6; color: #7a4600; border: 1px solid #f5cc85; }
+    .lesson-color-4 { background: #fde8ea; color: #991b2c; border: 1px solid #f5b0ba; }
+
+    .modal-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.35);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    }
+
+    .edit-card {
+        background: white;
+        border-radius: 10px;
+        padding: 1.25rem;
+        width: 420px;
+        max-width: 95vw;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    }
+</style>
 
 @code {
     private List<Lesson>? lessons;
     private Lesson currentLesson = new();
+    private bool showForm = false;
 
     protected override async Task OnInitializedAsync() => await Load();
 
     private async Task Load() => lessons = await LessonService.GetLessonsAsync();
 
+    private static readonly Dictionary<LessonHour, (string From, string To)> HourRanges = new()
+    {
+        { LessonHour.H1_0745,  ("07:45", "08:35") },
+        { LessonHour.H2_0835,  ("08:35", "09:25") },
+        { LessonHour.H3_0940,  ("09:40", "10:30") },
+        { LessonHour.H4_1030,  ("10:30", "11:20") },
+        { LessonHour.H5_1125,  ("11:25", "12:15") },
+        { LessonHour.H6_1215,  ("12:15", "13:05") },
+        { LessonHour.H7_1305,  ("13:05", "13:55") },
+        { LessonHour.H8_1355,  ("13:55", "14:45") },
+        { LessonHour.H9_1455,  ("14:55", "15:45") },
+        { LessonHour.H10_1545, ("15:45", "16:35") },
+    };
+
+    private string GetHourFrom(LessonHour h)
+        => HourRanges.TryGetValue(h, out var r) ? r.From : "";
+
+    private string GetHourTo(LessonHour h)
+        => HourRanges.TryGetValue(h, out var r) ? r.To : "";
+
+    private string GetHourLabel(LessonHour h)
+        => HourRanges.TryGetValue(h, out var r) ? $"{r.From}–{r.To}" : h.ToString();
+
+    private string GetSubjectAbbr(int sid)
+        => Enum.IsDefined(typeof(SubjectEnum), sid - 1)
+            ? ((SubjectEnum)(sid - 1)).ToString()
+            : sid.ToString();
+
+    private string GetTeacherAbbr(int tid)
+        => Enum.IsDefined(typeof(TeacherEnum), tid - 1)
+            ? ((TeacherEnum)(tid - 1)).ToString()
+            : tid.ToString();
+
+    private int GetSubjectColor(int sid) => (sid - 1) % 5;
+
+    private void ShowAddForm()
+    {
+        currentLesson = new Lesson();
+        showForm = true;
+    }
+
     private void PrepareEdit(Lesson lesson)
     {
-        currentLesson = new Lesson 
-        { 
-            Id = lesson.Id, 
-            Tid = lesson.Tid, 
-            Sid = lesson.Sid, 
-            Cid = lesson.Cid, 
-            WeekDay = lesson.WeekDay, 
-            Hour = lesson.Hour 
+        currentLesson = new Lesson
+        {
+            Id = lesson.Id,
+            Tid = lesson.Tid,
+            Sid = lesson.Sid,
+            Cid = lesson.Cid,
+            WeekDay = lesson.WeekDay,
+            Hour = lesson.Hour
         };
+        showForm = true;
     }
 
     private async Task HandleSubmit()
@@ -109,5 +332,9 @@
         await Load();
     }
 
-    private void Reset() => currentLesson = new Lesson();
+    private void Reset()
+    {
+        currentLesson = new Lesson();
+        showForm = false;
+    }
 }

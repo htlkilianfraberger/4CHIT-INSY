@@ -19,22 +19,7 @@ public class StundenplanContext : DbContext {
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
-        modelBuilder.Entity<TeacherSubject>()
-            .HasKey(ts => new { ts.Tid, ts.Sid });
-
-        modelBuilder.Entity<ClassSubject>()
-            .HasKey(cs => new { cs.Cid, cs.Sid });
-        
-        modelBuilder.Entity<Lesson>()
-            .HasOne(l => l.TeacherSubject)
-            .WithMany()
-            .HasForeignKey(l => new { l.Tid, l.Sid });
-
-        modelBuilder.Entity<Lesson>()
-            .HasOne(l => l.ClassSubject)
-            .WithMany()
-            .HasForeignKey(l => new { l.Cid, l.Sid });
-        
+        // --- Keys & Relations ---
         modelBuilder.Entity<TeacherSubject>().HasKey(ts => new { ts.Tid, ts.Sid });
         modelBuilder.Entity<ClassSubject>().HasKey(cs => new { cs.Cid, cs.Sid });
         
@@ -52,57 +37,92 @@ public class StundenplanContext : DbContext {
             e.HasOne(l => l.TeacherSubject).WithMany().HasForeignKey(l => new { l.Tid, l.Sid }).OnDelete(DeleteBehavior.Restrict);
             e.HasOne(l => l.ClassSubject).WithMany().HasForeignKey(l => new { l.Cid, l.Sid }).OnDelete(DeleteBehavior.Restrict);
         });
-        
-        
-        modelBuilder.Entity<Teacher>().HasData(
-            new Teacher { Id = 1, Abbr = "ALLI" },
-            new Teacher { Id = 2, Abbr = "BIRN" },
-            new Teacher { Id = 13, Abbr = "MACO" },
-            new Teacher { Id = 14, Abbr = "NIGI" },
-            new Teacher { Id = 19, Abbr = "STRO" }
-        );
-                
-        modelBuilder.Entity<Subject>().HasData(
-            new Subject { Id = 1, Desc = "AM" },
-            new Subject { Id = 4, Desc = "D" },
-            new Subject { Id = 5, Desc = "E" },
-            new Subject { Id = 9, Desc = "INSY" },
-            new Subject { Id = 18, Desc = "REL" },
-            new Subject { Id = 19, Desc = "SEW" },
-            new Subject { Id = 20, Desc = "SOPK" },
-            new Subject { Id = 21, Desc = "SYT" }
-        );
 
-        modelBuilder.Entity<SchoolClass>().HasData(
-            new SchoolClass { Id = 1, Abbr = "1CHIT" },
-            new SchoolClass { Id = 2, Abbr = "2CHIT" },
-            new SchoolClass { Id = 3, Abbr = "3CHIT" },
-            new SchoolClass { Id = 4, Abbr = "4CHIT" },
-            new SchoolClass { Id = 5, Abbr = "5CHIT" }
-        );
+        // --- Data Seeding ---
 
+        // 1. Stammdaten (IDs 1-n)
+        modelBuilder.Entity<Teacher>().HasData(Enum.GetValues<TeacherEnum>().Select((e, i) => new Teacher { Id = i + 1, Abbr = e }));
+        modelBuilder.Entity<Subject>().HasData(Enum.GetValues<SubjectEnum>().Select((e, i) => new Subject { Id = i + 1, Desc = e }));
+        modelBuilder.Entity<SchoolClass>().HasData(Enum.GetValues<SchoolClassEnum>().Select((e, i) => new SchoolClass { Id = i + 1, Abbr = e }));
+
+        // Deine Klasse 4CHIT
+        int cid = (int)SchoolClassEnum.CHIT4; 
+
+        // 2. TeacherSubject (Alle Paare, die im 4CHIT Plan vorkommen)
         modelBuilder.Entity<TeacherSubject>().HasData(
-            new { Tid = 1, Sid = 18 },
-            new { Tid = 13, Sid = 9 },
-            new { Tid = 13, Sid = 19 },
-            new { Tid = 2, Sid = 19 }
+            new { Tid = (int)TeacherEnum.ALLI + 1, Sid = (int)SubjectEnum.RK + 1 },
+            new { Tid = (int)TeacherEnum.KUBI + 1, Sid = (int)SubjectEnum.WIR + 1 },
+            new { Tid = (int)TeacherEnum.KIEN + 1, Sid = (int)SubjectEnum.BESP + 1 },
+            new { Tid = (int)TeacherEnum.WART + 1, Sid = (int)SubjectEnum.NW2 + 1 },
+            new { Tid = (int)TeacherEnum.MACO + 1, Sid = (int)SubjectEnum.SEW + 1 },
+            new { Tid = (int)TeacherEnum.MACO + 1, Sid = (int)SubjectEnum.INSY + 1 },
+            new { Tid = (int)TeacherEnum.LEYV + 1, Sid = (int)SubjectEnum.GGPH + 1 },
+            new { Tid = (int)TeacherEnum.LEYV + 1, Sid = (int)SubjectEnum.D + 1 },
+            new { Tid = (int)TeacherEnum.JAGE + 1, Sid = (int)SubjectEnum.ITPL + 1 },
+            new { Tid = (int)TeacherEnum.HAUP + 1, Sid = (int)SubjectEnum.SYTI + 1 },
+            new { Tid = (int)TeacherEnum.NIGI + 1, Sid = (int)SubjectEnum.GGPH + 1 },
+            new { Tid = (int)TeacherEnum.WIEN + 1, Sid = (int)SubjectEnum.ITPP + 1 },
+            new { Tid = (int)TeacherEnum.ELSH + 1, Sid = (int)SubjectEnum.E1 + 1 },
+            new { Tid = (int)TeacherEnum.WINN + 1, Sid = (int)SubjectEnum.SYTD + 1 },
+            new { Tid = (int)TeacherEnum.HAUL + 1, Sid = (int)SubjectEnum.SYTS + 1 },
+            new { Tid = (int)TeacherEnum.BRUN + 1, Sid = (int)SubjectEnum.DSAI + 1 },
+            new { Tid = (int)TeacherEnum.BRUN + 1, Sid = (int)SubjectEnum.SYTI + 1 },
+            new { Tid = (int)TeacherEnum.NIGI + 1, Sid = (int)SubjectEnum.AM + 1 }
         );
 
+        // 3. ClassSubject (Alle Fächer der 4CHIT zuordnen)
         modelBuilder.Entity<ClassSubject>().HasData(
-            new { Cid = 1, Sid = 18 },
-            new { Cid = 4, Sid = 18 },
-            new { Cid = 4, Sid = 9 },
-            new { Cid = 4, Sid = 19 },
-            new { Cid = 5, Sid = 19 }
+            Enum.GetValues<SubjectEnum>().Select(s => new { Cid = cid, Sid = (int)s + 1 })
         );
 
+        // 4. Lessons (Einzelstunden laut Plan)
         modelBuilder.Entity<Lesson>().HasData(
-            new Lesson { Id = 203, Tid = 1, Sid = 18, Cid = 1, WeekDay = WeekDay.Mo, Hour = 1 },
-            new Lesson { Id = 299, Tid = 1, Sid = 18, Cid = 4, WeekDay = WeekDay.Di, Hour = 2 },
-            new Lesson { Id = 378, Tid = 13, Sid = 9, Cid = 4, WeekDay = WeekDay.Mi, Hour = 3 },
-            new Lesson { Id = 379, Tid = 13, Sid = 19, Cid = 4, WeekDay = WeekDay.Do, Hour = 4 },
-            new Lesson { Id = 399, Tid = 13, Sid = 19, Cid = 5, WeekDay = WeekDay.Fr, Hour = 5 },
-            new Lesson { Id = 1277, Tid = 2, Sid = 19, Cid = 5, WeekDay = WeekDay.Mo, Hour = 6 }
+            // Montag
+            new Lesson { Id = 1, Cid = cid, WeekDay = WeekDay.Mo, Hour = LessonHour.H1_0745, Tid = (int)TeacherEnum.ALLI+1, Sid = (int)SubjectEnum.RK+1 },
+            new Lesson { Id = 2, Cid = cid, WeekDay = WeekDay.Mo, Hour = LessonHour.H2_0835, Tid = (int)TeacherEnum.KUBI+1, Sid = (int)SubjectEnum.WIR+1 },
+            new Lesson { Id = 3, Cid = cid, WeekDay = WeekDay.Mo, Hour = LessonHour.H3_0940, Tid = (int)TeacherEnum.KUBI+1, Sid = (int)SubjectEnum.WIR+1 },
+            new Lesson { Id = 4, Cid = cid, WeekDay = WeekDay.Mo, Hour = LessonHour.H4_1030, Tid = (int)TeacherEnum.ALLI+1, Sid = (int)SubjectEnum.RK+1 },
+            new Lesson { Id = 5, Cid = cid, WeekDay = WeekDay.Mo, Hour = LessonHour.H5_1125, Tid = (int)TeacherEnum.KIEN+1, Sid = (int)SubjectEnum.BESP+1 },
+            new Lesson { Id = 6, Cid = cid, WeekDay = WeekDay.Mo, Hour = LessonHour.H7_1305, Tid = (int)TeacherEnum.WART+1, Sid = (int)SubjectEnum.NW2+1 },
+            new Lesson { Id = 7, Cid = cid, WeekDay = WeekDay.Mo, Hour = LessonHour.H8_1355, Tid = (int)TeacherEnum.MACO+1, Sid = (int)SubjectEnum.SEW+1 },
+            new Lesson { Id = 8, Cid = cid, WeekDay = WeekDay.Mo, Hour = LessonHour.H9_1455, Tid = (int)TeacherEnum.MACO+1, Sid = (int)SubjectEnum.SEW+1 },
+
+            // Dienstag
+            new Lesson { Id = 9, Cid = cid, WeekDay = WeekDay.Di, Hour = LessonHour.H1_0745, Tid = (int)TeacherEnum.LEYV+1, Sid = (int)SubjectEnum.GGPH+1 },
+            new Lesson { Id = 10, Cid = cid, WeekDay = WeekDay.Di, Hour = LessonHour.H2_0835, Tid = (int)TeacherEnum.JAGE+1, Sid = (int)SubjectEnum.ITPL+1 },
+            new Lesson { Id = 11, Cid = cid, WeekDay = WeekDay.Di, Hour = LessonHour.H3_0940, Tid = (int)TeacherEnum.LEYV+1, Sid = (int)SubjectEnum.D+1 },
+            new Lesson { Id = 12, Cid = cid, WeekDay = WeekDay.Di, Hour = LessonHour.H4_1030, Tid = (int)TeacherEnum.LEYV+1, Sid = (int)SubjectEnum.D+1 },
+            new Lesson { Id = 13, Cid = cid, WeekDay = WeekDay.Di, Hour = LessonHour.H5_1125, Tid = (int)TeacherEnum.HAUP+1, Sid = (int)SubjectEnum.SYTI+1 },
+            new Lesson { Id = 14, Cid = cid, WeekDay = WeekDay.Di, Hour = LessonHour.H7_1305, Tid = (int)TeacherEnum.JAGE+1, Sid = (int)SubjectEnum.ITPL+1 },
+            new Lesson { Id = 15, Cid = cid, WeekDay = WeekDay.Di, Hour = LessonHour.H8_1355, Tid = (int)TeacherEnum.JAGE+1, Sid = (int)SubjectEnum.ITPL+1 },
+
+            // Mittwoch
+            new Lesson { Id = 16, Cid = cid, WeekDay = WeekDay.Mi, Hour = LessonHour.H1_0745, Tid = (int)TeacherEnum.NIGI+1, Sid = (int)SubjectEnum.GGPH+1 },
+            new Lesson { Id = 17, Cid = cid, WeekDay = WeekDay.Mi, Hour = LessonHour.H2_0835, Tid = (int)TeacherEnum.WIEN+1, Sid = (int)SubjectEnum.ITPP+1 },
+            new Lesson { Id = 18, Cid = cid, WeekDay = WeekDay.Mi, Hour = LessonHour.H3_0940, Tid = (int)TeacherEnum.ELSH+1, Sid = (int)SubjectEnum.E1+1 },
+            new Lesson { Id = 19, Cid = cid, WeekDay = WeekDay.Mi, Hour = LessonHour.H4_1030, Tid = (int)TeacherEnum.WINN+1, Sid = (int)SubjectEnum.SYTD+1 },
+            new Lesson { Id = 20, Cid = cid, WeekDay = WeekDay.Mi, Hour = LessonHour.H5_1125, Tid = (int)TeacherEnum.WINN+1, Sid = (int)SubjectEnum.SYTD+1 },
+            new Lesson { Id = 21, Cid = cid, WeekDay = WeekDay.Mi, Hour = LessonHour.H6_1215, Tid = (int)TeacherEnum.WIEN+1, Sid = (int)SubjectEnum.ITPP+1 },
+
+            // Donnerstag
+            new Lesson { Id = 22, Cid = cid, WeekDay = WeekDay.Do, Hour = LessonHour.H1_0745, Tid = (int)TeacherEnum.WART+1, Sid = (int)SubjectEnum.NW2+1 },
+            new Lesson { Id = 23, Cid = cid, WeekDay = WeekDay.Do, Hour = LessonHour.H2_0835, Tid = (int)TeacherEnum.MACO+1, Sid = (int)SubjectEnum.INSY+1 },
+            new Lesson { Id = 24, Cid = cid, WeekDay = WeekDay.Do, Hour = LessonHour.H3_0940, Tid = (int)TeacherEnum.MACO+1, Sid = (int)SubjectEnum.INSY+1 }, 
+            new Lesson { Id = 25, Cid = cid, WeekDay = WeekDay.Do, Hour = LessonHour.H4_1030, Tid = (int)TeacherEnum.MACO+1, Sid = (int)SubjectEnum.INSY+1 },
+            new Lesson { Id = 26, Cid = cid, WeekDay = WeekDay.Do, Hour = LessonHour.H5_1125, Tid = (int)TeacherEnum.MACO+1, Sid = (int)SubjectEnum.INSY+1 },
+            new Lesson { Id = 27, Cid = cid, WeekDay = WeekDay.Do, Hour = LessonHour.H6_1215, Tid = (int)TeacherEnum.MACO+1, Sid = (int)SubjectEnum.SEW+1 },
+            new Lesson { Id = 28, Cid = cid, WeekDay = WeekDay.Do, Hour = LessonHour.H8_1355, Tid = (int)TeacherEnum.HAUL+1, Sid = (int)SubjectEnum.SYTS+1 },
+            new Lesson { Id = 29, Cid = cid, WeekDay = WeekDay.Do, Hour = LessonHour.H9_1455, Tid = (int)TeacherEnum.HAUL+1, Sid = (int)SubjectEnum.SYTS+1 },
+
+            // Freitag
+            new Lesson { Id = 30, Cid = cid, WeekDay = WeekDay.Fr, Hour = LessonHour.H1_0745, Tid = (int)TeacherEnum.BRUN+1, Sid = (int)SubjectEnum.DSAI+1 },
+            new Lesson { Id = 31, Cid = cid, WeekDay = WeekDay.Fr, Hour = LessonHour.H2_0835, Tid = (int)TeacherEnum.BRUN+1, Sid = (int)SubjectEnum.DSAI+1 },
+            new Lesson { Id = 32, Cid = cid, WeekDay = WeekDay.Fr, Hour = LessonHour.H3_0940, Tid = (int)TeacherEnum.KUBI+1, Sid = (int)SubjectEnum.WIR+1 },
+            new Lesson { Id = 33, Cid = cid, WeekDay = WeekDay.Fr, Hour = LessonHour.H4_1030, Tid = (int)TeacherEnum.KUBI+1, Sid = (int)SubjectEnum.WIR+1 },
+            new Lesson { Id = 34, Cid = cid, WeekDay = WeekDay.Fr, Hour = LessonHour.H5_1125, Tid = (int)TeacherEnum.NIGI+1, Sid = (int)SubjectEnum.AM+1 },
+            new Lesson { Id = 35, Cid = cid, WeekDay = WeekDay.Fr, Hour = LessonHour.H6_1215, Tid = (int)TeacherEnum.NIGI+1, Sid = (int)SubjectEnum.AM+1 },
+            new Lesson { Id = 36, Cid = cid, WeekDay = WeekDay.Fr, Hour = LessonHour.H8_1355, Tid = (int)TeacherEnum.BRUN+1, Sid = (int)SubjectEnum.SYTI+1 },
+            new Lesson { Id = 37, Cid = cid, WeekDay = WeekDay.Fr, Hour = LessonHour.H9_1455, Tid = (int)TeacherEnum.BRUN+1, Sid = (int)SubjectEnum.SYTI+1 }
         );
     }
 }
