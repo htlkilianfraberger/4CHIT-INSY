@@ -1,0 +1,28 @@
+﻿@using Model
+
+<div class="modal-backdrop" @onclick="HandleCancel">
+    <div class="edit-card border-danger" @onclick:stopPropagation="true">
+        <div class="text-center mb-4">
+            <div class="display-6 text-danger mb-2">⚠</div>
+            <h5 class="mb-1">Stunde löschen?</h5>
+            <p class="text-muted small">Möchtest du diese Unterrichtsstunde wirklich unwiderruflich entfernen?</p>
+        </div>
+
+        <div class="d-flex flex-column gap-2">
+            <button type="button" class="btn btn-danger w-100" @onclick="HandleConfirm">
+                Ja, Löschen
+            </button>
+            <button type="button" class="btn btn-outline-secondary w-100" @onclick="HandleCancel">
+                Abbrechen
+            </button>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public EventCallback OnConfirm { get; set; }
+    [Parameter] public EventCallback OnCancel { get; set; }
+    
+    private async Task HandleConfirm() => await OnConfirm.InvokeAsync();
+    private async Task HandleCancel() => await OnCancel.InvokeAsync();
+}

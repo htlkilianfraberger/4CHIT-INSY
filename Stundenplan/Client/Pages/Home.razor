@@ -76,6 +76,10 @@
                   OnCancel="CloseForm" 
                   OnError="HandleError" />
         }
+        @if (idToDelete.HasValue)
+        {
+            <Delete OnConfirm="ConfirmDelete" OnCancel="CancelDelete" />
+        }
     }
 </div>
 
@@ -130,6 +134,7 @@
 
 @code {
     [Parameter] public int? Id { get; set; }
+    private int? idToDelete;
 
     private List<Lesson>? lessons;
     private Lesson currentLesson = new();
@@ -140,14 +145,39 @@
         public string? error { get; set; }
         public string? message { get; set; }
     }
-
+    
+    
+    private void CancelDelete()
+    {
+        idToDelete = null;
+    }
+    
+    private async Task ConfirmDelete()
+    {
+        if (idToDelete.HasValue)
+        {
+            try 
+            {
+                await LessonService.DeleteAsync(idToDelete.Value);
+                idToDelete = null;
+                await Load();
+                StateHasChanged();
+            }
+            catch (Exception ex)
+            {
+                errorMessage = "Fehler beim Löschen: " + ex.Message;
+                idToDelete = null;
+                StateHasChanged();
+            }
+        }
+    }
+    
     protected override async Task OnInitializedAsync() => await Load();
 
     protected override async Task OnParametersSetAsync()
     {
         if (Id.HasValue && Id.Value > 0)
         {
-            // Wir suchen die Lesson in der bereits geladenen Liste oder laden sie nach
             if (lessons == null) await Load();
             
             var lessonToEdit = lessons?.FirstOrDefault(l => l.Id == Id.Value);
@@ -180,7 +210,7 @@
     {
         showForm = false;
         errorMessage = null;
-        Navigation.NavigateTo("/"); // URL säubern
+        Navigation.NavigateTo("/");
     }
 
     private async Task HandleSaveSuccess()
@@ -193,8 +223,7 @@
 
     private async Task DeleteLesson(int id)
     {
-        await LessonService.DeleteAsync(id);
-        await Load();
+        idToDelete = id;
     }
 
     private void ShowAddForm()
@@ -202,8 +231,7 @@
         currentLesson = new Lesson { Cid = 4 }; 
         showForm = true;
     }
-
-    // --- Hilfsmethoden ---
+    
     private static readonly Dictionary<LessonHour, (string From, string To)> HourRanges = new()
     {
         { LessonHour.H1_0745,  ("07:45", "08:35") },
