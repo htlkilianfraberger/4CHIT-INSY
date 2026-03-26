@@ -53,14 +53,15 @@ public class StundenplanContext : DbContext {
             new { Tid = (int)TeacherEnum.ALLI + 1, Sid = (int)SubjectEnum.RK + 1 },
             new { Tid = (int)TeacherEnum.KUBI + 1, Sid = (int)SubjectEnum.WIR + 1 },
             new { Tid = (int)TeacherEnum.KIEN + 1, Sid = (int)SubjectEnum.BESP + 1 },
-            new { Tid = (int)TeacherEnum.WART + 1, Sid = (int)SubjectEnum.NW2 + 1 },
+            new { Tid = (int)TeacherEnum.WART + 1, Sid = (int)SubjectEnum.NW2P + 1 },
+            new { Tid = (int)TeacherEnum.WART + 1, Sid = (int)SubjectEnum.NW2C + 1 },
             new { Tid = (int)TeacherEnum.MACO + 1, Sid = (int)SubjectEnum.SEW + 1 },
             new { Tid = (int)TeacherEnum.MACO + 1, Sid = (int)SubjectEnum.INSY + 1 },
             new { Tid = (int)TeacherEnum.LEYV + 1, Sid = (int)SubjectEnum.GGPH + 1 },
             new { Tid = (int)TeacherEnum.LEYV + 1, Sid = (int)SubjectEnum.D + 1 },
             new { Tid = (int)TeacherEnum.JAGE + 1, Sid = (int)SubjectEnum.ITPL + 1 },
             new { Tid = (int)TeacherEnum.HAUP + 1, Sid = (int)SubjectEnum.SYTI + 1 },
-            new { Tid = (int)TeacherEnum.NIGI + 1, Sid = (int)SubjectEnum.GGPH + 1 },
+            new { Tid = (int)TeacherEnum.NIGI + 1, Sid = (int)SubjectEnum.GGPG + 1 },
             new { Tid = (int)TeacherEnum.WIEN + 1, Sid = (int)SubjectEnum.ITPP + 1 },
             new { Tid = (int)TeacherEnum.ELSH + 1, Sid = (int)SubjectEnum.E1 + 1 },
             new { Tid = (int)TeacherEnum.WINN + 1, Sid = (int)SubjectEnum.SYTD + 1 },
@@ -83,7 +84,7 @@ public class StundenplanContext : DbContext {
             new Lesson { Id = 3, Cid = cid, WeekDay = WeekDay.Mo, Hour = LessonHour.H3_0940, Tid = (int)TeacherEnum.KUBI+1, Sid = (int)SubjectEnum.WIR+1 },
             new Lesson { Id = 4, Cid = cid, WeekDay = WeekDay.Mo, Hour = LessonHour.H4_1030, Tid = (int)TeacherEnum.ALLI+1, Sid = (int)SubjectEnum.RK+1 },
             new Lesson { Id = 5, Cid = cid, WeekDay = WeekDay.Mo, Hour = LessonHour.H5_1125, Tid = (int)TeacherEnum.KIEN+1, Sid = (int)SubjectEnum.BESP+1 },
-            new Lesson { Id = 6, Cid = cid, WeekDay = WeekDay.Mo, Hour = LessonHour.H7_1305, Tid = (int)TeacherEnum.WART+1, Sid = (int)SubjectEnum.NW2+1 },
+            new Lesson { Id = 6, Cid = cid, WeekDay = WeekDay.Mo, Hour = LessonHour.H7_1305, Tid = (int)TeacherEnum.WART+1, Sid = (int)SubjectEnum.NW2P+1 },
             new Lesson { Id = 7, Cid = cid, WeekDay = WeekDay.Mo, Hour = LessonHour.H8_1355, Tid = (int)TeacherEnum.MACO+1, Sid = (int)SubjectEnum.SEW+1 },
             new Lesson { Id = 8, Cid = cid, WeekDay = WeekDay.Mo, Hour = LessonHour.H9_1455, Tid = (int)TeacherEnum.MACO+1, Sid = (int)SubjectEnum.SEW+1 },
 
@@ -97,7 +98,7 @@ public class StundenplanContext : DbContext {
             new Lesson { Id = 15, Cid = cid, WeekDay = WeekDay.Di, Hour = LessonHour.H8_1355, Tid = (int)TeacherEnum.JAGE+1, Sid = (int)SubjectEnum.ITPL+1 },
 
             // Mittwoch
-            new Lesson { Id = 16, Cid = cid, WeekDay = WeekDay.Mi, Hour = LessonHour.H1_0745, Tid = (int)TeacherEnum.NIGI+1, Sid = (int)SubjectEnum.GGPH+1 },
+            new Lesson { Id = 16, Cid = cid, WeekDay = WeekDay.Mi, Hour = LessonHour.H1_0745, Tid = (int)TeacherEnum.NIGI+1, Sid = (int)SubjectEnum.GGPG+1 },
             new Lesson { Id = 17, Cid = cid, WeekDay = WeekDay.Mi, Hour = LessonHour.H2_0835, Tid = (int)TeacherEnum.WIEN+1, Sid = (int)SubjectEnum.ITPP+1 },
             new Lesson { Id = 18, Cid = cid, WeekDay = WeekDay.Mi, Hour = LessonHour.H3_0940, Tid = (int)TeacherEnum.ELSH+1, Sid = (int)SubjectEnum.E1+1 },
             new Lesson { Id = 19, Cid = cid, WeekDay = WeekDay.Mi, Hour = LessonHour.H4_1030, Tid = (int)TeacherEnum.WINN+1, Sid = (int)SubjectEnum.SYTD+1 },
@@ -105,7 +106,7 @@ public class StundenplanContext : DbContext {
             new Lesson { Id = 21, Cid = cid, WeekDay = WeekDay.Mi, Hour = LessonHour.H6_1215, Tid = (int)TeacherEnum.WIEN+1, Sid = (int)SubjectEnum.ITPP+1 },
 
             // Donnerstag
-            new Lesson { Id = 22, Cid = cid, WeekDay = WeekDay.Do, Hour = LessonHour.H1_0745, Tid = (int)TeacherEnum.WART+1, Sid = (int)SubjectEnum.NW2+1 },
+            new Lesson { Id = 22, Cid = cid, WeekDay = WeekDay.Do, Hour = LessonHour.H1_0745, Tid = (int)TeacherEnum.WART+1, Sid = (int)SubjectEnum.NW2C+1 },
             new Lesson { Id = 23, Cid = cid, WeekDay = WeekDay.Do, Hour = LessonHour.H2_0835, Tid = (int)TeacherEnum.MACO+1, Sid = (int)SubjectEnum.INSY+1 },
             new Lesson { Id = 24, Cid = cid, WeekDay = WeekDay.Do, Hour = LessonHour.H3_0940, Tid = (int)TeacherEnum.MACO+1, Sid = (int)SubjectEnum.INSY+1 }, 
             new Lesson { Id = 25, Cid = cid, WeekDay = WeekDay.Do, Hour = LessonHour.H4_1030, Tid = (int)TeacherEnum.MACO+1, Sid = (int)SubjectEnum.INSY+1 },
@@ -118,7 +119,7 @@ public class StundenplanContext : DbContext {
             new Lesson { Id = 30, Cid = cid, WeekDay = WeekDay.Fr, Hour = LessonHour.H1_0745, Tid = (int)TeacherEnum.BRUN+1, Sid = (int)SubjectEnum.DSAI+1 },
             new Lesson { Id = 31, Cid = cid, WeekDay = WeekDay.Fr, Hour = LessonHour.H2_0835, Tid = (int)TeacherEnum.BRUN+1, Sid = (int)SubjectEnum.DSAI+1 },
             new Lesson { Id = 32, Cid = cid, WeekDay = WeekDay.Fr, Hour = LessonHour.H3_0940, Tid = (int)TeacherEnum.KUBI+1, Sid = (int)SubjectEnum.WIR+1 },
-            new Lesson { Id = 33, Cid = cid, WeekDay = WeekDay.Fr, Hour = LessonHour.H4_1030, Tid = (int)TeacherEnum.KUBI+1, Sid = (int)SubjectEnum.WIR+1 },
+            new Lesson { Id = 33, Cid = cid, WeekDay = WeekDay.Fr, Hour = LessonHour.H4_1030, Tid = (int)TeacherEnum.ELSH+1, Sid = (int)SubjectEnum.E1+1 },
             new Lesson { Id = 34, Cid = cid, WeekDay = WeekDay.Fr, Hour = LessonHour.H5_1125, Tid = (int)TeacherEnum.NIGI+1, Sid = (int)SubjectEnum.AM+1 },
             new Lesson { Id = 35, Cid = cid, WeekDay = WeekDay.Fr, Hour = LessonHour.H6_1215, Tid = (int)TeacherEnum.NIGI+1, Sid = (int)SubjectEnum.AM+1 },
             new Lesson { Id = 36, Cid = cid, WeekDay = WeekDay.Fr, Hour = LessonHour.H8_1355, Tid = (int)TeacherEnum.BRUN+1, Sid = (int)SubjectEnum.SYTI+1 },

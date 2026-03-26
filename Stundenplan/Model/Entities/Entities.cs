@@ -12,7 +12,7 @@ public enum SchoolClassEnum { CHIT = 1, CHIT2, CHIT3, CHIT4, CHIT5 }
 
 public enum TeacherEnum { ALLI, MACO, NIGI, LEYV, WART, BRUN, KUBI, JAGE, WIEN, ELSH, WINN, KIEN, HAUP, HAUL }
 
-public enum SubjectEnum { AM, D, E1, INSY, RK, SEW, SYTD, GGPH, NW2, DSAI, WIR, ITPL, ITPP, BESP, SYTI, SYTS }
+public enum SubjectEnum { AM, D, E1, INSY, RK, SEW, SYTD, GGPH, GGPG, NW2P, NW2C, DSAI, WIR, ITPL, ITPP, BESP, SYTI, SYTS }
 
 // Zeitfenster laut deinem Plan
 public enum LessonHour 

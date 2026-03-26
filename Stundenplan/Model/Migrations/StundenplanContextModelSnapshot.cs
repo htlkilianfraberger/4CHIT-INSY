@@ -112,6 +112,16 @@ namespace Model.Migrations
                         {
                             Cid = 4,
                             Sid = 16
+                        },
+                        new
+                        {
+                            Cid = 4,
+                            Sid = 17
+                        },
+                        new
+                        {
+                            Cid = 4,
+                            Sid = 18
                         });
                 });
 
@@ -159,7 +169,7 @@ namespace Model.Migrations
                             Id = 2,
                             Cid = 4,
                             Hour = 2,
-                            Sid = 11,
+                            Sid = 13,
                             Tid = 7,
                             WeekDay = 1
                         },
@@ -168,7 +178,7 @@ namespace Model.Migrations
                             Id = 3,
                             Cid = 4,
                             Hour = 3,
-                            Sid = 11,
+                            Sid = 13,
                             Tid = 7,
                             WeekDay = 1
                         },
@@ -186,7 +196,7 @@ namespace Model.Migrations
                             Id = 5,
                             Cid = 4,
                             Hour = 5,
-                            Sid = 14,
+                            Sid = 16,
                             Tid = 12,
                             WeekDay = 1
                         },
@@ -195,7 +205,7 @@ namespace Model.Migrations
                             Id = 6,
                             Cid = 4,
                             Hour = 7,
-                            Sid = 9,
+                            Sid = 10,
                             Tid = 5,
                             WeekDay = 1
                         },
@@ -231,7 +241,7 @@ namespace Model.Migrations
                             Id = 10,
                             Cid = 4,
                             Hour = 2,
-                            Sid = 12,
+                            Sid = 14,
                             Tid = 8,
                             WeekDay = 2
                         },
@@ -258,7 +268,7 @@ namespace Model.Migrations
                             Id = 13,
                             Cid = 4,
                             Hour = 5,
-                            Sid = 15,
+                            Sid = 17,
                             Tid = 13,
                             WeekDay = 2
                         },
@@ -267,7 +277,7 @@ namespace Model.Migrations
                             Id = 14,
                             Cid = 4,
                             Hour = 7,
-                            Sid = 12,
+                            Sid = 14,
                             Tid = 8,
                             WeekDay = 2
                         },
@@ -276,7 +286,7 @@ namespace Model.Migrations
                             Id = 15,
                             Cid = 4,
                             Hour = 8,
-                            Sid = 12,
+                            Sid = 14,
                             Tid = 8,
                             WeekDay = 2
                         },
@@ -285,7 +295,7 @@ namespace Model.Migrations
                             Id = 16,
                             Cid = 4,
                             Hour = 1,
-                            Sid = 8,
+                            Sid = 9,
                             Tid = 3,
                             WeekDay = 3
                         },
@@ -294,7 +304,7 @@ namespace Model.Migrations
                             Id = 17,
                             Cid = 4,
                             Hour = 2,
-                            Sid = 13,
+                            Sid = 15,
                             Tid = 9,
                             WeekDay = 3
                         },
@@ -330,7 +340,7 @@ namespace Model.Migrations
                             Id = 21,
                             Cid = 4,
                             Hour = 6,
-                            Sid = 13,
+                            Sid = 15,
                             Tid = 9,
                             WeekDay = 3
                         },
@@ -339,7 +349,7 @@ namespace Model.Migrations
                             Id = 22,
                             Cid = 4,
                             Hour = 1,
-                            Sid = 9,
+                            Sid = 11,
                             Tid = 5,
                             WeekDay = 4
                         },
@@ -393,7 +403,7 @@ namespace Model.Migrations
                             Id = 28,
                             Cid = 4,
                             Hour = 8,
-                            Sid = 16,
+                            Sid = 18,
                             Tid = 14,
                             WeekDay = 4
                         },
@@ -402,7 +412,7 @@ namespace Model.Migrations
                             Id = 29,
                             Cid = 4,
                             Hour = 9,
-                            Sid = 16,
+                            Sid = 18,
                             Tid = 14,
                             WeekDay = 4
                         },
@@ -411,7 +421,7 @@ namespace Model.Migrations
                             Id = 30,
                             Cid = 4,
                             Hour = 1,
-                            Sid = 10,
+                            Sid = 12,
                             Tid = 6,
                             WeekDay = 5
                         },
@@ -420,7 +430,7 @@ namespace Model.Migrations
                             Id = 31,
                             Cid = 4,
                             Hour = 2,
-                            Sid = 10,
+                            Sid = 12,
                             Tid = 6,
                             WeekDay = 5
                         },
@@ -429,7 +439,7 @@ namespace Model.Migrations
                             Id = 32,
                             Cid = 4,
                             Hour = 3,
-                            Sid = 11,
+                            Sid = 13,
                             Tid = 7,
                             WeekDay = 5
                         },
@@ -438,8 +448,8 @@ namespace Model.Migrations
                             Id = 33,
                             Cid = 4,
                             Hour = 4,
-                            Sid = 11,
-                            Tid = 7,
+                            Sid = 3,
+                            Tid = 10,
                             WeekDay = 5
                         },
                         new
@@ -465,7 +475,7 @@ namespace Model.Migrations
                             Id = 36,
                             Cid = 4,
                             Hour = 8,
-                            Sid = 15,
+                            Sid = 17,
                             Tid = 6,
                             WeekDay = 5
                         },
@@ -474,7 +484,7 @@ namespace Model.Migrations
                             Id = 37,
                             Cid = 4,
                             Hour = 9,
-                            Sid = 15,
+                            Sid = 17,
                             Tid = 6,
                             WeekDay = 5
                         });
@@ -614,6 +624,16 @@ namespace Model.Migrations
                         {
                             Id = 16,
                             Desc = 15
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Desc = 16
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Desc = 17
                         });
                 });
 
@@ -726,17 +746,22 @@ namespace Model.Migrations
                         new
                         {
                             Tid = 7,
-                            Sid = 11
+                            Sid = 13
                         },
                         new
                         {
                             Tid = 12,
-                            Sid = 14
+                            Sid = 16
                         },
                         new
                         {
                             Tid = 5,
-                            Sid = 9
+                            Sid = 10
+                        },
+                        new
+                        {
+                            Tid = 5,
+                            Sid = 11
                         },
                         new
                         {
@@ -761,22 +786,22 @@ namespace Model.Migrations
                         new
                         {
                             Tid = 8,
-                            Sid = 12
+                            Sid = 14
                         },
                         new
                         {
                             Tid = 13,
-                            Sid = 15
+                            Sid = 17
                         },
                         new
                         {
                             Tid = 3,
-                            Sid = 8
+                            Sid = 9
                         },
                         new
                         {
                             Tid = 9,
-                            Sid = 13
+                            Sid = 15
                         },
                         new
                         {
@@ -791,17 +816,17 @@ namespace Model.Migrations
                         new
                         {
                             Tid = 14,
-                            Sid = 16
+                            Sid = 18
                         },
                         new
                         {
                             Tid = 6,
-                            Sid = 10
+                            Sid = 12
                         },
                         new
                         {
                             Tid = 6,
-                            Sid = 15
+                            Sid = 17
                         },
                         new
                         {
