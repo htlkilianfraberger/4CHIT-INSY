@@ -5,8 +5,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace Model;
-
-// --- Logik-Enums bleiben (für das Grid-Layout sinnvoll) ---
 public enum WeekDay { Mo = 1, Di, Mi, Do, Fr }
 
 public enum LessonHour 
@@ -42,22 +40,20 @@ public enum LessonHour
     H10_1545 = 10
 }
 
-// --- Entities ohne Enums ---
-
 public class Teacher {
     public int Id { get; set; }
-    public string Abbr { get; set; } = string.Empty; // Direkt als String
+    public string Abbr { get; set; } = string.Empty;
     public virtual ICollection<TeacherSubject> TeacherSubjects { get; set; } = new List<TeacherSubject>();
 }
 
 public class Subject {
     public int Id { get; set; }
-    public string Desc { get; set; } = string.Empty; // Direkt als String
+    public string Desc { get; set; } = string.Empty; 
 }
 
 public class SchoolClass {
     public int Id { get; set; }
-    public string Abbr { get; set; } = string.Empty; // Direkt als String
+    public string Abbr { get; set; } = string.Empty;
     public virtual ICollection<ClassSubject> ClassSubjects { get; set; } = new List<ClassSubject>();
 }
 

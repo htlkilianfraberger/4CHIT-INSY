@@ -5,25 +5,25 @@
 @if (teachers == null || subjects == null || classes == null)
 {
     <div class="modal-backdrop">
-        <div class="edit-card text-center">
-            <span class="text-muted">Lade Formulardaten...</span>
+        <div class="modal-card" style="display:flex;align-items:center;justify-content:center;padding:2rem;">
+            <span style="color:#aaa;font-size:13px;">Lade Formulardaten…</span>
         </div>
     </div>
 }
 else
 {
     <div class="modal-backdrop" @onclick="CancelInternal">
-        <div class="edit-card" @onclick:stopPropagation="true">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h6 class="mb-0">@(Lesson.Id == 0 ? "Neue Stunde" : "Stunde bearbeiten")</h6>
-                <button type="button" class="btn-icon" @onclick="CancelInternal">✕</button>
+        <div class="modal-card" @onclick:stopPropagation="true">
+            <div class="modal-card-header">
+                <span>@(Lesson.Id == 0 ? "Neue Stunde hinzufügen" : "Stunde bearbeiten")</span>
+                <button type="button" class="modal-close" @onclick="CancelInternal">✕</button>
             </div>
 
             <EditForm Model="Lesson" OnValidSubmit="InternalHandleSubmit">
-                <div class="row g-2">
-                    <div class="col-6">
-                        <label class="form-label small">Tag</label>
-                        <InputSelect @bind-Value="Lesson.WeekDay" class="form-select form-select-sm">
+                <div class="modal-fields">
+                    <div class="field-group">
+                        <label>Tag</label>
+                        <InputSelect @bind-Value="Lesson.WeekDay" class="sp-select">
                             @foreach (var day in Enum.GetValues<WeekDay>())
                             {
                                 <option value="@day">@day</option>
@@ -31,9 +31,9 @@ else
                         </InputSelect>
                     </div>
 
-                    <div class="col-6">
-                        <label class="form-label small">Stunde</label>
-                        <InputSelect @bind-Value="Lesson.Hour" class="form-select form-select-sm">
+                    <div class="field-group">
+                        <label>Stunde</label>
+                        <InputSelect @bind-Value="Lesson.Hour" class="sp-select">
                             @foreach (var h in Enum.GetValues<LessonHour>())
                             {
                                 <option value="@h">@GetHourLabel(h)</option>
@@ -41,10 +41,10 @@ else
                         </InputSelect>
                     </div>
 
-                    <div class="col-6">
-                        <label class="form-label small">Lehrer</label>
-                        <InputSelect @bind-Value="Lesson.Tid" class="form-select form-select-sm">
-                            <option value="0">Wählen...</option>
+                    <div class="field-group">
+                        <label>Lehrer</label>
+                        <InputSelect @bind-Value="Lesson.Tid" class="sp-select">
+                            <option value="0">Wählen…</option>
                             @foreach (var t in teachers)
                             {
                                 <option value="@t.Id">@t.Abbr</option>
@@ -52,10 +52,10 @@ else
                         </InputSelect>
                     </div>
 
-                    <div class="col-6">
-                        <label class="form-label small">Fach</label>
-                        <InputSelect @bind-Value="Lesson.Sid" class="form-select form-select-sm">
-                            <option value="0">Wählen...</option>
+                    <div class="field-group">
+                        <label>Fach</label>
+                        <InputSelect @bind-Value="Lesson.Sid" class="sp-select">
+                            <option value="0">Wählen…</option>
                             @foreach (var s in subjects)
                             {
                                 <option value="@s.Id">@s.Desc</option>
@@ -63,10 +63,10 @@ else
                         </InputSelect>
                     </div>
 
-                    <div class="col-12">
-                        <label class="form-label small">Klasse</label>
-                        <InputSelect @bind-Value="Lesson.Cid" class="form-select form-select-sm">
-                            <option value="0">Wählen...</option>
+                    <div class="field-group field-group-full">
+                        <label>Klasse</label>
+                        <InputSelect @bind-Value="Lesson.Cid" class="sp-select">
+                            <option value="0">Wählen…</option>
                             @foreach (var c in classes)
                             {
                                 <option value="@c.Id">@c.Abbr</option>
@@ -75,14 +75,136 @@ else
                     </div>
                 </div>
 
-                <div class="mt-3 d-flex gap-2">
-                    <button type="submit" class="btn btn-sm btn-success">Speichern</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary" @onclick="CancelInternal">Abbrechen</button>
+                <div class="modal-actions">
+                    <button type="submit" class="sp-btn-save">Speichern</button>
+                    <button type="button" class="sp-btn-cancel" @onclick="CancelInternal">Abbrechen</button>
                 </div>
             </EditForm>
         </div>
     </div>
 }
+
+<style>
+    .modal-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 15, 30, 0.45);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        backdrop-filter: blur(2px);
+    }
+
+    .modal-card {
+        background: #fff;
+        border-radius: 14px;
+        width: 440px;
+        max-width: 95vw;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        overflow: hidden;
+    }
+
+    .modal-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid #f0f0f0;
+        font-weight: 600;
+        font-size: 14px;
+        color: #1a1a2e;
+        background: #fafafa;
+    }
+
+    .modal-close {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        color: #aaa;
+        padding: 2px 6px;
+        border-radius: 4px;
+        line-height: 1;
+    }
+
+    .modal-close:hover { background: #f0f0f0; color: #555; }
+
+    .modal-fields {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        padding: 1.25rem;
+    }
+
+    .field-group {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .field-group-full {
+        grid-column: 1 / -1;
+    }
+
+    .field-group label {
+        font-size: 11px;
+        font-weight: 600;
+        color: #888;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .sp-select {
+        width: 100%;
+        padding: 7px 10px;
+        border: 1px solid #e5e7eb;
+        border-radius: 7px;
+        font-size: 13px;
+        color: #1a1a2e;
+        background: #fff;
+        outline: none;
+        transition: border-color 0.15s;
+        appearance: auto;
+    }
+
+    .sp-select:focus { border-color: #6366f1; }
+
+    .modal-actions {
+        display: flex;
+        gap: 8px;
+        padding: 1rem 1.25rem;
+        border-top: 1px solid #f0f0f0;
+        background: #fafafa;
+    }
+
+    .sp-btn-save {
+        background: #1a1a2e;
+        color: #fff;
+        border: none;
+        border-radius: 7px;
+        padding: 8px 20px;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.15s;
+    }
+
+    .sp-btn-save:hover { background: #2d2d4e; }
+
+    .sp-btn-cancel {
+        background: none;
+        color: #666;
+        border: 1px solid #e5e7eb;
+        border-radius: 7px;
+        padding: 8px 16px;
+        font-size: 13px;
+        cursor: pointer;
+        transition: background 0.15s;
+    }
+
+    .sp-btn-cancel:hover { background: #f5f5f5; }
+</style>
 
 @code {
     [Parameter] public Lesson Lesson { get; set; } = new();
@@ -96,12 +218,11 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        try 
+        try
         {
-            // Laden der Stammdaten für die Dropdowns
             teachers = await Http.GetFromJsonAsync<List<Teacher>>("api/teacher");
             subjects = await Http.GetFromJsonAsync<List<Subject>>("api/subject");
-            classes = await Http.GetFromJsonAsync<List<SchoolClass>>("api/schoolclass");
+            classes  = await Http.GetFromJsonAsync<List<SchoolClass>>("api/classes");
         }
         catch (Exception ex)
         {
@@ -111,7 +232,6 @@ else
 
     private async Task InternalHandleSubmit()
     {
-        // Validierung: Sicherstellen, dass alles ausgewählt wurde
         if (Lesson.Tid == 0 || Lesson.Sid == 0 || Lesson.Cid == 0)
         {
             await OnError.InvokeAsync("Bitte Lehrer, Fach und Klasse auswählen.");
@@ -131,24 +251,26 @@ else
         else
         {
             var errorText = await response.Content.ReadAsStringAsync();
-            await OnError.InvokeAsync(string.IsNullOrWhiteSpace(errorText) ? "Fehler beim Speichern" : errorText);
+            await OnError.InvokeAsync(string.IsNullOrWhiteSpace(errorText)
+                ? "Fehler beim Speichern."
+                : errorText.Trim('"'));
         }
     }
 
     private async Task CancelInternal() => await OnCancel.InvokeAsync();
-    
+
     private string GetHourLabel(LessonHour h) => h switch
     {
-        LessonHour.H1_0745 => "07:45–08:35",
-        LessonHour.H2_0835 => "08:35–09:25",
-        LessonHour.H3_0940 => "09:40–10:30",
-        LessonHour.H4_1030 => "10:30–11:20",
-        LessonHour.H5_1125 => "11:25–12:15",
-        LessonHour.H6_1215 => "12:15–13:05",
-        LessonHour.H7_1305 => "13:05–13:55",
-        LessonHour.H8_1355 => "13:55–14:45",
-        LessonHour.H9_1455 => "14:55–15:45",
+        LessonHour.H1_0745  => "07:45–08:35",
+        LessonHour.H2_0835  => "08:35–09:25",
+        LessonHour.H3_0940  => "09:40–10:30",
+        LessonHour.H4_1030  => "10:30–11:20",
+        LessonHour.H5_1125  => "11:25–12:15",
+        LessonHour.H6_1215  => "12:15–13:05",
+        LessonHour.H7_1305  => "13:05–13:55",
+        LessonHour.H8_1355  => "13:55–14:45",
+        LessonHour.H9_1455  => "14:55–15:45",
         LessonHour.H10_1545 => "15:45–16:35",
-        _ => h.ToString()
+        _                   => h.ToString()
     };
 }

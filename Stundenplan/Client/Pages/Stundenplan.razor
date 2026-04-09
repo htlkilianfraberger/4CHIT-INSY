@@ -4,149 +4,99 @@
 @inject LessonService LessonService
 @inject HttpClient Http
 
-<div class="sp-header">
-    <div>
-        <h1 class="sp-title">Stundenplan</h1>
-        <span class="sp-subtitle">Schuljahr 2025/26</span>
+<div class="sp-page">
+    <div class="sp-header">
+        <div>
+            <h1 class="sp-title">Stundenplan</h1>
+            <span class="sp-subtitle">Schuljahr 2025/26</span>
+        </div>
+        <button class="sp-btn-add" @onclick="ShowAddForm">+ Neue Stunde</button>
     </div>
-    <button class="sp-btn-add" @onclick="ShowAddForm">+ Neue Stunde</button>
-</div>
 
-@if (lessons == null || teachers == null || subjects == null || classes == null)
-{
-    <div class="sp-loading"><span>Lade Daten…</span></div>
-}
-else
-{
-    <div class="timetable-wrapper">
-        <div class="timetable-grid">
-            <div class="timetable-corner"></div>
-            @foreach (var day in Enum.GetValues<WeekDay>())
-            {
-                <div class="timetable-day-header">@day</div>
-            }
-
-            @foreach (var hour in Enum.GetValues<LessonHour>())
-            {
-                <div class="timetable-hour-label">
-                    <span class="hour-from">@GetHourFrom(hour)</span>
-                    <span class="hour-sep">–</span>
-                    <span class="hour-to">@GetHourTo(hour)</span>
-                </div>
-
+    @if (lessons == null || teachers == null || subjects == null || classes == null)
+    {
+        <div class="sp-loading"><span>Lade Daten…</span></div>
+    }
+    else
+    {
+        <div class="timetable-wrapper">
+            <div class="timetable-grid">
+                <div class="timetable-corner"></div>
                 @foreach (var day in Enum.GetValues<WeekDay>())
                 {
-                    var lesson = lessons.FirstOrDefault(l => l.WeekDay == day && l.Hour == hour);
-                    <div class="timetable-cell @(lesson != null ? "has-lesson" : "empty-cell")"
-                         @onclick="() => { if (lesson != null) PrepareEdit(lesson); }">
-                        @if (lesson != null)
-                        {
-                            <div class="lesson-card lc-@(lesson.Sid % 18)">
-                                <span class="lesson-subject">@GetSubjectDesc(lesson.Sid)</span>
-                                <span class="lesson-teacher">@GetTeacherAbbr(lesson.Tid)</span>
-                                <div class="lesson-actions">
-                                    <button class="la-btn la-edit" title="Bearbeiten"
-                                            @onclick:stopPropagation="true"
-                                            @onclick="() => PrepareEdit(lesson)">✏</button>
-                                    <button class="la-btn la-del" title="Löschen"
-                                            @onclick:stopPropagation="true"
-                                            @onclick="() => AskDelete(lesson.Id)">✕</button>
-                                </div>
-                            </div>
-                        }
-                    </div>
+                    <div class="timetable-day-header">@day</div>
                 }
-            }
-        </div>
-    </div>
 
-    @* ── Edit / Add Modal ── *@
-    @if (showForm)
-    {
-        <div class="modal-backdrop" @onclick="Reset">
-            <div class="modal-card" @onclick:stopPropagation="true">
-                <div class="modal-card-header">
-                    <span>@(currentLesson.Id == 0 ? "Neue Stunde" : "Bearbeiten")</span>
-                    <button class="modal-close" @onclick="Reset">✕</button>
-                </div>
-                <EditForm Model="currentLesson" OnValidSubmit="HandleSubmit">
-                    <div class="modal-fields">
-                        <div class="field-group">
-                            <label>Tag</label>
-                            <InputSelect @bind-Value="currentLesson.WeekDay" class="sp-select">
-                                @foreach (var day in Enum.GetValues<WeekDay>())
-                                {
-                                    <option value="@day">@day</option>
-                                }
-                            </InputSelect>
-                        </div>
-                        <div class="field-group">
-                            <label>Stunde</label>
-                            <InputSelect @bind-Value="currentLesson.Hour" class="sp-select">
-                                @foreach (var h in Enum.GetValues<LessonHour>())
-                                {
-                                    <option value="@h">@GetHourLabel(h)</option>
-                                }
-                            </InputSelect>
-                        </div>
-                        <div class="field-group">
-                            <label>Lehrer</label>
-                            <InputSelect @bind-Value="currentLesson.Tid" class="sp-select">
-                                <option value="0">Wählen...</option>
-                                @foreach (var t in teachers)
-                                {
-                                    <option value="@t.Id">@t.Abbr</option>
-                                }
-                            </InputSelect>
-                        </div>
-                        <div class="field-group">
-                            <label>Fach</label>
-                            <InputSelect @bind-Value="currentLesson.Sid" class="sp-select">
-                                <option value="0">Wählen...</option>
-                                @foreach (var s in subjects)
-                                {
-                                    <option value="@s.Id">@s.Desc</option>
-                                }
-                            </InputSelect>
-                        </div>
-                        <div class="field-group field-group-full">
-                            <label>Klasse</label>
-                            <InputSelect @bind-Value="currentLesson.Cid" class="sp-select">
-                                <option value="0">Wählen...</option>
-                                @foreach (var c in classes)
-                                {
-                                    <option value="@c.Id">@c.Abbr</option>
-                                }
-                            </InputSelect>
-                        </div>
+                @foreach (var hour in Enum.GetValues<LessonHour>())
+                {
+                    <div class="timetable-hour-label">
+                        <span class="hour-from">@GetHourFrom(hour)</span>
+                        <span class="hour-sep">–</span>
+                        <span class="hour-to">@GetHourTo(hour)</span>
                     </div>
-                    <div class="modal-actions">
-                        <button type="submit" class="sp-btn-save">Speichern</button>
-                        <button type="button" class="sp-btn-cancel" @onclick="Reset">Abbrechen</button>
-                    </div>
-                </EditForm>
+
+                    @foreach (var day in Enum.GetValues<WeekDay>())
+                    {
+                        var lesson = lessons.FirstOrDefault(l => l.WeekDay == day && l.Hour == hour);
+                        <div class="timetable-cell @(lesson != null ? "has-lesson" : "empty-cell")"
+                             @onclick="() => { if (lesson != null) PrepareEdit(lesson); }">
+                            @if (lesson != null)
+                            {
+                                <div class="lesson-card lc-@(lesson.Sid % 18)">
+                                    <span class="lesson-subject">@GetSubjectDesc(lesson.Sid)</span>
+                                    <span class="lesson-teacher">@GetTeacherAbbr(lesson.Tid)</span>
+                                    <div class="lesson-actions">
+                                        <button class="la-btn la-edit" title="Bearbeiten"
+                                                @onclick:stopPropagation="true"
+                                                @onclick="() => PrepareEdit(lesson)">✏</button>
+                                        <button class="la-btn la-del" title="Löschen"
+                                                @onclick:stopPropagation="true"
+                                                @onclick="() => AskDelete(lesson.Id)">✕</button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                }
             </div>
         </div>
-    }
 
-    @* Delete Modal & Toast (Style bleibt gleich wie in deinem Entwurf) *@
-    @if (deleteId != null)
-    {
-        <div class="modal-backdrop" @onclick="CancelDelete">
-            <div class="modal-card modal-card-sm" @onclick:stopPropagation="true">
-                <div class="delete-icon">⚠</div>
-                <div class="modal-card-header modal-card-header-center"><span>Löschen?</span></div>
-                <div class="delete-body">
-                    <p class="delete-hint">Soll diese Stunde wirklich entfernt werden?</p>
-                    <div class="delete-actions">
-                        <button class="sp-btn-danger" @onclick="ConfirmDelete">Ja, löschen</button>
-                        <button class="sp-btn-cancel" @onclick="CancelDelete">Abbrechen</button>
+        @* ── Hier wird deine neue Edit-Komponente aufgerufen ── *@
+        @if (showForm)
+        {
+            <Edit Lesson="currentLesson" 
+                  OnSaveSuccess="HandleSaveSuccess" 
+                  OnCancel="Reset" 
+                  OnError="HandleError" />
+        }
+
+        @* Delete Modal *@
+        @if (deleteId != null)
+        {
+            <div class="modal-backdrop" @onclick="CancelDelete">
+                <div class="modal-card modal-card-sm" @onclick:stopPropagation="true">
+                    <div class="delete-icon">⚠</div>
+                    <div class="modal-card-header modal-card-header-center"><span>Löschen?</span></div>
+                    <div class="delete-body">
+                        <p class="delete-hint">Soll diese Stunde wirklich entfernt werden?</p>
+                        <div class="delete-actions">
+                            <button class="sp-btn-danger" @onclick="ConfirmDelete">Ja, löschen</button>
+                            <button class="sp-btn-cancel" @onclick="CancelDelete">Abbrechen</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        }
+        
+        @if (errorMessage != null)
+        {
+            <div class="sp-toast sp-toast-error" @onclick="() => errorMessage = null">
+                <span class="toast-icon">⚠</span> @errorMessage
+                <span class="toast-dismiss">✕</span>
+            </div>
+        }
     }
-}
+</div>
 
 <style>
     .sp-page {
@@ -522,17 +472,27 @@ else
 
     private async Task LoadAll()
     {
-        lessons = await LessonService.GetLessonsAsync();
-        teachers = await Http.GetFromJsonAsync<List<Teacher>>("api/teacher");
-        subjects = await Http.GetFromJsonAsync<List<Subject>>("api/subject");
-        classes = await Http.GetFromJsonAsync<List<SchoolClass>>("api/classes");
+        try 
+        {
+            lessons = await LessonService.GetLessonsAsync();
+            teachers = await Http.GetFromJsonAsync<List<Teacher>>("api/teacher");
+            subjects = await Http.GetFromJsonAsync<List<Subject>>("api/subject");
+            classes = await Http.GetFromJsonAsync<List<SchoolClass>>("api/classes");
+        }
+        catch (Exception ex)
+        {
+            errorMessage = "Fehler beim Laden: " + ex.Message;
+        }
     }
 
-    // Helper zur Anzeige der Namen statt IDs im Grid
     private string GetTeacherAbbr(int tid) => teachers?.FirstOrDefault(t => t.Id == tid)?.Abbr ?? tid.ToString();
     private string GetSubjectDesc(int sid) => subjects?.FirstOrDefault(s => s.Id == sid)?.Desc ?? sid.ToString();
 
-    private void ShowAddForm() { currentLesson = new Lesson { Cid = 4 }; showForm = true; }
+    private void ShowAddForm() 
+    { 
+        currentLesson = new Lesson { Cid = classes?.FirstOrDefault()?.Id ?? 0 }; 
+        showForm = true; 
+    }
 
     private void PrepareEdit(Lesson lesson)
     {
@@ -544,21 +504,23 @@ else
         showForm = true;
     }
 
-    private async Task HandleSubmit()
+    private async Task HandleSaveSuccess()
     {
-        if (currentLesson.Tid == 0 || currentLesson.Sid == 0 || currentLesson.Cid == 0) return;
+        await LoadAll();
+        Reset();
+    }
 
-        HttpResponseMessage res = currentLesson.Id == 0 
-            ? await Http.PostAsJsonAsync("api/lesson", currentLesson) 
-            : await Http.PutAsJsonAsync($"api/lesson/{currentLesson.Id}", currentLesson);
-
-        if (res.IsSuccessStatusCode) { await LoadAll(); Reset(); }
+    private void HandleError(string message)
+    {
+        errorMessage = message;
+        StateHasChanged();
     }
 
     private async Task ConfirmDelete()
     {
         if (deleteId == null) return;
-        if ((await Http.DeleteAsync($"api/lesson/{deleteId}")).IsSuccessStatusCode) await LoadAll();
+        var res = await Http.DeleteAsync($"api/lesson/{deleteId}");
+        if (res.IsSuccessStatusCode) await LoadAll();
         deleteId = null;
     }
 
@@ -566,7 +528,6 @@ else
     private void CancelDelete() => deleteId = null;
     private void Reset() { currentLesson = new Lesson(); showForm = false; }
 
-    // Zeit-Logik (unverändert)
     private static readonly Dictionary<LessonHour, (string From, string To)> HourRanges = new() {
         { LessonHour.H1_0745, ("07:45", "08:35") }, { LessonHour.H2_0835, ("08:35", "09:25") },
         { LessonHour.H3_0940, ("09:40", "10:30") }, { LessonHour.H4_1030, ("10:30", "11:20") },
@@ -576,5 +537,4 @@ else
     };
     private string GetHourFrom(LessonHour h) => HourRanges[h].From;
     private string GetHourTo(LessonHour h) => HourRanges[h].To;
-    private string GetHourLabel(LessonHour h) => $"{HourRanges[h].From}–{HourRanges[h].To}";
 }
