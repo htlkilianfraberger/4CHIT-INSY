@@ -4,14 +4,13 @@
 @inject LessonService LessonService
 @inject HttpClient Http
 
-<div class="sp-page">
-    <div class="sp-header">
-        <div>
-            <h1 class="sp-title">Stundenplan</h1>
-            <span class="sp-subtitle">4CHIT · 2024/25</span>
-        </div>
-        <button class="sp-btn-add" @onclick="ShowAddForm">+ Neue Stunde</button>
+<div class="sp-header">
+    <div>
+        <h1 class="sp-title">Stundenplan</h1>
+        <span class="sp-subtitle">4CHIT · 2024/25</span>
     </div>
+    <button class="sp-btn-add" @onclick="ShowAddForm">+ Neue Stunde</button>
+</div>
 
     @if (lessons == null)
     {
@@ -156,7 +155,7 @@
             </div>
         }
     }
-</div>
+
 
 <style>
     .sp-page {

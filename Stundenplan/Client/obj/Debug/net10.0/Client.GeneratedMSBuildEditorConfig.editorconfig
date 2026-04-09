@@ -52,6 +52,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3R1bmRlbnBsYW4ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/kilia/Github/4CHIT-INSY/Stundenplan/Client/Pages/TeacherSubject.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVhY2hlclN1YmplY3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/kilia/Github/4CHIT-INSY/Stundenplan/Client/Pages/Weather.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcV2VhdGhlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 

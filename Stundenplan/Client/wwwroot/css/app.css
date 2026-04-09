@@ -5,12 +5,11 @@ html, body {
     padding: 0;
 }
 
-/* Blazor sidebar/navbar komplett ausblenden */
+/* Blazor-Standardlayout ausblenden */
 .sidebar, .navbar, .top-row, nav[class*="navbar"] {
     display: none !important;
 }
 
-/* Hauptinhalt nimmt die volle Breite */
 .page, article, main, .content {
     margin-left: 0 !important;
     padding: 0 !important;
