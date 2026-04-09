@@ -496,8 +496,9 @@ namespace Model.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("Abbr")
-                        .HasColumnType("int");
+                    b.Property<string>("Abbr")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -507,27 +508,27 @@ namespace Model.Migrations
                         new
                         {
                             Id = 1,
-                            Abbr = 1
+                            Abbr = "1CHIT"
                         },
                         new
                         {
                             Id = 2,
-                            Abbr = 2
+                            Abbr = "2CHIT"
                         },
                         new
                         {
                             Id = 3,
-                            Abbr = 3
+                            Abbr = "3CHIT"
                         },
                         new
                         {
                             Id = 4,
-                            Abbr = 4
+                            Abbr = "4CHIT"
                         },
                         new
                         {
                             Id = 5,
-                            Abbr = 5
+                            Abbr = "5CHIT"
                         });
                 });
 
@@ -537,8 +538,9 @@ namespace Model.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("Desc")
-                        .HasColumnType("int");
+                    b.Property<string>("Desc")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -548,92 +550,92 @@ namespace Model.Migrations
                         new
                         {
                             Id = 1,
-                            Desc = 0
+                            Desc = "AM"
                         },
                         new
                         {
                             Id = 2,
-                            Desc = 1
+                            Desc = "D"
                         },
                         new
                         {
                             Id = 3,
-                            Desc = 2
+                            Desc = "E1"
                         },
                         new
                         {
                             Id = 4,
-                            Desc = 3
+                            Desc = "INSY"
                         },
                         new
                         {
                             Id = 5,
-                            Desc = 4
+                            Desc = "RK"
                         },
                         new
                         {
                             Id = 6,
-                            Desc = 5
+                            Desc = "SEW"
                         },
                         new
                         {
                             Id = 7,
-                            Desc = 6
+                            Desc = "SYTD"
                         },
                         new
                         {
                             Id = 8,
-                            Desc = 7
+                            Desc = "GGPH"
                         },
                         new
                         {
                             Id = 9,
-                            Desc = 8
+                            Desc = "GGPG"
                         },
                         new
                         {
                             Id = 10,
-                            Desc = 9
+                            Desc = "NW2P"
                         },
                         new
                         {
                             Id = 11,
-                            Desc = 10
+                            Desc = "NW2C"
                         },
                         new
                         {
                             Id = 12,
-                            Desc = 11
+                            Desc = "DSAI"
                         },
                         new
                         {
                             Id = 13,
-                            Desc = 12
+                            Desc = "WIR"
                         },
                         new
                         {
                             Id = 14,
-                            Desc = 13
+                            Desc = "ITPL"
                         },
                         new
                         {
                             Id = 15,
-                            Desc = 14
+                            Desc = "ITPP"
                         },
                         new
                         {
                             Id = 16,
-                            Desc = 15
+                            Desc = "BESP"
                         },
                         new
                         {
                             Id = 17,
-                            Desc = 16
+                            Desc = "SYTI"
                         },
                         new
                         {
                             Id = 18,
-                            Desc = 17
+                            Desc = "SYTS"
                         });
                 });
 
@@ -643,8 +645,9 @@ namespace Model.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("Abbr")
-                        .HasColumnType("int");
+                    b.Property<string>("Abbr")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -654,72 +657,72 @@ namespace Model.Migrations
                         new
                         {
                             Id = 1,
-                            Abbr = 0
+                            Abbr = "ALLI"
                         },
                         new
                         {
                             Id = 2,
-                            Abbr = 1
+                            Abbr = "MACO"
                         },
                         new
                         {
                             Id = 3,
-                            Abbr = 2
+                            Abbr = "NIGI"
                         },
                         new
                         {
                             Id = 4,
-                            Abbr = 3
+                            Abbr = "LEYV"
                         },
                         new
                         {
                             Id = 5,
-                            Abbr = 4
+                            Abbr = "WART"
                         },
                         new
                         {
                             Id = 6,
-                            Abbr = 5
+                            Abbr = "BRUN"
                         },
                         new
                         {
                             Id = 7,
-                            Abbr = 6
+                            Abbr = "KUBI"
                         },
                         new
                         {
                             Id = 8,
-                            Abbr = 7
+                            Abbr = "JAGE"
                         },
                         new
                         {
                             Id = 9,
-                            Abbr = 8
+                            Abbr = "WIEN"
                         },
                         new
                         {
                             Id = 10,
-                            Abbr = 9
+                            Abbr = "ELSH"
                         },
                         new
                         {
                             Id = 11,
-                            Abbr = 10
+                            Abbr = "WINN"
                         },
                         new
                         {
                             Id = 12,
-                            Abbr = 11
+                            Abbr = "KIEN"
                         },
                         new
                         {
                             Id = 13,
-                            Abbr = 12
+                            Abbr = "HAUP"
                         },
                         new
                         {
                             Id = 14,
-                            Abbr = 13
+                            Abbr = "HAUL"
                         });
                 });
 
