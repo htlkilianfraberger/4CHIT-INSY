@@ -38,7 +38,6 @@ public class StundenplanContext : DbContext {
         e.HasOne(l => l.TeacherSubject).WithMany().HasForeignKey(l => new { l.Tid, l.Sid }).OnDelete(DeleteBehavior.Restrict);
         e.HasOne(l => l.ClassSubject).WithMany().HasForeignKey(l => new { l.Cid, l.Sid }).OnDelete(DeleteBehavior.Restrict);
     });
-
     // --- DATA SEEDING ---
 
     // 1. Lehrer (Abbr als String)
@@ -62,7 +61,7 @@ public class StundenplanContext : DbContext {
     // 3. Klassen (Abbr als String)
     var classes = new[] { "1CHIT", "2CHIT", "3CHIT", "4CHIT", "5CHIT" };
     modelBuilder.Entity<SchoolClass>().HasData(
-        classes.Select((abbr, i) => new SchoolClass { Id = i + 1, Abbr = abbr })
+        classes.Select((abbr, i) => new { Id = i + 1, Abbr = abbr })
     );
 
     // Referenz-ID für 4CHIT (Index 3 im Array -> ID 4)

@@ -580,3 +580,37 @@ db.emps.aggregate([
     }
   }
 ])
+
+//38
+db.emps.aggregate([
+    {
+        $group: {
+            _id: "$dept_id", // Gruppierung nach Abteilung
+            TOTAL_ANNUAL_PAYMENT: {
+                $sum: {
+                    $add: [
+                        { $multiply: ["$SAL", 12] }, // Grundgehalt * 12
+                        { $ifNull: ["$COMM", { $multiply: [100, 12] }] } // COALESCE(COMM, 1200)
+                        ]
+                    }
+                }
+            }
+        }
+    ]);
+
+//40
+db.emps.aggregate([
+    { $group: {
+        _id: "$JOB",
+        avgSal: { $avg: "$SAL" }
+        }},
+    { $match: { avgSal: { $gt: 1500 } } },
+    { $sort: { avgSal: -1 } }
+    ]);
+
+//41
+db.emps.aggregate([
+    { $match: { JOB: "CLERK" } }, // WHERE
+    { $group: { _id: "$dept_id", count: { $sum: 1 } } }, // GROUP BY
+    { $match: { count: { $gte: 2 } } } // HAVING
+    ]);

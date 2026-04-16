@@ -18,3 +18,13 @@ public class Bird : Animal
 {
     public string Wingspan { get; set; }
 }
+public class a{
+    public string Name { get; set; }
+}
+public class b{
+    public string Name { get; set; }
+}
+public class c{
+    public string AId { get; set; }
+    public string BId { get; set; }
+}

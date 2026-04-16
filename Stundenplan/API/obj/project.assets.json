@@ -1468,7 +1468,7 @@
           }
         }
       },
-      "Microsoft.DotNet.HotReload.WebAssembly.Browser/10.0.104": {
+      "Microsoft.DotNet.HotReload.WebAssembly.Browser/10.0.106": {
         "type": "package",
         "compile": {
           "lib/net10.0/Microsoft.DotNet.HotReload.WebAssembly.Browser.dll": {}
@@ -2852,7 +2852,7 @@
         "framework": ".NETCoreApp,Version=v10.0",
         "dependencies": {
           "Microsoft.AspNetCore.Components.WebAssembly": "10.0.4",
-          "Microsoft.DotNet.HotReload.WebAssembly.Browser": "10.0.104",
+          "Microsoft.DotNet.HotReload.WebAssembly.Browser": "10.0.106",
           "Model": "1.0.0"
         },
         "compile": {
@@ -5309,10 +5309,10 @@
         "microsoft.diasymreader.nuspec"
       ]
     },
-    "Microsoft.DotNet.HotReload.WebAssembly.Browser/10.0.104": {
-      "sha512": "OkWFygvFdm9emwxRW5ahcsU6saKO9EOYCFVNEXWl+23A4ssZy40VCQuqPhyurU7IyaPEhgA4iXh0/o7fhyNngA==",
+    "Microsoft.DotNet.HotReload.WebAssembly.Browser/10.0.106": {
+      "sha512": "8MzC43QmkOaut7+LL44MrLhtM3rcNeZOmqGtq92m5tbzJ+61bHExfWzE/6SL77ebzq8W+HVD58u+5pov6T1apg==",
       "type": "package",
-      "path": "microsoft.dotnet.hotreload.webassembly.browser/10.0.104",
+      "path": "microsoft.dotnet.hotreload.webassembly.browser/10.0.106",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -5323,7 +5323,7 @@
         "buildMultiTargeting/Microsoft.DotNet.HotReload.WebAssembly.Browser.props",
         "buildTransitive/Microsoft.DotNet.HotReload.WebAssembly.Browser.props",
         "lib/net10.0/Microsoft.DotNet.HotReload.WebAssembly.Browser.dll",
-        "microsoft.dotnet.hotreload.webassembly.browser.10.0.104.nupkg.sha512",
+        "microsoft.dotnet.hotreload.webassembly.browser.10.0.106.nupkg.sha512",
         "microsoft.dotnet.hotreload.webassembly.browser.nuspec",
         "staticwebassets/Microsoft.DotNet.HotReload.WebAssembly.Browser.99zm1jdh75.lib.module.js"
       ]
@@ -7597,7 +7597,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.104/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.106/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.AspNetCore": "(,10.0.32767]",
           "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",

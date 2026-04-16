@@ -4,13 +4,21 @@ namespace Model.Context;
 
 public class MyDbContext : DbContext
 {
-    public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
-    public MyDbContext() { }
+    public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
+    {
+    }
+
+    public MyDbContext()
+    {
+    }
 
     //Standardmäßig Table per Hierachy (TPH) / Single Table
     public virtual DbSet<Animal> Animals { get; set; }
     public virtual DbSet<Dog> Dogs { get; set; }
     public virtual DbSet<Bird> Birds { get; set; }
+    public virtual DbSet<a> A { get; set; }
+    public virtual DbSet<b> B { get; set; }
+    public virtual DbSet<c> C { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -35,4 +43,11 @@ public class MyDbContext : DbContext
         modelBuilder.Entity<Dog>().ToTable("Dogs");
         modelBuilder.Entity<Bird>().ToTable("Birds");
     }
+    
+    /*protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<a>().HasMany<b>().WithMany().UsingEntity<c>(
+            c => c.HasOne<b>().WithMany().HasForeignKey(c => c.BId),
+            c => c.HasOne<a>().WithMany().HasForeignKey(c => c.AId));
+    }*/
 }
