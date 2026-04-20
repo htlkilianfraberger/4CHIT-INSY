@@ -1,5 +1,7 @@
-﻿@using Model
+﻿@using System.ComponentModel
+@using Model
 @using System.Net.Http.Json
+@using System.Reflection
 @inject HttpClient Http
 
 @if (teachers == null || subjects == null || classes == null)
@@ -258,19 +260,9 @@ else
     }
 
     private async Task CancelInternal() => await OnCancel.InvokeAsync();
+    private static string GetHourLabel(LessonHour h) =>
+        h.GetType().GetField(h.ToString())
+            ?.GetCustomAttribute<DescriptionAttribute>()
+            ?.Description ?? h.ToString();
 
-    private string GetHourLabel(LessonHour h) => h switch
-    {
-        LessonHour.H1_0745  => "07:45–08:35",
-        LessonHour.H2_0835  => "08:35–09:25",
-        LessonHour.H3_0940  => "09:40–10:30",
-        LessonHour.H4_1030  => "10:30–11:20",
-        LessonHour.H5_1125  => "11:25–12:15",
-        LessonHour.H6_1215  => "12:15–13:05",
-        LessonHour.H7_1305  => "13:05–13:55",
-        LessonHour.H8_1355  => "13:55–14:45",
-        LessonHour.H9_1455  => "14:55–15:45",
-        LessonHour.H10_1545 => "15:45–16:35",
-        _                   => h.ToString()
-    };
 }

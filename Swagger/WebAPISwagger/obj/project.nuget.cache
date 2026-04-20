@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "LG2WuSA8x5U=",
+  "dgSpecHash": "ViCyGHNA0eE=",
   "success": true,
   "projectFilePath": "C:\\Users\\kilia\\Github\\4CHIT-INSY\\Swagger\\WebAPISwagger\\WebAPISwagger.csproj",
   "expectedPackageFiles": [
@@ -153,5 +153,30 @@
     "C:\\Users\\kilia\\.nuget\\packages\\system.windows.extensions\\8.0.0\\system.windows.extensions.8.0.0.nupkg.sha512",
     "C:\\Users\\kilia\\.nuget\\packages\\zstdsharp.port\\0.8.6\\zstdsharp.port.0.8.6.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1901",
+      "level": "Warning",
+      "message": "Package 'NuGet.Packaging' 6.12.1 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg",
+      "projectPath": "C:\\Users\\kilia\\Github\\4CHIT-INSY\\Swagger\\WebAPISwagger\\WebAPISwagger.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\kilia\\Github\\4CHIT-INSY\\Swagger\\WebAPISwagger\\WebAPISwagger.csproj",
+      "libraryId": "NuGet.Packaging",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    },
+    {
+      "code": "NU1901",
+      "level": "Warning",
+      "message": "Package 'NuGet.Protocol' 6.12.1 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg",
+      "projectPath": "C:\\Users\\kilia\\Github\\4CHIT-INSY\\Swagger\\WebAPISwagger\\WebAPISwagger.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\kilia\\Github\\4CHIT-INSY\\Swagger\\WebAPISwagger\\WebAPISwagger.csproj",
+      "libraryId": "NuGet.Protocol",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    }
+  ]
 }
