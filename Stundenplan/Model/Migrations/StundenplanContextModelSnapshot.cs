@@ -734,6 +734,9 @@ namespace Model.Migrations
                     b.Property<int>("Sid")
                         .HasColumnType("int");
 
+                    b.Property<int?>("HourCount")
+                        .HasColumnType("int");
+
                     b.HasKey("Tid", "Sid");
 
                     b.HasIndex("Sid");

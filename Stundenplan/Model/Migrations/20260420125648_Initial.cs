@@ -22,7 +22,7 @@ namespace Model.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Abbr = table.Column<int>(type: "int", nullable: false)
+                    Abbr = table.Column<string>(type: "longtext", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -36,7 +36,7 @@ namespace Model.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Desc = table.Column<int>(type: "int", nullable: false)
+                    Desc = table.Column<string>(type: "longtext", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -50,7 +50,7 @@ namespace Model.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Abbr = table.Column<int>(type: "int", nullable: false)
+                    Abbr = table.Column<string>(type: "longtext", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -88,7 +88,8 @@ namespace Model.Migrations
                 columns: table => new
                 {
                     Tid = table.Column<int>(type: "int", nullable: false),
-                    Sid = table.Column<int>(type: "int", nullable: false)
+                    Sid = table.Column<int>(type: "int", nullable: false),
+                    HourCount = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -143,11 +144,11 @@ namespace Model.Migrations
                 columns: new[] { "Id", "Abbr" },
                 values: new object[,]
                 {
-                    { 1, 1 },
-                    { 2, 2 },
-                    { 3, 3 },
-                    { 4, 4 },
-                    { 5, 5 }
+                    { 1, "1CHIT" },
+                    { 2, "2CHIT" },
+                    { 3, "3CHIT" },
+                    { 4, "4CHIT" },
+                    { 5, "5CHIT" }
                 });
 
             migrationBuilder.InsertData(
@@ -155,24 +156,24 @@ namespace Model.Migrations
                 columns: new[] { "Id", "Desc" },
                 values: new object[,]
                 {
-                    { 1, 0 },
-                    { 2, 1 },
-                    { 3, 2 },
-                    { 4, 3 },
-                    { 5, 4 },
-                    { 6, 5 },
-                    { 7, 6 },
-                    { 8, 7 },
-                    { 9, 8 },
-                    { 10, 9 },
-                    { 11, 10 },
-                    { 12, 11 },
-                    { 13, 12 },
-                    { 14, 13 },
-                    { 15, 14 },
-                    { 16, 15 },
-                    { 17, 16 },
-                    { 18, 17 }
+                    { 1, "AM" },
+                    { 2, "D" },
+                    { 3, "E1" },
+                    { 4, "INSY" },
+                    { 5, "RK" },
+                    { 6, "SEW" },
+                    { 7, "SYTD" },
+                    { 8, "GGPH" },
+                    { 9, "GGPG" },
+                    { 10, "NW2P" },
+                    { 11, "NW2C" },
+                    { 12, "DSAI" },
+                    { 13, "WIR" },
+                    { 14, "ITPL" },
+                    { 15, "ITPP" },
+                    { 16, "BESP" },
+                    { 17, "SYTI" },
+                    { 18, "SYTS" }
                 });
 
             migrationBuilder.InsertData(
@@ -180,20 +181,20 @@ namespace Model.Migrations
                 columns: new[] { "Id", "Abbr" },
                 values: new object[,]
                 {
-                    { 1, 0 },
-                    { 2, 1 },
-                    { 3, 2 },
-                    { 4, 3 },
-                    { 5, 4 },
-                    { 6, 5 },
-                    { 7, 6 },
-                    { 8, 7 },
-                    { 9, 8 },
-                    { 10, 9 },
-                    { 11, 10 },
-                    { 12, 11 },
-                    { 13, 12 },
-                    { 14, 13 }
+                    { 1, "ALLI" },
+                    { 2, "MACO" },
+                    { 3, "NIGI" },
+                    { 4, "LEYV" },
+                    { 5, "WART" },
+                    { 6, "BRUN" },
+                    { 7, "KUBI" },
+                    { 8, "JAGE" },
+                    { 9, "WIEN" },
+                    { 10, "ELSH" },
+                    { 11, "WINN" },
+                    { 12, "KIEN" },
+                    { 13, "HAUP" },
+                    { 14, "HAUL" }
                 });
 
             migrationBuilder.InsertData(
@@ -223,28 +224,28 @@ namespace Model.Migrations
 
             migrationBuilder.InsertData(
                 table: "TeacherSubjects",
-                columns: new[] { "Sid", "Tid" },
+                columns: new[] { "Sid", "Tid", "HourCount" },
                 values: new object[,]
                 {
-                    { 5, 1 },
-                    { 4, 2 },
-                    { 6, 2 },
-                    { 1, 3 },
-                    { 9, 3 },
-                    { 2, 4 },
-                    { 8, 4 },
-                    { 10, 5 },
-                    { 11, 5 },
-                    { 12, 6 },
-                    { 17, 6 },
-                    { 13, 7 },
-                    { 14, 8 },
-                    { 15, 9 },
-                    { 3, 10 },
-                    { 7, 11 },
-                    { 16, 12 },
-                    { 17, 13 },
-                    { 18, 14 }
+                    { 5, 1, null },
+                    { 4, 2, null },
+                    { 6, 2, null },
+                    { 1, 3, null },
+                    { 9, 3, null },
+                    { 2, 4, null },
+                    { 8, 4, null },
+                    { 10, 5, null },
+                    { 11, 5, null },
+                    { 12, 6, null },
+                    { 17, 6, null },
+                    { 13, 7, null },
+                    { 14, 8, null },
+                    { 15, 9, null },
+                    { 3, 10, null },
+                    { 7, 11, null },
+                    { 16, 12, null },
+                    { 17, 13, null },
+                    { 18, 14, null }
                 });
 
             migrationBuilder.InsertData(

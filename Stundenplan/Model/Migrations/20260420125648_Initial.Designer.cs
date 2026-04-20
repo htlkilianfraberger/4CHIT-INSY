@@ -10,8 +10,8 @@ using Model;
 namespace Model.Migrations
 {
     [DbContext(typeof(StundenplanContext))]
-    [Migration("20260409100410_WithoutEnums")]
-    partial class WithoutEnums
+    [Migration("20260420125648_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -735,6 +735,9 @@ namespace Model.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Sid")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("HourCount")
                         .HasColumnType("int");
 
                     b.HasKey("Tid", "Sid");

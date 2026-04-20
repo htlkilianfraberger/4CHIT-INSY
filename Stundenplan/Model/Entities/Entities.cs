@@ -62,6 +62,7 @@ public class TeacherSubject {
     public virtual Teacher Teacher { get; set; } = null!;
     public int Sid { get; set; }
     public virtual Subject Subject { get; set; } = null!;
+    public int? HourCount { get; set; }
 }
 
 public class ClassSubject {
