@@ -610,7 +610,137 @@ db.emps.aggregate([
 
 //41
 db.emps.aggregate([
-    { $match: { JOB: "CLERK" } }, // WHERE
-    { $group: { _id: "$dept_id", count: { $sum: 1 } } }, // GROUP BY
-    { $match: { count: { $gte: 2 } } } // HAVING
+    { $match: { JOB: "CLERK" } },
+    { $group: { _id: "$dept_id", count: { $sum: 1 } } },
+    { $match: { count: { $gte: 2 } } }
+    ]);
+
+//43
+db.emps.aggregate([
+    {
+        $group: {
+            _id: "$JOB",
+            AVG_SALARY: { $avg: "$SAL" }
+            }
+        },
+    {
+        $match: {
+            AVG_SALARY: { $gt: 1500 }
+            }
+        },
+    {
+        $sort: {
+            _id: 1
+            }
+        },
+    {
+        $project: {
+            _id: 0,
+            JOB: "$_id",
+            AVG_SALARY: 1
+            }
+        }
+    ]);
+
+//46
+db.emps.aggregate([
+    {
+        $lookup: {
+            from: "emps",
+            pipeline: [
+                { $match: { ENAME: "JONES" } },
+                { $project: { _id: 0, SAL: 1 } }
+                ],
+            as: "jones_data"
+            }
+        },
+    {
+        $match: {
+            $expr: {
+                $gt: ["$SAL", { $arrayElemAt: ["$jones_data.SAL", 0] }]
+                }
+            }
+        },
+    {
+        $project: {
+            jones_data: 0
+            }
+        }
+    ]);
+
+//47
+db.emps.aggregate([
+    {
+        $lookup: {
+            from: "emps",
+            localField: "parent_id",
+            foreignField: "id",
+            as: "parent_info"
+            }
+        },
+    {
+        $match: {
+            $expr: {
+                $gt: ["$SAL", { $arrayElemAt: ["$parent_info.SAL", 0] }]
+                }
+            }
+        },
+    {
+        $project: {
+            _id: 0,
+            ENAME: 1,
+            SAL: 1
+            }
+        }
+    ]);
+
+//48
+db.emps.aggregate([
+    {
+        $lookup: {
+            from: "emps",
+            pipeline: [
+                { $match: { JOB: "PRESIDENT" } },
+                { $project: { _id: 0, SAL: 1 } }
+                ],
+            as: "pres_data"
+            }
+        },
+    {
+        $match: {
+            $expr: {
+                $lt: [
+                    "$SAL",
+                    { $multiply: [0.3, { $arrayElemAt: ["$pres_data.SAL", 0] }] }
+                    ]
+                }
+            }
+        },
+    {
+        $project: {
+            pres_data: 0
+            }
+        }
+    ]);
+
+//49
+db.depts.aggregate([
+    {
+        $lookup: {
+            from: "emps",
+            localField: "DEPTNO",
+            foreignField: "dept_id",
+            as: "matched_emps"
+            }
+        },
+    {
+        $match: {
+            matched_emps: { $size: 0 }
+            }
+        },
+    {
+        $project: {
+            matched_emps: 0
+            }
+        }
     ]);
